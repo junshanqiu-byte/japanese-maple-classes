@@ -1,60 +1,449 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2299.77">
-  <style type="text/css">
-    body {background-color: #f6f7f9}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'PingFang SC Semibold'; color: #b02621; -webkit-text-stroke: #b02621}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #28384b; -webkit-text-stroke: #28384b; background-color: #ffffff; min-height: 18.0px}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #28384b; background-color: #ffffff}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #28384b; -webkit-text-stroke: #28384b; background-color: #ffffff}
-    span.s1 {font: 32.0px '.AppleSimplifiedChineseFont'; font-kerning: none}
-    span.s2 {font: 22.0px '.AppleSimplifiedChineseFont'; font-kerning: none}
-    span.s3 {font-kerning: none}
-    span.s4 {font: 15.0px 'PingFang SC'; font-kerning: none; -webkit-text-stroke: 0px #000000}
-    span.s5 {font-kerning: none; -webkit-text-stroke: 0px #000000}
-    span.s6 {font: 15.0px 'PingFang SC'; font-kerning: none}
-    span.s7 {font: 15.0px 'Helvetica Neue'; font-kerning: none}
-    span.s8 {font: 15.0px 'Helvetica Neue'; font-kerning: none; -webkit-text-stroke: 0px #000000}
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>枫树形态分类 · 话术手册</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+            min-height: 100vh;
+            padding: 48px 24px;
+            background: #080c18;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* ===== 主容器 ===== */
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: linear-gradient(145deg, #0b1224 0%, #101a30 100%);
+            border-radius: 40px;
+            padding: 56px 60px 48px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(212, 175, 55, 0.08) inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(212, 175, 55, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== 头部 ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+            padding-bottom: 28px;
+        }
+
+        .emblem {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        .emblem-line {
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+
+        .emblem-icon {
+            font-size: 30px;
+            color: #d4af37;
+            opacity: 0.7;
+        }
+
+        .main-title {
+            font-family: "Playfair Display", serif;
+            font-weight: 700;
+            font-size: 40px;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #f6e6b0 0%, #d4af37 50%, #b8902a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 40px rgba(212, 175, 55, 0.12);
+        }
+
+        .subtitle {
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 17px;
+            letter-spacing: 5px;
+            margin-top: 4px;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.35);
+        }
+
+        .subtitle span {
+            color: #d4af37;
+            -webkit-text-fill-color: #d4af37;
+            padding: 0 4px;
+        }
+
+        /* ===== 分类区块 ===== */
+        .section-block {
+            margin-bottom: 44px;
+        }
+
+        .section-block:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .section-number {
+            font-family: "Playfair Display", serif;
+            font-weight: 700;
+            font-size: 28px;
+            color: rgba(212, 175, 55, 0.2);
+            letter-spacing: 1px;
+            min-width: 48px;
+        }
+
+        .section-title {
+            font-family: "Playfair Display", serif;
+            font-weight: 600;
+            font-size: 24px;
+            color: #f0ece4;
+            letter-spacing: 2px;
+        }
+
+        .section-title-en {
+            font-family: "Inter", sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: rgba(212, 175, 55, 0.4);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-left: auto;
+        }
+
+        /* ===== 链接网格 ===== */
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px 14px;
+            padding-left: 8px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 15px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .link-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(212, 175, 55, 0.2);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .link-index {
+            font-family: "Playfair Display", serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: rgba(212, 175, 55, 0.3);
+            min-width: 28px;
+            transition: color 0.3s ease;
+        }
+
+        .link-item:hover .link-index {
+            color: rgba(212, 175, 55, 0.6);
+        }
+
+        .link-label {
+            flex: 1;
+        }
+
+        /* ===== 底部 ===== */
+        .footer {
+            margin-top: 44px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-motto {
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.18);
+            font-size: 14px;
+            letter-spacing: 3px;
+        }
+
+        .footer-motto strong {
+            color: #d4af37;
+            font-weight: 600;
+            -webkit-text-fill-color: #d4af37;
+        }
+
+        .footer-badge {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.10);
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+
+        .footer-badge span {
+            color: rgba(212, 175, 55, 0.2);
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 992px) {
+            .container {
+                padding: 40px 32px 36px;
+                border-radius: 32px;
+            }
+            .main-title {
+                font-size: 34px;
+            }
+            .link-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 12px;
+            }
+            .container {
+                padding: 28px 18px 24px;
+                border-radius: 24px;
+            }
+            .main-title {
+                font-size: 28px;
+                letter-spacing: 2px;
+            }
+            .subtitle {
+                font-size: 14px;
+                letter-spacing: 4px;
+            }
+            .section-title {
+                font-size: 20px;
+            }
+            .section-number {
+                font-size: 22px;
+                min-width: 36px;
+            }
+            .section-title-en {
+                font-size: 11px;
+            }
+            .link-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 8px 10px;
+                padding-left: 4px;
+            }
+            .link-item {
+                padding: 8px 12px;
+                font-size: 14px;
+                border-radius: 10px;
+            }
+            .link-index {
+                font-size: 12px;
+                min-width: 22px;
+            }
+            .header {
+                margin-bottom: 32px;
+                padding-bottom: 20px;
+            }
+            .emblem-icon {
+                font-size: 24px;
+            }
+            .emblem-line {
+                width: 30px;
+            }
+            .section-block {
+                margin-bottom: 32px;
+            }
+            .footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 6px;
+                margin-top: 32px;
+            }
+            .footer-badge {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .container {
+                padding: 20px 12px 18px;
+                border-radius: 20px;
+            }
+            .main-title {
+                font-size: 22px;
+            }
+            .subtitle {
+                font-size: 12px;
+                letter-spacing: 3px;
+            }
+            .section-title {
+                font-size: 17px;
+            }
+            .link-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+            .link-item {
+                padding: 8px 10px;
+                font-size: 13px;
+                border-radius: 8px;
+            }
+            .link-index {
+                font-size: 11px;
+                min-width: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
-<h1 style="margin: 0.0px 0.0px 50.0px 0.0px; text-align: center; font: 32.0px 'PingFang SC Semibold'; color: #212f3f; -webkit-text-stroke: #212f3f"><span class="s1"><b>枫树形态分类话术手册</b></span></h1>
-<p class="p2"><span class="s2"><b>一、树形分类</b></span></p>
-<p class="p3"><span class="s3"></span><br></p>
-<p class="p4"><span class="s3"><a href="1.html">1 <span class="s4">高飘直立疏朗</span><span class="s5">.html</span></a></span></p>
-<p class="p5"><span class="s3"><a href="2.html">2 <span class="s6">常规直立疏朗</span>.html</a></span></p>
-<p class="p5"><span class="s3"><a href="3.html">3 <span class="s6">低分枝直立疏朗</span>.html</a></span></p>
-<p class="p5"><span class="s3"><a href="4.html">4 <span class="s6">多干直立疏朗</span>.html</a></span></p>
-<p class="p5"><span class="s3"><a href="5.html">5 <span class="s6">高分枝斜飘</span>.html</a></span></p>
-<p class="p5"><span class="s3"><a href="6.html">6 <span class="s6">中分枝斜飘</span>.html</a></span></p>
-<p class="p5"><span class="s3"><a href="7.html">7 <span class="s6">低分枝双杆斜飘</span>.html</a></span></p>
-<p class="p5"><span class="s3"><a href="8.html">8 <span class="s6">多杆斜飘</span>.html</a></span></p>
-<p class="p5"><span class="s3"><a href="9.html">9 <span class="s6">低接龙爪垂枝</span>.html</a></span></p>
-<p class="p5"><span class="s3"><a href="10.html">10 <span class="s6">游龙形</span>.html</a></span></p>
-<p class="p5"><span class="s3"><a href="11.html">11 <span class="s6">凤舞形</span>.html</a></span></p>
-<p class="p5"><span class="s3"><a href="12.html">12 <span class="s6">临水形</span>.html</a></span></p>
-<p class="p3"><span class="s3"></span><br></p>
-<h2 style="margin: 0.0px 0.0px 20.0px 0.0px; font: 22.0px 'PingFang SC Semibold'; color: #b02621; -webkit-text-stroke: #b02621"><span class="s2"><b>二、叶色分类</b></span></h2>
-<p class="p5"><span class="s6"><a href="A.html">红色系<span class="s7">.html</span></a></span></p>
-<p class="p5"><span class="s6"><a href="B.html">粉色系<span class="s7">.html</span></a></span></p>
-<p class="p5"><span class="s6"><a href="C.html">紫色系<span class="s7">.html</span></a></span></p>
-<p class="p5"><span class="s6"><a href="D.html">黄色系<span class="s7">.html</span></a></span></p>
-<p class="p5"><span class="s6"><a href="E.html">绿色系<span class="s7">.html</span></a></span></p>
-<p class="p5"><span class="s6"><a href="F.html">锦叶系<span class="s7">.html</span></a></span></p>
-<p class="p5"><span class="s6"><a href="G.html">观枝系<span class="s7">.html</span></a></span></p>
-<p class="p3"><span class="s3"></span><br></p>
-<p class="p2"><span class="s2"><b>三、叶形分类</b></span></p>
-<p class="p3"><span class="s3"></span><br></p>
-<p class="p4"><span class="s6"><a href="a.html">掌叶型<span class="s8">.html</span></a></span></p>
-<p class="p5"><span class="s6"><a href="b.html">羽毛型<span class="s7">.html</span></a></span></p>
-<p class="p5"><span class="s6"><a href="c.html">团扇型<span class="s7">.html</span></a></span></p>
-<p class="p5"><span class="s6"><a href="d.html">羽扇型<span class="s7">.html</span></a></span></p>
-<p class="p5"><span class="s6"><a href="e.html">脉纹型<span class="s7">.html</span></a></span></p>
-<p class="p5"><span class="s6"><a href="f.html">异叶型<span class="s7">.html</span></a></span></p>
+
+    <div class="container">
+        <div class="content">
+
+            <!-- ===== 头部 ===== -->
+            <div class="header">
+                <div class="emblem">
+                    <span class="emblem-line"></span>
+                    <span class="emblem-icon">🍁</span>
+                    <span class="emblem-line"></span>
+                </div>
+                <h1 class="main-title">枫树形态分类 · 话术手册</h1>
+                <div class="subtitle">
+                    树形 <span>·</span> 叶色 <span>·</span> 叶形
+                </div>
+            </div>
+
+            <!-- ===== 一、树形分类 ===== -->
+            <div class="section-block">
+                <div class="section-head">
+                    <span class="section-number">Ⅰ</span>
+                    <span class="section-title">树形分类</span>
+                    <span class="section-title-en">Tree Form</span>
+                </div>
+                <div class="link-grid">
+                    <a href="1.html" class="link-item"><span class="link-index">01</span><span class="link-label">高飘直立疏朗</span></a>
+                    <a href="2.html" class="link-item"><span class="link-index">02</span><span class="link-label">常规直立疏朗</span></a>
+                    <a href="3.html" class="link-item"><span class="link-index">03</span><span class="link-label">低分枝直立疏朗</span></a>
+                    <a href="4.html" class="link-item"><span class="link-index">04</span><span class="link-label">多干直立疏朗</span></a>
+                    <a href="5.html" class="link-item"><span class="link-index">05</span><span class="link-label">高分枝斜飘</span></a>
+                    <a href="6.html" class="link-item"><span class="link-index">06</span><span class="link-label">中分枝斜飘</span></a>
+                    <a href="7.html" class="link-item"><span class="link-index">07</span><span class="link-label">低分枝双杆斜飘</span></a>
+                    <a href="8.html" class="link-item"><span class="link-index">08</span><span class="link-label">多杆斜飘</span></a>
+                    <a href="9.html" class="link-item"><span class="link-index">09</span><span class="link-label">低接龙爪垂枝</span></a>
+                    <a href="10.html" class="link-item"><span class="link-index">10</span><span class="link-label">游龙形</span></a>
+                    <a href="11.html" class="link-item"><span class="link-index">11</span><span class="link-label">凤舞形</span></a>
+                    <a href="12.html" class="link-item"><span class="link-index">12</span><span class="link-label">临水形</span></a>
+                </div>
+            </div>
+
+            <!-- ===== 二、叶色分类 ===== -->
+            <div class="section-block">
+                <div class="section-head">
+                    <span class="section-number">Ⅱ</span>
+                    <span class="section-title">叶色分类</span>
+                    <span class="section-title-en">Foliage Color</span>
+                </div>
+                <div class="link-grid">
+                    <a href="A.html" class="link-item"><span class="link-index">A</span><span class="link-label">红色系</span></a>
+                    <a href="B.html" class="link-item"><span class="link-index">B</span><span class="link-label">粉色系</span></a>
+                    <a href="C.html" class="link-item"><span class="link-index">C</span><span class="link-label">紫色系</span></a>
+                    <a href="D.html" class="link-item"><span class="link-index">D</span><span class="link-label">黄色系</span></a>
+                    <a href="E.html" class="link-item"><span class="link-index">E</span><span class="link-label">绿色系</span></a>
+                    <a href="F.html" class="link-item"><span class="link-index">F</span><span class="link-label">锦叶系</span></a>
+                    <a href="G.html" class="link-item"><span class="link-index">G</span><span class="link-label">观枝系</span></a>
+                </div>
+            </div>
+
+            <!-- ===== 三、叶形分类 ===== -->
+            <div class="section-block">
+                <div class="section-head">
+                    <span class="section-number">Ⅲ</span>
+                    <span class="section-title">叶形分类</span>
+                    <span class="section-title-en">Leaf Shape</span>
+                </div>
+                <div class="link-grid">
+                    <a href="a.html" class="link-item"><span class="link-index">a</span><span class="link-label">掌叶型</span></a>
+                    <a href="b.html" class="link-item"><span class="link-index">b</span><span class="link-label">羽毛型</span></a>
+                    <a href="c.html" class="link-item"><span class="link-index">c</span><span class="link-label">团扇型</span></a>
+                    <a href="d.html" class="link-item"><span class="link-index">d</span><span class="link-label">羽扇型</span></a>
+                    <a href="e.html" class="link-item"><span class="link-index">e</span><span class="link-label">脉纹型</span></a>
+                    <a href="f.html" class="link-item"><span class="link-index">f</span><span class="link-label">异叶型</span></a>
+                </div>
+            </div>
+
+            <!-- ===== 底部 ===== -->
+            <div class="footer">
+                <div class="footer-motto">
+                    <strong>✦</strong> 精研枫树形态 · 构建专业话术体系 <strong>✦</strong>
+                </div>
+                <div class="footer-badge">
+                    <span>©</span> 山秋枫树园学术中心 <span>|</span> 分类话术手册
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </body>
 </html>
