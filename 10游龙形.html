@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10号 · 游龙形 · 优化版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f1ec;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #2b2620;
+            line-height: 1.6;
+        }
+        .card {
+            max-width: 960px;
+            margin: 0 auto;
+            background: #fcfaf7;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            padding: 2.4rem 2.8rem;
+        }
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #ece5dc;
+            margin-bottom: 1.8rem;
+        }
+        .header .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            color: #b09b86;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+        }
+        .header .name {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2b2620;
+            letter-spacing: 0.3px;
+        }
+        .header .sub {
+            font-size: 0.85rem;
+            color: #7a6e5e;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+            margin-left: auto;
+        }
+        .hero {
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 450;
+            color: #1f1b17;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+        }
+        .hero .tagline {
+            display: inline-block;
+            background: #f2ede7;
+            padding: 0.35rem 1.8rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 450;
+            color: #3d352c;
+            margin-top: 0.6rem;
+            border: 1px solid #e5ddd2;
+            letter-spacing: 0.2px;
+        }
+        .block {
+            margin-bottom: 2.4rem;
+        }
+        .block-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #e5ddd2;
+            padding-bottom: 0.4rem;
+        }
+        .block-header .icon {
+            font-size: 1rem;
+            color: #b09b86;
+        }
+        .block-header h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6f6456;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+        .sell-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .sell-item {
+            background: #f8f5f0;
+            border-radius: 10px;
+            padding: 1rem 1.4rem;
+            border-left: 4px solid #c4b2a0;
+        }
+        .sell-item .label {
+            font-weight: 600;
+            color: #3d352c;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .sell-item .label .emoji {
+            font-size: 1.1rem;
+            opacity: 0.7;
+        }
+        .sell-item .desc {
+            color: #5f5549;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin: 0.2rem 0 0.4rem 0;
+        }
+        .sell-item ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sell-item ul li {
+            font-size: 0.85rem;
+            color: #3d352c;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.15rem;
+        }
+        .sell-item ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+            font-weight: 700;
+        }
+        .quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.2rem 1.6rem;
+            background: #f8f5f0;
+            padding: 1.2rem 1.8rem;
+            border-radius: 12px;
+            border: 1px solid #ece5dc;
+        }
+        .quick-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+            font-size: 0.88rem;
+            border-bottom: 1px dotted #e5ddd2;
+        }
+        .quick-item .q-label {
+            font-weight: 500;
+            color: #6f6456;
+            min-width: 4.2rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        .quick-item .q-value {
+            color: #2b2620;
+        }
+        .quick-item .q-tag {
+            background: #ede7df;
+            padding: 0.05rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #4d443a;
+            display: inline-block;
+            margin-right: 0.2rem;
+        }
+        .scene-list {
+            list-style: none;
+            padding: 0;
+        }
+        .scene-list li {
+            padding: 0.5rem 1.2rem;
+            margin-bottom: 0.4rem;
+            background: #f8f5f0;
+            border-radius: 6px;
+            border-left: 3px solid #d6ccbf;
+            font-size: 0.88rem;
+            color: #3d352c;
+        }
+        .scene-list li strong {
+            color: #2b2620;
+            font-weight: 550;
+        }
+        .pain-block {
+            background: #f8f5f0;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            border-left: 4px solid #b8a692;
+            margin-bottom: 0.7rem;
+        }
+        .pain-block .pain-q {
+            font-weight: 500;
+            color: #3d352c;
+            font-size: 0.88rem;
+        }
+        .pain-block .pain-a {
+            color: #4d443a;
+            font-size: 0.85rem;
+            margin-top: 0.15rem;
+        }
+        .pain-block .pain-a strong {
+            color: #2b2620;
+        }
+        .dream-block {
+            background: #f2ede7;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+            font-size: 0.88rem;
+            color: #3d352c;
+            font-style: italic;
+            border-left: 3px solid #c4b2a0;
+        }
+        .dream-block strong {
+            font-style: normal;
+            color: #2b2620;
+        }
+        .footnote {
+            background: #f8f5f0;
+            padding: 0.8rem 1.4rem;
+            border-radius: 8px;
+            border: 1px solid #e5ddd2;
+            font-size: 0.85rem;
+            color: #5f5549;
+        }
+        .footnote strong {
+            color: #a65a4a;
+        }
+        .footnote ul {
+            list-style: none;
+            padding-left: 0.2rem;
+            margin-top: 0.3rem;
+        }
+        .footnote ul li {
+            padding-left: 1rem;
+            position: relative;
+            font-size: 0.82rem;
+            margin-bottom: 0.1rem;
+        }
+        .footnote ul li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+        }
+        @media (max-width: 760px) {
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .sell-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem 1.2rem;
+                gap: 0.1rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .header .name {
+                font-size: 1.2rem;
+            }
+            .header .sub {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem 0.5rem;
+            }
+            .card {
+                padding: 1rem 0.8rem;
+                border-radius: 16px;
+            }
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+            .hero .tagline {
+                font-size: 0.85rem;
+                padding: 0.25rem 1.2rem;
+            }
+            .quick-item {
+                font-size: 0.8rem;
+                flex-wrap: wrap;
+            }
+            .quick-item .q-label {
+                min-width: 3.2rem;
+            }
+            .sell-item {
+                padding: 0.7rem 1rem;
+            }
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0.2in;
+            }
+            .card {
+                box-shadow: none;
+                padding: 0.2in;
+                border-radius: 0;
+                background: white;
+            }
+            .sell-item,
+            .quick-grid,
+            .pain-block,
+            .dream-block,
+            .footnote {
+                background: #f9f6f2;
+                border-color: #ccc;
+            }
+            .hero .tagline {
+                background: #f5f0ea;
+                border-color: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <span class="badge">10 号</span>
+            <span class="name">游龙形</span>
+            <span class="sub">特型类 · 天然扭曲 · 蜿蜒如龙 · 每一棵独一无二</span>
+        </div>
+        <div class="hero">
+            <h1>蜿蜒如龙天然长，白墙投影最出神</h1>
+            <div class="tagline">“蜿蜒 · 游走 · 稀缺 · 活的雕塑 — 每一棵都是大自然的孤品”</div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>核心卖点 · 四维话术</h2></div>
+            <div class="sell-grid">
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 天然扭曲 · 每一棵都是大自然的孤品</div>
+                    <div class="desc">“这不是种出来的树，是长出来的雕塑——活的，还会继续扭曲”</div>
+                    <ul>
+                        <li>扭曲是品种自带的天然特性，不是人工蟠扎。</li>
+                        <li>你找不到两棵一样的——买的是‘这一棵’。</li>
+                        <li>人工扭曲是‘死’的，天然扭曲是‘活’的——会继续长、继续扭。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 游龙之姿 · 枝条如龙身在庭院中游走</div>
+                    <div class="desc">“它不是‘站’在那里的，是‘游’出去的——你看久了会觉得它‘活’了”</div>
+                    <ul>
+                        <li>枝条先往左走一段，再往右拐回来——像龙在游走。</li>
+                        <li>你能找到‘龙头’、‘龙身’、‘龙尾’——那不是一棵树，是一个故事。</li>
+                        <li>你的视线会顺着扭曲走——从这道弯到那道弯，像在追踪一条龙。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 收藏级 · 它不是‘绿化树’，是‘藏品’</div>
+                    <div class="desc">“稀缺的、独特的、会继续生长的艺术品”</div>
+                    <ul>
+                        <li>苗圃里一千棵中可能只有一两棵是游龙形。</li>
+                        <li>你看到的那道弯，可能是它花了两年时间才扭出来的。</li>
+                        <li>朋友来了会问‘这是什么树？’——自带话题，是‘镇院之宝’。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 四季皆可观 · 叶在时看叶，叶落时看骨</div>
+                    <div class="desc">“有叶看色彩，无叶看线条——从来没有‘空档期’”</div>
+                    <ul>
+                        <li>春天嫩红的叶子沿着扭曲的枝条排列，像龙身上长了鳞片。</li>
+                        <li>秋天每一道弯上的叶子颜色不同——同一棵树上看到秋天不同阶段。</li>
+                        <li>冬天叶子落尽，扭曲的枝条完全暴露——那是它最好看的季节。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>主播速查卡</h2></div>
+            <div class="quick-grid">
+                <div class="quick-item"><span class="q-label">编号</span><span class="q-value">10 号</span></div>
+                <div class="quick-item"><span class="q-label">树形</span><span class="q-value">游龙形</span></div>
+                <div class="quick-item"><span class="q-label">定位</span><span class="q-value">特型类 · 天然扭曲 · 蜿蜒如龙 · 独一无二</span></div>
+                <div class="quick-item"><span class="q-label">定调</span><span class="q-value">“蜿蜒如龙天然长，白墙投影最出神。”</span></div>
+                <div class="quick-item"><span class="q-label">卖点</span><span class="q-value">天然扭曲 · 游龙之姿 · 收藏级 · 四季皆可观</span></div>
+                <div class="quick-item"><span class="q-label">气质</span><span class="q-value">蜿蜒 · 游走 · 稀缺 · 抽象之龙 · 活的雕塑</span></div>
+                <div class="quick-item"><span class="q-label">场景</span><span class="q-value"><span class="q-tag">白墙前</span> <span class="q-tag">茶室窗外</span> <span class="q-tag">石组旁</span> <span class="q-tag">入口孤植</span> <span class="q-tag">转角</span></span></div>
+                <div class="quick-item"><span class="q-label">痛点</span><span class="q-value">全院规矩缺破格 · 茶室缺可凝视的线条 · 想要独一份 · 传统龙太俗 · 冬天断档</span></div>
+                <div class="quick-item"><span class="q-label">造梦</span><span class="q-value">龙游白墙 · 茶窗观龙 · 转角遇龙 · 雪中游龙</span></div>
+                <div class="quick-item"><span class="q-label">违禁词</span><span class="q-value">❌ 家人们 · 性价比 · 赶紧拍 · 3、2、1上链接</span></div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>高频场景匹配</h2></div>
+            <ul class="scene-list">
+                <li><strong>白墙前 ·</strong> 白墙为纸，游龙为墨——扭曲的枝条像一条黑色的龙在白纸上游走，影子在白墙上‘游’一整天。</li>
+                <li><strong>茶室窗外 ·</strong> 蜿蜒扭曲的枝条——不是‘植物’，是‘可以看的书法’。顺着扭曲走一遍，茶刚好喝了一口。</li>
+                <li><strong>石组旁 ·</strong> 石在‘蹲’，龙在‘游’——‘静’与‘动’的对照，是庭院里最有张力的关系。</li>
+                <li><strong>入口孤植 ·</strong> 人还没进门，先看到一条‘龙’在门口蜿蜒。不是迎宾，是‘镇院’。</li>
+                <li><strong>转角 ·</strong> 转角是‘转折’，龙也是‘转折’——两个‘转’在同一个位置相遇。</li>
+            </ul>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>场景痛点话术</h2></div>
+            <div class="pain-block"><div class="pain-q">庭院里全是‘规矩’的树，缺‘破格’之物</div><div class="pain-a">“找不到任何让你‘停下来多看一眼’的东西。<strong>→</strong> 种一棵游龙形——它是院子里唯一‘不守规矩’的东西，像一条闯入花园的龙。”</div></div>
+            <div class="pain-block"><div class="pain-q">想要‘别人家没有的’树</div><div class="pain-a">“你想要的不是‘好看’，是‘只有我家有’。<strong>→</strong> 每一棵的扭曲都不一样，你买走这一棵，世上就没有第二棵一模一样的。”</div></div>
+            <div class="pain-block"><div class="pain-q">传统‘龙’造型太俗，想要‘雅’的龙</div><div class="pain-a">“不要具象的龙，要抽象的龙——有龙的神，没有龙的形。<strong>→</strong> 它没有告诉你‘我是龙’，但它让你想到了‘龙’。那是被发现的美，不是被强加的美。”</div></div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>造梦深化</h2></div>
+            <div class="dream-block"><strong>龙游白墙 ·</strong> “冬天的下午，影子在白墙上蜿蜒、盘绕、游走。你看了三分钟——影子没停过，它一直在动。那不是影子，是一条在白墙上‘游’了一整天的龙。”</div>
+            <div class="dream-block"><strong>茶窗观龙 ·</strong> “秋天，一根枝条上同时挂着三个季节——这道弯上是红的，下一道弯上还是黄的。你的视线顺着那道弯走过去——红、黄、绿，像走了一条彩色的路。”</div>
+            <div class="dream-block"><strong>转角遇龙 ·</strong> “你每天回家，走到那个转角都会‘遇’到它。一年后你熟悉了它每一道弯；三年后它多了一道弯。它不是你回家路上的树，是你回家路上的‘老朋友’。”</div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>主播临场要点</h2></div>
+            <div class="footnote">
+                <p><strong>❌ 违禁词：</strong> 禁用“家人们”“性价比”“赶紧拍”“3、2、1上链接”。</p>
+                <p><strong>✅ 要点：</strong></p>
+                <ul>
+                    <li><strong>定位：</strong> ‘孤品级的收藏’。反复强调“每一棵都不一样”“你买的是‘这一棵’”。</li>
+                    <li><strong>强调‘天然’而非‘人工’：</strong> “这不是人工绑出来的，是它自己长成这样的。人工扭曲是‘死’的，天然扭曲是‘活’的。”</li>
+                    <li><strong>先讲‘抽象之龙’，再讲‘具象之龙’：</strong> 先讲‘扭曲’‘蜿蜒’这些自然的线条感，再让客户自己‘发现’它是龙。</li>
+                    <li><strong>‘镇院之宝’：</strong> “它不是种在院子里的树，是‘陈列’在院子里的艺术品。”</li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top:2.2rem;padding-top:1rem;border-top:1px solid #ece5dc;font-size:0.75rem;color:#b09b86;text-align:center;">庭院美学顾问 · 速查便签 · 10号游龙形 · 优化版</div>
+    </div>
+</body>
+</html>

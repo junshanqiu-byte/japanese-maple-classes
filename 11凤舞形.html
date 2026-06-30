@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>11号 · 凤舞形 · 优化版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f1ec;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #2b2620;
+            line-height: 1.6;
+        }
+        .card {
+            max-width: 960px;
+            margin: 0 auto;
+            background: #fcfaf7;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            padding: 2.4rem 2.8rem;
+        }
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #ece5dc;
+            margin-bottom: 1.8rem;
+        }
+        .header .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            color: #b09b86;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+        }
+        .header .name {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2b2620;
+            letter-spacing: 0.3px;
+        }
+        .header .sub {
+            font-size: 0.85rem;
+            color: #7a6e5e;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+            margin-left: auto;
+        }
+        .hero {
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 450;
+            color: #1f1b17;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+        }
+        .hero .tagline {
+            display: inline-block;
+            background: #f2ede7;
+            padding: 0.35rem 1.8rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 450;
+            color: #3d352c;
+            margin-top: 0.6rem;
+            border: 1px solid #e5ddd2;
+            letter-spacing: 0.2px;
+        }
+        .block {
+            margin-bottom: 2.4rem;
+        }
+        .block-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #e5ddd2;
+            padding-bottom: 0.4rem;
+        }
+        .block-header .icon {
+            font-size: 1rem;
+            color: #b09b86;
+        }
+        .block-header h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6f6456;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+        .sell-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .sell-item {
+            background: #f8f5f0;
+            border-radius: 10px;
+            padding: 1rem 1.4rem;
+            border-left: 4px solid #c4b2a0;
+        }
+        .sell-item .label {
+            font-weight: 600;
+            color: #3d352c;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .sell-item .label .emoji {
+            font-size: 1.1rem;
+            opacity: 0.7;
+        }
+        .sell-item .desc {
+            color: #5f5549;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin: 0.2rem 0 0.4rem 0;
+        }
+        .sell-item ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sell-item ul li {
+            font-size: 0.85rem;
+            color: #3d352c;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.15rem;
+        }
+        .sell-item ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+            font-weight: 700;
+        }
+        .quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.2rem 1.6rem;
+            background: #f8f5f0;
+            padding: 1.2rem 1.8rem;
+            border-radius: 12px;
+            border: 1px solid #ece5dc;
+        }
+        .quick-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+            font-size: 0.88rem;
+            border-bottom: 1px dotted #e5ddd2;
+        }
+        .quick-item .q-label {
+            font-weight: 500;
+            color: #6f6456;
+            min-width: 4.2rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        .quick-item .q-value {
+            color: #2b2620;
+        }
+        .quick-item .q-tag {
+            background: #ede7df;
+            padding: 0.05rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #4d443a;
+            display: inline-block;
+            margin-right: 0.2rem;
+        }
+        .scene-list {
+            list-style: none;
+            padding: 0;
+        }
+        .scene-list li {
+            padding: 0.5rem 1.2rem;
+            margin-bottom: 0.4rem;
+            background: #f8f5f0;
+            border-radius: 6px;
+            border-left: 3px solid #d6ccbf;
+            font-size: 0.88rem;
+            color: #3d352c;
+        }
+        .scene-list li strong {
+            color: #2b2620;
+            font-weight: 550;
+        }
+        .pain-block {
+            background: #f8f5f0;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            border-left: 4px solid #b8a692;
+            margin-bottom: 0.7rem;
+        }
+        .pain-block .pain-q {
+            font-weight: 500;
+            color: #3d352c;
+            font-size: 0.88rem;
+        }
+        .pain-block .pain-a {
+            color: #4d443a;
+            font-size: 0.85rem;
+            margin-top: 0.15rem;
+        }
+        .pain-block .pain-a strong {
+            color: #2b2620;
+        }
+        .dream-block {
+            background: #f2ede7;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+            font-size: 0.88rem;
+            color: #3d352c;
+            font-style: italic;
+            border-left: 3px solid #c4b2a0;
+        }
+        .dream-block strong {
+            font-style: normal;
+            color: #2b2620;
+        }
+        .footnote {
+            background: #f8f5f0;
+            padding: 0.8rem 1.4rem;
+            border-radius: 8px;
+            border: 1px solid #e5ddd2;
+            font-size: 0.85rem;
+            color: #5f5549;
+        }
+        .footnote strong {
+            color: #a65a4a;
+        }
+        .footnote ul {
+            list-style: none;
+            padding-left: 0.2rem;
+            margin-top: 0.3rem;
+        }
+        .footnote ul li {
+            padding-left: 1rem;
+            position: relative;
+            font-size: 0.82rem;
+            margin-bottom: 0.1rem;
+        }
+        .footnote ul li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+        }
+        @media (max-width: 760px) {
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .sell-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem 1.2rem;
+                gap: 0.1rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .header .name {
+                font-size: 1.2rem;
+            }
+            .header .sub {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem 0.5rem;
+            }
+            .card {
+                padding: 1rem 0.8rem;
+                border-radius: 16px;
+            }
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+            .hero .tagline {
+                font-size: 0.85rem;
+                padding: 0.25rem 1.2rem;
+            }
+            .quick-item {
+                font-size: 0.8rem;
+                flex-wrap: wrap;
+            }
+            .quick-item .q-label {
+                min-width: 3.2rem;
+            }
+            .sell-item {
+                padding: 0.7rem 1rem;
+            }
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0.2in;
+            }
+            .card {
+                box-shadow: none;
+                padding: 0.2in;
+                border-radius: 0;
+                background: white;
+            }
+            .sell-item,
+            .quick-grid,
+            .pain-block,
+            .dream-block,
+            .footnote {
+                background: #f9f6f2;
+                border-color: #ccc;
+            }
+            .hero .tagline {
+                background: #f5f0ea;
+                border-color: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <span class="badge">11 号</span>
+            <span class="name">凤舞形</span>
+            <span class="sub">特型类 · 低分枝/多干基部 · 枝条开张 · 如舞者长袖</span>
+        </div>
+        <div class="hero">
+            <h1>枝条开张如长袖，庭院从此有舞姿</h1>
+            <div class="tagline">“灵动 · 舒展 · 开张 · 韵律 — 庭院中的舞者，生命喜悦的化身”</div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>核心卖点 · 四维话术</h2></div>
+            <div class="sell-grid">
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 舞者之姿 · 不是在长，是在舞</div>
+                    <div class="desc">“枝条不是‘长’出来的，是‘甩’出来的”</div>
+                    <ul>
+                        <li>每一根枝条都带着弧度、韵律、节奏展开——像舞者抬起了手臂。</li>
+                        <li>枝条向四面八方舒展，撑开巨大空间——是舞者张开的手臂。</li>
+                        <li>枝条之间有韵律——长与短、陡与缓，像音乐节拍。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 疏朗不瘦 · 有骨有肉，通透不空</div>
+                    <div class="desc">“舒展、通透，但不单薄——‘健康的清瘦’”</div>
+                    <ul>
+                        <li>枝条分布均匀，疏朗但‘饱满’——空隙恰到好处。</li>
+                        <li>光从枝条缝隙漏下，是碎片状的、舞动的光斑。</li>
+                        <li>前、中、后三个层次同时存在——是‘有深度的立体’。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 生机盎然 · 树是活的，舞也是活的</div>
+                    <div class="desc">“雕塑是静的，它是动的、活的、会变的”</div>
+                    <ul>
+                        <li>每年都在长，每年都在‘编新舞’——‘正在创作中的作品’。</li>
+                        <li>春天嫩红描舞姿，夏天浓绿让舞姿沉稳，秋天三色共舞。</li>
+                        <li>风来的时候——不是‘被风吹动’，是‘借着风在跳舞’。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 辨识度极高 · 一眼就能认出来</div>
+                    <div class="desc">“它跟所有树都不一样——它自己就是标签”</div>
+                    <ul>
+                        <li>客人会停下来——“这是什么树？怎么长成这样？”</li>
+                        <li>不需要解释，它自己就是话题——是社交空间的‘破冰者’。</li>
+                        <li>游龙是‘奇’，凤舞是‘雅’——一个让人想到‘美好’。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>主播速查卡</h2></div>
+            <div class="quick-grid">
+                <div class="quick-item"><span class="q-label">编号</span><span class="q-value">11 号</span></div>
+                <div class="quick-item"><span class="q-label">树形</span><span class="q-value">凤舞形</span></div>
+                <div class="quick-item"><span class="q-label">定位</span><span class="q-value">特型类 · 低分枝/多干 · 开张 · 如舞者长袖</span></div>
+                <div class="quick-item"><span class="q-label">定调</span><span class="q-value">“枝条开张如长袖，庭院从此有舞姿。”</span></div>
+                <div class="quick-item"><span class="q-label">卖点</span><span class="q-value">舞者之姿 · 疏朗不瘦 · 生机盎然 · 辨识度极高</span></div>
+                <div class="quick-item"><span class="q-label">气质</span><span class="q-value">灵动 · 舒展 · 开张 · 韵律 · 生机 · 动态美</span></div>
+                <div class="quick-item"><span class="q-label">场景</span><span class="q-value"><span class="q-tag">白墙前</span> <span class="q-tag">茶室窗外</span> <span class="q-tag">开阔草坪</span> <span class="q-tag">石组旁</span> <span class="q-tag">入口孤植</span></span></div>
+                <div class="quick-item"><span class="q-label">痛点</span><span class="q-value">树太安静 · 茶室缺活的画 · 都在立正 · 白墙影子太规矩 · 院子太板</span></div>
+                <div class="quick-item"><span class="q-label">造梦</span><span class="q-value">白墙舞影 · 茶窗滑过弧线 · 草坪独舞 · 雪中定格的舞姿</span></div>
+                <div class="quick-item"><span class="q-label">违禁词</span><span class="q-value">❌ 家人们 · 性价比 · 赶紧拍 · 3、2、1上链接</span></div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>高频场景匹配</h2></div>
+            <ul class="scene-list">
+                <li><strong>白墙前 ·</strong> 舒展的枝条影子是舞动的、有弧度的——像皮影戏里的舞者，在白墙上演着永不落幕的戏。</li>
+                <li><strong>茶室窗外 ·</strong> 窗框像舞台框口，树在框里跳舞——春、夏、秋、冬，同一棵舞者穿着不同颜色的衣裳。</li>
+                <li><strong>开阔草坪 ·</strong> 一个‘静’的地面托着一支‘动’的舞——那棵树像正在草坪中央旋转。</li>
+                <li><strong>石组旁 ·</strong> 石的‘重’托着树的‘轻’，石的‘静’衬着树的‘动’——‘静动关系’最动人。</li>
+                <li><strong>入口孤植 ·</strong> 人还没进门，先看到一棵在‘舞’的树——不是迎宾的卫兵，是迎宾的舞者。</li>
+            </ul>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>场景痛点话术</h2></div>
+            <div class="pain-block"><div class="pain-q">院子里的树‘太安静’，缺一个‘会动’的</div><div class="pain-a">“你想要一点‘动’——让院子不要那么‘静物画’。<strong>→</strong> 凤舞形的枝条本身就是舞动的弧线，不用风来它已经在‘舞’了。你的院子从‘静物画’变成‘活的画’。”</div></div>
+            <div class="pain-block"><div class="pain-q">茶室窗前‘缺一幅活的画’</div><div class="pain-a">“墙上的画不会变，你想要一幅‘活的画’。<strong>→</strong> 凤舞形就是那幅‘活的画’——春天用嫩红画、夏天用浓绿画、秋天用火红画、冬天用墨色画。你不用换画，它自己换。”</div></div>
+            <div class="pain-block"><div class="pain-q">所有树都像在‘立正’</div><div class="pain-a">“你缺一棵‘不站’的树——不是立正，是在舞动。<strong>→</strong> 凤舞形的枝条在伸展、在流转、在起伏——像舞者被定格了一瞬间。”</div></div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>造梦深化</h2></div>
+            <div class="dream-block"><strong>白墙舞影 ·</strong> “秋日的下午，凤舞形的影子在墙上展开，像皮影戏里的舞者。风来了，影子轻轻晃动——那支舞还没跳完。”</div>
+            <div class="dream-block"><strong>茶窗外的舞者 ·</strong> “你端着茶杯，视线从这一条弧线滑到那一条——你的视线不是‘看’过去的，是‘滑’过去的。一杯茶喝完了，视线还没滑完。”</div>
+            <div class="dream-block"><strong>草坪中央的独舞 ·</strong> “夏天的傍晚，夕阳照在凤舞形上，枝条的末端都带着金色。风来了，整棵树开始轻轻摆动——是一个舞者在草坪中央独舞。”</div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>主播临场要点</h2></div>
+            <div class="footnote">
+                <p><strong>❌ 违禁词：</strong> 禁用“家人们”“性价比”“赶紧拍”“3、2、1上链接”。</p>
+                <p><strong>✅ 要点：</strong></p>
+                <ul>
+                    <li><strong>手势：</strong> 双手从身体中央向两侧缓缓展开——“枝条这样舒展开，像舞者张开双臂。”</li>
+                    <li><strong>先讲‘舒展’，再讲‘舞’：</strong> 先讲‘枝条向四周舒展’‘有弧度’，让客户自己感受到‘舞’。</li>
+                    <li><strong>强调‘不用风也在舞’：</strong> “凤舞形‘不用风来就已经在舞了’——它的姿态本身就是舞动的。”</li>
+                    <li><strong>愉悦感传递：</strong> 凤舞形让人想到‘美好’。语气要愉悦、轻快、舒展——你越轻松，客户越能感受到‘愉悦感’。</li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top:2.2rem;padding-top:1rem;border-top:1px solid #ece5dc;font-size:0.75rem;color:#b09b86;text-align:center;">庭院美学顾问 · 速查便签 · 11号凤舞形 · 优化版</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>羽毛型 · 枫叶话术速查卡</title>
+    <style>
+        /* ===== 全局深色主题 · 青灰色系 · 更亮更透 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1E2A2D;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #F0F5F5;
+            padding: 2rem 1.2rem;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== 标题区 ===== */
+        .header {
+            text-align: center;
+            padding-bottom: 1.8rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #3E5054;
+            position: relative;
+        }
+        .header .icon {
+            font-size: 2.6rem;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+        }
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: #F0F5F5;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            margin-top: 0.2rem;
+        }
+        .header h1 span {
+            color: #A8D5D8;
+            font-weight: 600;
+        }
+        .header .sub {
+            font-size: 0.95rem;
+            color: #A0B0B0;
+            font-weight: 300;
+            letter-spacing: 0.12em;
+            margin-top: 0.2rem;
+        }
+        .header .sub em {
+            font-style: normal;
+            color: #A8D5D8;
+            background: #28373A;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+        }
+
+        /* ===== 定调 & 对比 ===== */
+        .tone-card {
+            background: #28373A;
+            border-radius: 16px;
+            padding: 1.8rem 2.2rem;
+            margin-bottom: 2.5rem;
+            border-left: 6px solid #A8D5D8;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1.2rem 2.5rem;
+        }
+        .tone-card .tagline {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #F0F5F5;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            min-width: 200px;
+        }
+        .tone-card .tagline strong {
+            color: #A8D5D8;
+            font-style: normal;
+        }
+        .tone-card .contrast {
+            flex: 1;
+            font-size: 0.98rem;
+            color: #D8E0E0;
+            line-height: 1.7;
+        }
+        .tone-card .contrast .highlight {
+            color: #A8D5D8;
+            font-weight: 500;
+            background: rgba(168, 213, 216, 0.08);
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+        }
+
+        /* ===== 速查网格 ===== */
+        .section-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #A0B0B0;
+            margin: 2.2rem 0 1.2rem 0;
+            font-weight: 500;
+            border-bottom: 1px solid #3E5054;
+            padding-bottom: 0.4rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== 话术卡片 ===== */
+        .sticky-card {
+            background: #28373A;
+            border-radius: 14px;
+            padding: 1.4rem 1.4rem 1.2rem;
+            border: 1px solid #3E5054;
+            transition: all 0.2s ease;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .sticky-card:hover {
+            transform: translateY(-3px);
+            border-color: #A8D5D8;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        .sticky-card .card-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #A8D5D8;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+        .sticky-card .card-title .badge {
+            font-weight: 400;
+            font-size: 0.65rem;
+            background: #3E5054;
+            color: #A0B0B0;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            letter-spacing: 0.04em;
+        }
+        .sticky-card .card-desc {
+            font-size: 0.92rem;
+            color: #D8E0E0;
+            line-height: 1.6;
+            margin-top: 0.2rem;
+        }
+        .sticky-card .card-desc strong {
+            color: #F0F5F5;
+            font-weight: 500;
+        }
+        .sticky-card .card-desc .highlight {
+            color: #A8D5D8;
+            font-weight: 400;
+        }
+
+        /* ===== 特征与品种 ===== */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            background: #28373A;
+            border-radius: 14px;
+            padding: 1.6rem 2rem;
+            border: 1px solid #3E5054;
+            margin-top: 1.5rem;
+        }
+        .info-grid .info-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+        .info-grid .info-block .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #A0B0B0;
+        }
+        .info-grid .info-block .value {
+            font-size: 0.95rem;
+            color: #F0F5F5;
+            line-height: 1.6;
+        }
+        .info-grid .info-block .value .tag {
+            background: #3E5054;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #A8D5D8;
+            margin-right: 0.3rem;
+            display: inline-block;
+        }
+
+        /* ===== 场景匹配 ===== */
+        .scene-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 0.8rem;
+            margin: 0.8rem 0 1rem;
+        }
+        .scene-pill {
+            background: #1E2A2D;
+            border-radius: 40px;
+            padding: 0.25rem 1rem;
+            font-size: 0.8rem;
+            color: #D8E0E0;
+            border: 1px solid #3E5054;
+        }
+        .scene-pill strong {
+            font-weight: 600;
+            color: #A8D5D8;
+        }
+
+        /* ===== 底部 ===== */
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #4A5A5C;
+            border-top: 1px solid #3E5054;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            letter-spacing: 0.06em;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 700px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+                padding: 1.2rem;
+            }
+            .tone-card {
+                flex-direction: column;
+                gap: 0.6rem;
+                padding: 1.2rem 1.2rem;
+            }
+            .tone-card .tagline {
+                font-size: 1.1rem;
+                min-width: auto;
+            }
+        }
+        @media (max-width: 420px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* ===== 打印优化 ===== */
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+                padding: 0.2in;
+            }
+            .sticky-card {
+                background: #f9f9f9;
+                border: 1px solid #ddd;
+                box-shadow: none;
+            }
+            .tone-card {
+                background: #f3f3f3;
+                border-left-color: #666;
+                box-shadow: none;
+            }
+            .info-grid {
+                background: #f3f3f3;
+                border: 1px solid #ddd;
+            }
+            .header {
+                border-bottom-color: #ccc;
+            }
+            .sticky-card .card-title {
+                color: #333;
+            }
+            .sticky-card .card-desc {
+                color: #222;
+            }
+            .tone-card .contrast {
+                color: #222;
+            }
+            .header .sub {
+                color: #555;
+            }
+            .scene-pill {
+                background: #eee;
+                border-color: #ccc;
+                color: #222;
+            }
+            .footer-note {
+                border-top-color: #ccc;
+                color: #666;
+            }
+            .sticky-card .card-title .badge {
+                background: #ddd;
+                color: #333;
+            }
+            .info-grid .info-block .label {
+                color: #555;
+            }
+            .info-grid .info-block .value .tag {
+                background: #ddd;
+                color: #333;
+            }
+        }
+    </style>
+    <!-- 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 标题 ===== -->
+        <div class="header">
+            <div class="icon">🪶</div>
+            <h1>羽毛型 · <span>枫叶话术速查卡</span></h1>
+            <div class="sub">
+                <em>虚 · 透 · 飘</em>  &nbsp;—&nbsp; 像羽毛、像蕾丝、像烟
+            </div>
+        </div>
+
+        <!-- ===== 定调 & 对比 ===== -->
+        <div class="tone-card">
+            <div class="tagline">
+                “普通叶子是‘实’的，<br /><strong>羽毛型的叶子是‘虚’的</strong>”
+            </div>
+            <div class="contrast">
+                <strong>与普通叶子的对比 · 审美共鸣</strong><br />
+                普通树叶是实的、有分量的，风来了只是“摇”。羽毛型的叶子是轻的、薄的、透的——裂片裂到根部，再分裂成细丝，整片叶子像羽毛一样轻。风稍微一吹，整棵树都在“飞”。<br />
+                <span class="highlight">它不是一片叶子，是一团会飘的雾。</span>
+            </div>
+        </div>
+
+        <!-- ===== 话术速查卡片 ===== -->
+        <div class="section-label">✦ 核心话术 · 五重对比</div>
+        <div class="card-grid">
+
+            <!-- 话术1：轻盈感 -->
+            <div class="sticky-card">
+                <div class="card-title">
+                    1 · 轻盈感 <span class="badge">飞 vs 摇</span>
+                </div>
+                <div class="card-desc">
+                    “你摘一片普通树叶，握在手心里——是实的、是有分量的。羽毛型的叶子呢？——是轻的、是薄的、是透的。它的裂片裂到根部，再继续分裂成细丝，整片叶子像羽毛一样轻。<strong>风稍微一吹，整棵树都在飘。</strong>普通叶子风来了只是‘摇’，羽毛型的叶子风来了是<strong class="highlight">‘飞’</strong>。”
+                </div>
+            </div>
+
+            <!-- 话术2：透光性 -->
+            <div class="sticky-card">
+                <div class="card-title">
+                    2 · 透光性 <span class="badge">碎光 vs 阴影</span>
+                </div>
+                <div class="card-desc">
+                    “普通叶子把光挡住了——你坐在树下，头顶是一整片阴影。羽毛型的叶子呢？——<strong>光能穿过来！</strong>因为裂片之间有缝隙，因为叶片薄到半透明。阳光打过来，地面上不是一块死板的阴影，是<strong class="highlight">无数细碎的光斑在跳舞</strong>。它不是‘遮光’，是‘碎光’。”
+                </div>
+            </div>
+
+            <!-- 话术3：蕾丝精致感 -->
+            <div class="sticky-card">
+                <div class="card-title">
+                    3 · 蕾丝精致 <span class="badge">绣品 vs 叶片</span>
+                </div>
+                <div class="card-desc">
+                    “普通叶子的边缘是平滑的或锯齿的——看得多了，没什么特别。你再看羽毛型的叶子——它的边缘是细碎的、镂空的、有花纹的。<strong>像什么？像蕾丝。</strong>像手织蕾丝的花边，一丝一丝、一线一线。每一片叶子的‘蕾丝花纹’都不一样。<strong class="highlight">普通叶子是一片‘面’，羽毛型的叶子是一片‘绣品’。</strong>”
+                </div>
+            </div>
+
+            <!-- 话术4：仙气感 -->
+            <div class="sticky-card">
+                <div class="card-title">
+                    4 · 仙气感 <span class="badge">薄纱 vs 一坨</span>
+                </div>
+                <div class="card-desc">
+                    “你见过普通树的树冠——一团绿、一坨绿、密不透风的一整块。羽毛型的树冠不一样——它是一层一层细碎的<strong class="highlight">‘薄纱’堆叠</strong>起来的。远远看去，像一团彩色的雾、一片会飘的云。你种一棵羽毛型枫树在院子里，它不像普通树那样‘蹲’在那儿，它是<strong>‘浮’</strong>在那儿的。”
+                </div>
+            </div>
+
+            <!-- 话术5：风动效果 -->
+            <div class="sticky-card">
+                <div class="card-title">
+                    5 · 风动效果 <span class="badge">永不停歇</span>
+                </div>
+                <div class="card-desc">
+                    “普通树的叶子风来了摇两下，风停了就停了。羽毛型不一样——<strong>因为它太轻了</strong>，最轻微的风都能让它动。你坐在院子里，看到的是<strong class="highlight">整棵树一直在微微颤动、一直在飘</strong>。那种‘永不停歇的灵动’，是任何普通树都给不了的。”
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===== 审美感觉与场景 ===== -->
+        <div class="section-label">✦ 审美感觉 & 场景匹配</div>
+        <div class="scene-pills">
+            <span class="scene-pill"><strong>柔美飘逸</strong> 羽毛型自带仙气，轻盈浪漫</span>
+            <span class="scene-pill"><strong>中式园林</strong> 与太湖石、水景搭配经典</span>
+            <span class="scene-pill"><strong>日式庭院</strong> 与苔藓、石灯笼相得益彰</span>
+            <span class="scene-pill"><strong>自然式庭院</strong> 柔美飘逸，风动效果绝佳</span>
+        </div>
+
+        <!-- ===== 特征与品种 ===== -->
+        <div class="section-label">✦ 形态特征 & 代表品种</div>
+        <div class="info-grid">
+            <div class="info-block">
+                <div class="label">形态特征</div>
+                <div class="value">
+                    裂刻极深（≥90%），裂片几乎裂到基部，再分裂成细丝。<br />
+                    叶片薄而柔，质地轻盈，呈羽毛状或蕾丝状。
+                </div>
+            </div>
+            <div class="info-block">
+                <div class="label">审美感觉</div>
+                <div class="value">
+                    <span class="tag">柔美</span>
+                    <span class="tag">飘逸</span>
+                    <span class="tag">浪漫</span>
+                    <span class="tag">精致</span>
+                    <span class="tag">仙气</span>
+                </div>
+            </div>
+            <div class="info-block" style="grid-column: 1 / -1;">
+                <div class="label">代表品种</div>
+                <div class="value" style="font-size: 1rem; letter-spacing: 0.02em;">
+                    青龙 · 绯红皇后 · 石榴红 · 羽衣
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer-note">
+            庭院美学顾问 · 羽毛型速查 · 与普通叶子不同 · 轻盈 · 透光 · 蕾丝 · 仙气 · 灵动
+        </div>
+
+    </div>
+</body>
+</html>

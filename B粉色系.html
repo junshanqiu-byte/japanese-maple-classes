@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>粉色系 · 枫叶色彩速查卡</title>
+    <style>
+        /* ===== 全局 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #F8F4F2;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #1E1C19;
+            padding: 1.8rem 1.2rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== 标题区 ===== */
+        .header {
+            text-align: center;
+            padding-bottom: 1.6rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #F0DAD5;
+            position: relative;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #B05A6A;
+            /* 粉红褐色 */
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            margin-bottom: 0.2rem;
+        }
+        .header .sub {
+            font-size: 0.95rem;
+            color: #7A5E5A;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+        }
+        .header .sub span {
+            background: #F5E6E2;
+            padding: 0.15rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #A0585A;
+        }
+
+        /* ===== 定调 & 对比 ===== */
+        .tone-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 1.4rem 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border-left: 6px solid #D98A9B;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1rem 2rem;
+        }
+        .tone-card .tone {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1E1C19;
+        }
+        .tone-card .tone em {
+            font-style: normal;
+            color: #B05A6A;
+            font-weight: 600;
+        }
+        .tone-card .contrast {
+            flex: 1;
+            font-size: 0.95rem;
+            color: #3D3832;
+            line-height: 1.6;
+        }
+        .tone-card .contrast strong {
+            color: #B05A6A;
+        }
+        .tone-card .contrast .highlight {
+            background: #FDF4F0;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 500;
+            color: #B05A6A;
+        }
+
+        /* ===== 速查网格 ===== */
+        .section-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7A5E5A;
+            margin: 2rem 0 1rem 0;
+            font-weight: 500;
+            border-bottom: 1px dashed #E8D5D0;
+            padding-bottom: 0.3rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== 便签卡片 ===== */
+        .sticky-card {
+            background: #FFFFFF;
+            border-radius: 14px;
+            padding: 1.2rem 1.2rem 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            border: 1px solid #F0EAE2;
+            transition: all 0.15s;
+            position: relative;
+        }
+        .sticky-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        }
+        .sticky-card .color-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1E1C19;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .sticky-card .color-name .tag {
+            font-weight: 400;
+            font-size: 0.7rem;
+            background: #F5E6E2;
+            color: #7A5E5A;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            letter-spacing: 0.02em;
+        }
+        .sticky-card .color-tagline {
+            font-size: 0.85rem;
+            color: #B05A6A;
+            font-weight: 500;
+            margin-top: 0.1rem;
+        }
+        .sticky-card .color-desc {
+            font-size: 0.9rem;
+            color: #3D3832;
+            margin: 0.4rem 0 0.3rem;
+            line-height: 1.5;
+        }
+        .sticky-card .variety {
+            font-size: 0.75rem;
+            color: #7A5E5A;
+            border-top: 1px solid #F0EAE2;
+            padding-top: 0.4rem;
+            margin-top: 0.3rem;
+        }
+        .sticky-card .variety strong {
+            font-weight: 500;
+            color: #5A4A3A;
+        }
+
+        /* 粉色系装饰线 */
+        .sticky-card.pink-border {
+            border-left: 4px solid #D98A9B;
+        }
+
+        /* ===== 场景标签 ===== */
+        .scene-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.7rem;
+            margin: 0.5rem 0 1rem;
+        }
+        .scene-pill {
+            background: #F5EDEA;
+            border-radius: 40px;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.8rem;
+            color: #3D3832;
+            border: 1px solid #E8D5D0;
+        }
+        .scene-pill strong {
+            font-weight: 600;
+            color: #B05A6A;
+        }
+
+        /* ===== 痛点 & 造梦 ===== */
+        .pain-solution {
+            background: #FDF4F0;
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            margin-bottom: 0.8rem;
+            border-left: 4px solid #D98A9B;
+        }
+        .pain-solution .pain {
+            font-weight: 500;
+            color: #1E1C19;
+            font-size: 0.95rem;
+        }
+        .pain-solution .solution {
+            color: #3D3832;
+            font-size: 0.9rem;
+            margin-top: 0.1rem;
+        }
+        .pain-solution .solution .highlight {
+            color: #B05A6A;
+            font-weight: 500;
+        }
+
+        .dream-box {
+            background: #F5EDEA;
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid #D98A9B;
+            font-size: 0.95rem;
+            color: #2D2A26;
+        }
+        .dream-box strong {
+            color: #B05A6A;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        /* ===== 底部 ===== */
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #A69B8E;
+            border-top: 1px solid #E8D5D0;
+            padding-top: 1.5rem;
+            margin-top: 2.5rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .tone-card {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        @media (max-width: 420px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 打印优化 */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0.2in;
+            }
+            .sticky-card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+            .header {
+                border-bottom-color: #ccc;
+            }
+        }
+    </style>
+    <!-- 字体：Playfair Display 用于标题 -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 标题 ===== -->
+        <div class="header">
+            <h1>🌸 粉色系 · 枫叶色彩速查卡</h1>
+            <div class="sub">
+                <span>比花还温柔</span>  &nbsp;·&nbsp; 长在叶子上的粉 &nbsp;·&nbsp; 庭院美学顾问
+            </div>
+        </div>
+
+        <!-- ===== 定调 & 对比 ===== -->
+        <div class="tone-card">
+            <div class="tone">
+                “枫树不只有红色——<br /><em>还有粉色。比花还温柔。</em>”
+            </div>
+            <div class="contrast">
+                <strong>与普通植物的对比 · 审美共鸣</strong><br />
+                你见过粉色的树吗？粉色在植物界通常是花的颜色——樱花粉、桃花粉，但那是花，开完就谢了。<br />
+                枫树的粉色是<span class="highlight">“长在叶子上的粉”</span>——不是开几天就没了，是长在那里、一直在的粉。<br />
+                种一棵粉色枫在院子里，那不是一棵树，是<span class="highlight">“一棵不会谢的花”</span>。
+            </div>
+        </div>
+
+        <!-- ===== 色彩速查卡片 ===== -->
+        <div class="section-label">✦ 完整色彩 · 便签速查</div>
+        <div class="card-grid">
+
+            <div class="sticky-card pink-border">
+                <div class="color-name">全粉 <span class="tag">最纯粹</span></div>
+                <div class="color-tagline">整片叶子都是粉色</div>
+                <div class="color-desc">像一块粉色的绸缎挂在树上，没有杂色。</div>
+                <div class="variety"><strong>代表：</strong>泰勒（春季）</div>
+            </div>
+
+            <div class="sticky-card pink-border">
+                <div class="color-name">鲑鱼粉 <span class="tag">最温暖</span></div>
+                <div class="color-tagline">像三文鱼肉色</div>
+                <div class="color-desc">带一点橙调的粉，那种暖意让人心里发热。</div>
+                <div class="variety"><strong>代表：</strong>珊瑚之心</div>
+            </div>
+
+            <div class="sticky-card pink-border">
+                <div class="color-name">珊瑚粉 <span class="tag">最高级</span></div>
+                <div class="color-tagline">有质感的粉</div>
+                <div class="color-desc">像珊瑚、像日落，温柔又有力量。</div>
+                <div class="variety"><strong>代表：</strong>魔幻珊瑚</div>
+            </div>
+
+            <div class="sticky-card pink-border">
+                <div class="color-name">薄粉 <span class="tag">最轻</span></div>
+                <div class="color-tagline">若有若无</div>
+                <div class="color-desc">像一层粉色薄纱蒙在叶子上，似有似无，最撩人。</div>
+                <div class="variety"><strong>代表：</strong>花散里（春叶半开）</div>
+            </div>
+
+            <div class="sticky-card pink-border">
+                <div class="color-name">粉白 <span class="tag">清雅</span></div>
+                <div class="color-tagline">粉色与白色交织</div>
+                <div class="color-desc">像一杯粉色奶昔，柔和感是纯色给不了的。</div>
+                <div class="variety"><strong>代表：</strong>花散里（半开）</div>
+            </div>
+
+            <div class="sticky-card pink-border">
+                <div class="color-name">粉绿斑锦 <span class="tag">一片两色</span></div>
+                <div class="color-tagline">粉一块、绿一块</div>
+                <div class="color-desc">像画家随意泼上去的，每一片比例都不一样。</div>
+                <div class="variety"><strong>代表：</strong>蝴蝶、羽前锦</div>
+            </div>
+
+            <div class="sticky-card pink-border">
+                <div class="color-name">粉边 <span class="tag">精致</span></div>
+                <div class="color-tagline">边缘镶粉边</div>
+                <div class="color-desc">像给叶子描了一道粉色轮廓线，精细感十足。</div>
+                <div class="variety"><strong>代表：</strong>粉色蕾丝</div>
+            </div>
+
+            <div class="sticky-card pink-border">
+                <div class="color-name">粉紫 <span class="tag">神秘</span></div>
+                <div class="color-tagline">捉摸不定</div>
+                <div class="color-desc">早上看是粉的，下午又带一点紫，最耐看。</div>
+                <div class="variety"><strong>代表：</strong>粉色激情</div>
+            </div>
+
+            <div class="sticky-card pink-border">
+                <div class="color-name">深粉 <span class="tag">有劲儿</span></div>
+                <div class="color-tagline">扎扎实实的粉</div>
+                <div class="color-desc">像草莓、像胭脂，一切“粉得很认真”的东西。</div>
+                <div class="variety"><strong>代表：</strong>羽前锦（春季）</div>
+            </div>
+
+        </div>
+
+        <!-- ===== 场景匹配 ===== -->
+        <div class="section-label">✦ 场景推荐 · 身份确认</div>
+        <div class="scene-pills">
+            <span class="scene-pill"><strong>窗前</strong> 粉色枫 —— 晨光里半透明的粉，每天早上的“第一眼好心情”</span>
+            <span class="scene-pill"><strong>草坪中央</strong> 全粉 —— 绿草坪上一朵粉云，整个院子最梦幻的存在</span>
+            <span class="scene-pill"><strong>水边</strong> 粉色枫 —— 粉色倒影柔柔的，是水边最温柔的画面</span>
+            <span class="scene-pill"><strong>茶室</strong> 粉色枫 —— 粉色是最安静的颜色，不跳不闹，柔柔地待在那里</span>
+            <span class="scene-pill"><strong>入口</strong> 粉色枫 —— 客人还没进门，先看到那抹粉色——“这家主人不一样”</span>
+        </div>
+
+        <!-- ===== 痛点解药 ===== -->
+        <div class="section-label">✦ 痛点化解 · 解药话术</div>
+        <div class="pain-solution">
+            <div class="pain">“粉色太个性，怕过两年不喜欢”</div>
+            <div class="solution">→ 选<span class="highlight">鲑鱼粉或珊瑚粉</span>，带橙调的暖粉，不是“一眼到底”的粉。第一年温暖，第三年还是温暖。<span class="highlight">不会腻的颜色，才是好颜色。</span></div>
+        </div>
+
+        <!-- ===== 造梦话术 ===== -->
+        <div class="section-label">✦ 造梦 · 即时拥有</div>
+        <div class="dream-box">
+            <strong>晨光粉影</strong>
+            春天的早晨，阳光照在粉色枫叶上，半透明的粉色像被点亮了的纱巾。你端着咖啡站在窗前，一天还没有正式开始，但你已经觉得“今天会很好”。
+        </div>
+        <div class="dream-box">
+            <strong>治愈角落</strong>
+            疲惫的下午回到家，粉色枫树在等你。搬一把椅子坐在旁边，看着那些粉色的叶子，十分钟后，你觉得今天的累也没那么累了。
+        </div>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer-note">
+            庭院美学顾问 · 粉色系速查 · 审美共鸣 × 身份确认 × 即时拥有
+        </div>
+
+    </div>
+</body>
+</html>

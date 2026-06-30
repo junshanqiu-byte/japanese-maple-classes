@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6号 · 中分枝斜飘 · 优化版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f1ec;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #2b2620;
+            line-height: 1.6;
+        }
+
+        .card {
+            max-width: 960px;
+            margin: 0 auto;
+            background: #fcfaf7;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            padding: 2.4rem 2.8rem;
+        }
+
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #ece5dc;
+            margin-bottom: 1.8rem;
+        }
+
+        .header .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            color: #b09b86;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+        }
+
+        .header .name {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2b2620;
+            letter-spacing: 0.3px;
+        }
+
+        .header .sub {
+            font-size: 0.85rem;
+            color: #7a6e5e;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+            margin-left: auto;
+        }
+
+        .hero {
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 450;
+            color: #1f1b17;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: #f2ede7;
+            padding: 0.35rem 1.8rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 450;
+            color: #3d352c;
+            margin-top: 0.6rem;
+            border: 1px solid #e5ddd2;
+            letter-spacing: 0.2px;
+        }
+
+        .block {
+            margin-bottom: 2.4rem;
+        }
+
+        .block-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #e5ddd2;
+            padding-bottom: 0.4rem;
+        }
+
+        .block-header .icon {
+            font-size: 1rem;
+            color: #b09b86;
+        }
+
+        .block-header h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6f6456;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .sell-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .sell-item {
+            background: #f8f5f0;
+            border-radius: 10px;
+            padding: 1rem 1.4rem;
+            border-left: 4px solid #c4b2a0;
+        }
+
+        .sell-item .label {
+            font-weight: 600;
+            color: #3d352c;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .sell-item .label .emoji {
+            font-size: 1.1rem;
+            opacity: 0.7;
+        }
+
+        .sell-item .desc {
+            color: #5f5549;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin: 0.2rem 0 0.4rem 0;
+        }
+
+        .sell-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sell-item ul li {
+            font-size: 0.85rem;
+            color: #3d352c;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.15rem;
+        }
+
+        .sell-item ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+            font-weight: 700;
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.2rem 1.6rem;
+            background: #f8f5f0;
+            padding: 1.2rem 1.8rem;
+            border-radius: 12px;
+            border: 1px solid #ece5dc;
+        }
+
+        .quick-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+            font-size: 0.88rem;
+            border-bottom: 1px dotted #e5ddd2;
+        }
+
+        .quick-item .q-label {
+            font-weight: 500;
+            color: #6f6456;
+            min-width: 4.2rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .quick-item .q-value {
+            color: #2b2620;
+        }
+
+        .quick-item .q-tag {
+            background: #ede7df;
+            padding: 0.05rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #4d443a;
+            display: inline-block;
+            margin-right: 0.2rem;
+        }
+
+        .scene-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .scene-list li {
+            padding: 0.5rem 1.2rem;
+            margin-bottom: 0.4rem;
+            background: #f8f5f0;
+            border-radius: 6px;
+            border-left: 3px solid #d6ccbf;
+            font-size: 0.88rem;
+            color: #3d352c;
+        }
+
+        .scene-list li strong {
+            color: #2b2620;
+            font-weight: 550;
+        }
+
+        .pain-block {
+            background: #f8f5f0;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            border-left: 4px solid #b8a692;
+            margin-bottom: 0.7rem;
+        }
+
+        .pain-block .pain-q {
+            font-weight: 500;
+            color: #3d352c;
+            font-size: 0.88rem;
+        }
+
+        .pain-block .pain-a {
+            color: #4d443a;
+            font-size: 0.85rem;
+            margin-top: 0.15rem;
+        }
+
+        .pain-block .pain-a strong {
+            color: #2b2620;
+        }
+
+        .dream-block {
+            background: #f2ede7;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+            font-size: 0.88rem;
+            color: #3d352c;
+            font-style: italic;
+            border-left: 3px solid #c4b2a0;
+        }
+
+        .dream-block strong {
+            font-style: normal;
+            color: #2b2620;
+        }
+
+        .footnote {
+            background: #f8f5f0;
+            padding: 0.8rem 1.4rem;
+            border-radius: 8px;
+            border: 1px solid #e5ddd2;
+            font-size: 0.85rem;
+            color: #5f5549;
+        }
+
+        .footnote strong {
+            color: #a65a4a;
+        }
+
+        .footnote ul {
+            list-style: none;
+            padding-left: 0.2rem;
+            margin-top: 0.3rem;
+        }
+
+        .footnote ul li {
+            padding-left: 1rem;
+            position: relative;
+            font-size: 0.82rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .footnote ul li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+        }
+
+        @media (max-width: 760px) {
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .sell-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem 1.2rem;
+                gap: 0.1rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .header .name {
+                font-size: 1.2rem;
+            }
+            .header .sub {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem 0.5rem;
+            }
+            .card {
+                padding: 1rem 0.8rem;
+                border-radius: 16px;
+            }
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+            .hero .tagline {
+                font-size: 0.85rem;
+                padding: 0.25rem 1.2rem;
+            }
+            .quick-item {
+                font-size: 0.8rem;
+                flex-wrap: wrap;
+            }
+            .quick-item .q-label {
+                min-width: 3.2rem;
+            }
+            .sell-item {
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0.2in;
+            }
+            .card {
+                box-shadow: none;
+                padding: 0.2in;
+                border-radius: 0;
+                background: white;
+            }
+            .sell-item,
+            .quick-grid,
+            .pain-block,
+            .dream-block,
+            .footnote {
+                background: #f9f6f2;
+                border-color: #ccc;
+            }
+            .hero .tagline {
+                background: #f5f0ea;
+                border-color: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+
+        <!-- 头部 -->
+        <div class="header">
+            <span class="badge">6 号</span>
+            <span class="name">中分枝斜飘</span>
+            <span class="sub">斜飘型 · 中 (0.8-1.5m) · 单干 · 疏朗 · 倾斜≥15°</span>
+        </div>
+
+        <!-- 主标题 -->
+        <div class="hero">
+            <h1>斜枝在眼前，坐着也能看</h1>
+            <div class="tagline">“谦逊 · 低伏 · 近人 · 视线平齐 — 迁就你的树，坐着也陪你”</div>
+        </div>
+
+        <!-- ===== 核心卖点 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>核心卖点 · 四维话术</h2>
+            </div>
+            <div class="sell-grid">
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 谦逊尺度 · 不高不低，低伏在你面前</div>
+                    <div class="desc">“它不‘高调’，它‘低伏’——不让你仰望，是让你平视”</div>
+                    <ul>
+                        <li>分枝点在一米左右，你站着的时候视线平视就能看到树冠。</li>
+                        <li>5号引你‘仰望’，6号引你‘平视’——这是本质的区别。</li>
+                        <li>伸手就能摸到倾斜的主干，顺着它的方向看出去——你与树在同一个高度出发。</li>
+                    </ul>
+                </div>
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 低处动势 · 视线从腰部开始被引导</div>
+                    <div class="desc">“5号引你‘仰望’，6号引你‘平视’”</div>
+                    <ul>
+                        <li>斜枝在你胸前——你的视线‘平着’就跟它走了，不费力气。</li>
+                        <li>如果你想引导人看向近处的水面、脚边的石组——用6号，视线从腰部出发自然落到近景。</li>
+                        <li>它是‘精确制导’，不是‘大方向引导’。</li>
+                    </ul>
+                </div>
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 为坐姿设计 · 人坐下的时候，它正好陪着你</div>
+                    <div class="desc">“你站着的时候它在，你坐下来的时候它还在——它始终在你的视线高度”</div>
+                    <ul>
+                        <li>人坐着时视线约1.1m，6号分枝点约1m——你坐下，它正好在你眼前。</li>
+                        <li>茶室窗前、长椅旁、榻榻米上——视线平出去就是斜飘的枝条。</li>
+                        <li>它不是‘需要你迁就’的树，它是一棵‘迁就你’的树。</li>
+                    </ul>
+                </div>
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 近景破法 · 不挡景，但破景</div>
+                    <div class="desc">“它不填满，但它‘破’——在规整的框里画一道斜线，画面就活了”</div>
+                    <ul>
+                        <li>窗户、月洞门、格栅都是‘框’——太规整容易‘死’。</li>
+                        <li>种一棵6号在框景位置，斜斜的枝条从一侧探入，打破规整。</li>
+                        <li>它不是去‘填’那个画面，是去跟画面里的其他元素‘对话’。</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ===== 速查卡 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>主播速查卡</h2>
+            </div>
+            <div class="quick-grid">
+                <div class="quick-item"><span class="q-label">编号</span><span class="q-value">6 号</span></div>
+                <div class="quick-item"><span class="q-label">树形</span><span class="q-value">中分枝斜飘</span></div>
+                <div class="quick-item"><span class="q-label">定位</span><span class="q-value">斜飘型 · 中 (0.8-1.5m) · 单干 · 疏朗 · 倾斜≥15°</span></div>
+                <div class="quick-item"><span class="q-label">定调</span><span class="q-value">“斜枝在眼前，坐着也能看。”</span></div>
+                <div class="quick-item"><span class="q-label">卖点</span><span class="q-value">谦逊尺度 · 低处动势 · 为坐姿设计 · 近景破法</span></div>
+                <div class="quick-item"><span class="q-label">气质</span><span class="q-value">谦逊 · 低伏 · 近人 · 视线平齐 · 陪伴</span></div>
+                <div class="quick-item"><span class="q-label">场景</span><span class="q-value"><span class="q-tag">茶室窗前</span> <span class="q-tag">座椅/长椅旁</span> <span class="q-tag">石组/石灯笼旁</span> <span class="q-tag">飞石路径</span> <span class="q-tag">花境边缘</span></span></div>
+                <div class="quick-item"><span class="q-label">痛点</span><span class="q-value">窗前斜飘坐着看不见 · 精致元素视线落不到 · 所有树都站着缺一棵斜的 · 花境有层次没串联</span></div>
+                <div class="quick-item"><span class="q-label">造梦</span><span class="q-value">坐观斜枝 · 石旁斜影 · 飞石同行 · 同一高度四季轮换</span></div>
+                <div class="quick-item"><span class="q-label">违禁词</span><span class="q-value">❌ 家人们 · 性价比 · 赶紧拍 · 3、2、1上链接</span></div>
+            </div>
+        </div>
+
+        <!-- ===== 高频场景匹配 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>高频场景匹配 · 种在哪里，就长成什么画面</h2>
+            </div>
+            <ul class="scene-list">
+                <li><strong>茶室/茶庭 ·</strong> 茶人坐于室内，视线高度约一米，窗外斜枝在窗框中横斜穿过。春红夏绿秋金冬枝，四季在同一个视线高度流转——最省力的观看方式。</li>
+                <li><strong>长椅/座椅旁 ·</strong> 人坐于长椅上，视线约一米，斜枝也在同一高度。坐下去的时候斜枝就在你眼前——不需要调整任何角度，坐下来就能看。</li>
+                <li><strong>石组/散置石旁 ·</strong> 石组高度在膝盖到腰部，6号的斜枝也在腰部高度指向石组。石是‘实’的，斜枝是‘虚’的——两者在同一个高度咬合。</li>
+                <li><strong>飞石/汀步路径旁 ·</strong> 人在石上走，斜枝在腰部高度陪你。一步一石、一步一斜，走路不再只是走路，是跟一棵树同步前进。</li>
+                <li><strong>花境边缘 ·</strong> 斜枝不是高高在上俯视花境，而是在花境的高度‘穿行’其中。枫树不是花境的‘背景’，是花境的‘参与者’。</li>
+            </ul>
+        </div>
+
+        <!-- ===== 场景痛点话术 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>场景痛点话术 · 先刺痛，再给解药</h2>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点一 · 窗前有斜飘，但‘太高了’，坐着看不见</div>
+                <div class="pain-a">“你想种斜飘，但担心坐在屋里看出去枝条在头顶——想要斜飘的画意，但怕高度不对，坐着看不到。”<br />
+                <strong>→</strong> 6号就是为‘坐着看’设计的。分枝点在一米左右——你站着的时候它在胸前，你坐下来的时候它正好在你眼前。茶室里坐着喝茶，平视出去就是那根斜枝——不用抬头、不费脖子。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点二 · 近景有精致元素，但视线‘落不到’它们身上</div>
+                <div class="pain-a">“你放了一块好看的景石、一个石灯笼，但每次走过的时候视线好像‘落不到’它们身上。东西是好的，但它们在‘视线的盲区’。”<br />
+                <strong>→</strong> 种一棵6号在旁边——斜枝在腰部高度指向那个小物件。人走到附近，视线自然地从斜枝‘滑’到景石上。斜枝是‘视线导轨’——它不是主角，但让主角被看见了。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点三 · 院子里所有树都‘站着’，没有一棵‘坐着’</div>
+                <div class="pain-a">“院子里的树全在‘立正’，没有一棵是‘坐着’的、‘靠着’的、‘探着’的。太整齐了，整齐到像列队。你总觉得院子太‘板’了。”<br />
+                <strong>→</strong> 种一棵6号进去——它是院子里唯一‘不站直’的树。斜斜地探向一边，在那些笔直的树中间画了一道斜线。它不是‘破坏’秩序，是给秩序加了一点‘温度’。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点四 · 花境有‘层次’但没‘串联’</div>
+                <div class="pain-a">“花境层次是有的，但你看过去的时候视线在植物之间‘跳来跳去’，没有一个东西把它们‘串’起来。花境像一首没有主旋律的歌。”<br />
+                <strong>→</strong> 在花境边缘种一棵6号——斜枝在花境的高度横斜穿过，视线从斜枝出发，自然地滑向花境的各个层次。斜枝是花境的‘主旋律’——它把所有散落的音符串成了一首歌。</div>
+            </div>
+        </div>
+
+        <!-- ===== 造梦深化 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>造梦深化 · 把‘看见’变成‘感受到’</h2>
+            </div>
+
+            <div class="dream-block">
+                <strong>坐观斜枝 ·</strong> “春天的下午，你坐在茶室里，窗外的6号新叶初展。斜枝在你视线的高度，阳光透过疏朗的叶子，在茶桌上投下斑驳的光影。你端起茶杯的时候，光影就在杯沿上晃动——你不是在看风景，你就坐在风景里。”
+            </div>
+
+            <div class="dream-block">
+                <strong>石旁斜影 ·</strong> “秋天的傍晚，你站在石组旁边。6号的斜枝指向石组的方向，叶子红了。夕阳从侧面照过来，斜枝的影子落在石头上、落在苔地上。石头是永恒不变的，影子是随光变化的——一个‘恒’，一个‘变’，在这一刻同时被你看见。”
+            </div>
+
+            <div class="dream-block">
+                <strong>飞石同行 ·</strong> “你走在日式飞石路径上，每一步踏下去，都有斜枝在腰部的高度陪着你的视线。你走快它也快（在你的视线里），你走慢它也慢。它不是‘种在那儿’，它是‘跟你一起走’。”
+            </div>
+
+            <div class="dream-block">
+                <strong>近身四季 ·</strong> “春天它在你的视线高度冒新芽，夏天它在你的视线高度展开绿叶，秋天它在你的视线高度变红，冬天它在你的视线高度留下骨感的枝条。你不需要换姿势、不需要改变视角，四季就在同一个高度轮换。它不是一棵‘需要你迁就’的树，它是一棵‘迁就你’的树——你坐着，它就陪着你坐着。”
+            </div>
+        </div>
+
+        <!-- ===== 违禁词 & 临场要点 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>主播临场要点</h2>
+            </div>
+            <div class="footnote">
+                <p><strong>❌ 违禁词提醒：</strong> 禁用“家人们”“性价比”“赶紧拍”“3、2、1上链接”——用“大家”“价值”“感受”“从容拥有”替代。</p>
+                <p style="margin-top:0.5rem;"><strong>✅ 临场要点：</strong></p>
+                <ul>
+                    <li><strong>定位要准：</strong> 这是‘坐下来看的斜飘’。介绍时做一个坐下的手势——“你坐着的时候，视线正好跟它平齐”——这个动作比任何语言都直观。</li>
+                    <li><strong>先讲5号，再讲6号：</strong> “5号是指向远方的，6号是指向眼前的。一个是‘视线导演’，一个是‘近身陪伴’。”</li>
+                    <li><strong>强调‘迁就你’的陪伴感：</strong> “你不用抬头、不用弯腰，你坐着的时候它在，你站着的时候它也在——它始终在你的视线高度。它是一棵‘迁就你’的树。”</li>
+                    <li><strong>针对‘茶室’场景要精准：</strong> 当客户提到茶室、书房、卡座这类“坐下来”的空间时，笃定地说：“6号就是为这种空间准备的。”坐下来的客户最需要的就是‘眼前有景可看’。</li>
+                    <li><strong>价格轻描淡写：</strong> 不要说价格，要说“它的价值在于它和你的‘平等’关系——你坐着，它陪你坐着。”</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 底部 -->
+        <div style="margin-top:2.2rem;padding-top:1rem;border-top:1px solid #ece5dc;font-size:0.75rem;color:#b09b86;text-align:center;letter-spacing:0.5px;">
+            庭院美学顾问 · 速查便签 · 6号中分枝斜飘 · 优化版
+        </div>
+
+    </div>
+</body>
+</html>

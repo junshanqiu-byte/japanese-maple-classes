@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>黄色系 · 枫叶色彩速查卡</title>
+    <style>
+        /* ===== 全局 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #FCF8F0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #1E1C19;
+            padding: 1.8rem 1.2rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== 标题区 ===== */
+        .header {
+            text-align: center;
+            padding-bottom: 1.6rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #E8D8B0;
+            position: relative;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #B8862A;
+            /* 金黄褐色 */
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            margin-bottom: 0.2rem;
+        }
+        .header .sub {
+            font-size: 0.95rem;
+            color: #7A6A3A;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+        }
+        .header .sub span {
+            background: #F0E8D0;
+            padding: 0.15rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #8A723A;
+        }
+
+        /* ===== 定调 & 对比 ===== */
+        .tone-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 1.4rem 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border-left: 6px solid #D4A84A;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1rem 2rem;
+        }
+        .tone-card .tone {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1E1C19;
+        }
+        .tone-card .tone em {
+            font-style: normal;
+            color: #B8862A;
+            font-weight: 600;
+        }
+        .tone-card .contrast {
+            flex: 1;
+            font-size: 0.95rem;
+            color: #3D3832;
+            line-height: 1.6;
+        }
+        .tone-card .contrast strong {
+            color: #B8862A;
+        }
+        .tone-card .contrast .highlight {
+            background: #F8F0E0;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 500;
+            color: #A87A2A;
+        }
+
+        /* ===== 速查网格 ===== */
+        .section-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7A6A3A;
+            margin: 2rem 0 1rem 0;
+            font-weight: 500;
+            border-bottom: 1px dashed #E0D0B0;
+            padding-bottom: 0.3rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== 便签卡片 ===== */
+        .sticky-card {
+            background: #FFFFFF;
+            border-radius: 14px;
+            padding: 1.2rem 1.2rem 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            border: 1px solid #F0EAE2;
+            transition: all 0.15s;
+            position: relative;
+        }
+        .sticky-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        }
+        .sticky-card .color-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1E1C19;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .sticky-card .color-name .tag {
+            font-weight: 400;
+            font-size: 0.7rem;
+            background: #F0E8D0;
+            color: #7A6A3A;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            letter-spacing: 0.02em;
+        }
+        .sticky-card .color-tagline {
+            font-size: 0.85rem;
+            color: #B8862A;
+            font-weight: 500;
+            margin-top: 0.1rem;
+        }
+        .sticky-card .color-desc {
+            font-size: 0.9rem;
+            color: #3D3832;
+            margin: 0.4rem 0 0.3rem;
+            line-height: 1.5;
+        }
+        .sticky-card .variety {
+            font-size: 0.75rem;
+            color: #7A6A3A;
+            border-top: 1px solid #F0EAE2;
+            padding-top: 0.4rem;
+            margin-top: 0.3rem;
+        }
+        .sticky-card .variety strong {
+            font-weight: 500;
+            color: #5A4A2A;
+        }
+
+        /* 黄色系装饰线 */
+        .sticky-card.yellow-border {
+            border-left: 4px solid #D4A84A;
+        }
+
+        /* ===== 场景标签 ===== */
+        .scene-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.7rem;
+            margin: 0.5rem 0 1rem;
+        }
+        .scene-pill {
+            background: #F5F0E8;
+            border-radius: 40px;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.8rem;
+            color: #3D3832;
+            border: 1px solid #E0D0B0;
+        }
+        .scene-pill strong {
+            font-weight: 600;
+            color: #B8862A;
+        }
+
+        /* ===== 痛点 & 造梦 ===== */
+        .pain-solution {
+            background: #F8F4E8;
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            margin-bottom: 0.8rem;
+            border-left: 4px solid #D4A84A;
+        }
+        .pain-solution .pain {
+            font-weight: 500;
+            color: #1E1C19;
+            font-size: 0.95rem;
+        }
+        .pain-solution .solution {
+            color: #3D3832;
+            font-size: 0.9rem;
+            margin-top: 0.1rem;
+        }
+        .pain-solution .solution .highlight {
+            color: #B8862A;
+            font-weight: 500;
+        }
+
+        .dream-box {
+            background: #F5F0E8;
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid #D4A84A;
+            font-size: 0.95rem;
+            color: #2D2A26;
+        }
+        .dream-box strong {
+            color: #B8862A;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        /* ===== 底部 ===== */
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #A69B8E;
+            border-top: 1px solid #E0D0B0;
+            padding-top: 1.5rem;
+            margin-top: 2.5rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .tone-card {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        @media (max-width: 420px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 打印优化 */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0.2in;
+            }
+            .sticky-card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+            .header {
+                border-bottom-color: #ccc;
+            }
+        }
+    </style>
+    <!-- 字体：Playfair Display 用于标题 -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 标题 ===== -->
+        <div class="header">
+            <h1>🌟 黄色系 · 枫叶色彩速查卡</h1>
+            <div class="sub">
+                <span>黄金枫</span>  &nbsp;·&nbsp; 金色就是最好的定调 &nbsp;·&nbsp; 庭院美学顾问
+            </div>
+        </div>
+
+        <!-- ===== 定调 & 对比 ===== -->
+        <div class="tone-card">
+            <div class="tone">
+                “不是枫叶，<br /><em>是小太阳。</em>”
+            </div>
+            <div class="contrast">
+                <strong>与普通植物的对比 · 审美共鸣</strong><br />
+                普通树在阴面是“更暗了”，黄金枫在阴面是“亮了”。金色在哪都是金色——不管光线好不好，它本身就是亮的。<br />
+                秋天的银杏也是黄的，但它只黄一个月。黄金枫的“金”是长在叶子上的——<span class="highlight">春天金、夏天金、秋天金，一金就是大半年。</span>
+            </div>
+        </div>
+
+        <!-- ===== 色彩速查卡片 ===== -->
+        <div class="section-label">✦ 完整色彩 · 便签速查</div>
+        <div class="card-grid">
+
+            <div class="sticky-card yellow-border">
+                <div class="color-name">金黄色 <span class="tag">最正</span></div>
+                <div class="color-tagline">像金币、像麦田</div>
+                <div class="color-desc">不偏绿、不偏橙，就是金色本身。一棵金黄色枫树种在院子里，整个院子都被“照亮”了。</div>
+                <div class="variety"><strong>代表：</strong>约旦、金陵黄枫</div>
+            </div>
+
+            <div class="sticky-card yellow-border">
+                <div class="color-name">橙黄色 <span class="tag">最暖</span></div>
+                <div class="color-tagline">像秋天的午后阳光</div>
+                <div class="color-desc">比金黄色多了一点橙调，那种温暖感，像阳光照在叶子上的颜色。</div>
+                <div class="variety"><strong>代表：</strong>黄金流泉、袖锦</div>
+            </div>
+
+            <div class="sticky-card yellow-border">
+                <div class="color-name">亮黄色 <span class="tag">最扎眼</span></div>
+                <div class="color-tagline">你看我一眼就忘不掉</div>
+                <div class="color-desc">不是温和的黄，是院子里最亮的那一个。</div>
+                <div class="variety"><strong>代表：</strong>金陵黄枫（春夏）</div>
+            </div>
+
+            <div class="sticky-card yellow-border">
+                <div class="color-name">黄绿色 <span class="tag">清新</span></div>
+                <div class="color-tagline">介于绿和黄之间</div>
+                <div class="color-desc">两种颜色各占一半，那种“说不清”的感觉最有趣。</div>
+                <div class="variety"><strong>代表：</strong>约旦（夏季转）</div>
+            </div>
+
+            <div class="sticky-card yellow-border">
+                <div class="color-name">橙红色 <span class="tag">丰富</span></div>
+                <div class="color-tagline">黄橙红渐变</div>
+                <div class="color-desc">一片叶子上同时有黄、橙、红，三个颜色在同一片叶子上过渡。</div>
+                <div class="variety"><strong>代表：</strong>橙之梦、约旦（秋）</div>
+            </div>
+
+            <div class="sticky-card yellow-border">
+                <div class="color-name">荧光黄 <span class="tag">会发光</span></div>
+                <div class="color-tagline">阳光穿过，整片叶子被点亮</div>
+                <div class="color-desc">那种亮度，普通黄色给不了。</div>
+                <div class="variety"><strong>代表：</strong>部分黄金枫</div>
+            </div>
+
+            <div class="sticky-card yellow-border">
+                <div class="color-name">鹅黄色 <span class="tag">最嫩</span></div>
+                <div class="color-tagline">像小鹅的绒毛</div>
+                <div class="color-desc">温柔的、让人想摸一下的黄，春天的第一缕阳光。</div>
+                <div class="variety"><strong>代表：</strong>部分品种春叶</div>
+            </div>
+
+            <div class="sticky-card yellow-border">
+                <div class="color-name">金色 <span class="tag">华丽</span></div>
+                <div class="color-tagline">它不是“像金子”，它就是金色</div>
+                <div class="color-desc">秋天的枫树如果变成金色，整棵树像一座金色的雕塑。</div>
+                <div class="variety"><strong>代表：</strong>秋叶品种</div>
+            </div>
+
+            <div class="sticky-card yellow-border">
+                <div class="color-name">橙金 <span class="tag">富贵</span></div>
+                <div class="color-tagline">橙的温暖+金的华丽</div>
+                <div class="color-desc">那种颜色，放在哪里都是焦点。</div>
+                <div class="variety"><strong>代表：</strong>部分秋叶品种</div>
+            </div>
+
+            <div class="sticky-card yellow-border">
+                <div class="color-name">乳黄色 <span class="tag">最柔</span></div>
+                <div class="color-tagline">像奶油、像月光</div>
+                <div class="color-desc">淡淡的、奶白色的黄，那种“不争”的气质最安静。</div>
+                <div class="variety"><strong>代表：</strong>花散里（全开叶）</div>
+            </div>
+
+        </div>
+
+        <!-- ===== 场景匹配 ===== -->
+        <div class="section-label">✦ 场景推荐 · 身份确认</div>
+        <div class="scene-pills">
+            <span class="scene-pill"><strong>阴面角落</strong> 金黄色 —— 金黄色是“放光”的颜色，越暗越亮。那个你放弃了多年的角落，第一次“亮了”</span>
+            <span class="scene-pill"><strong>窗前</strong> 黄色枫 —— 像一盏金色的灯挂在窗外</span>
+            <span class="scene-pill"><strong>草坪中央</strong> 三季黄 —— 绿草坪中间一个金色的圆，像地上长出了一颗太阳</span>
+            <span class="scene-pill"><strong>水边</strong> 黄色枫 —— 金黄色的倒影在水面上，水蓝树金，像一幅油画</span>
+            <span class="scene-pill"><strong>入口</strong> 黄色枫 —— 每天出门看到金色，心情是亮的；每天回家看到金色，心里是暖的</span>
+        </div>
+
+        <!-- ===== 痛点解药 ===== -->
+        <div class="section-label">✦ 痛点化解 · 解药话术</div>
+        <div class="pain-solution">
+            <div class="pain">“阴角种什么都不行，放弃那个角落了”</div>
+            <div class="solution">→ 种一棵黄色枫。普通绿植在阴角是“吸光”的，越种越暗；<span class="highlight">黄色枫在阴角是“放光”的，越种越亮。</span></div>
+        </div>
+
+        <!-- ===== 造梦话术 ===== -->
+        <div class="section-label">✦ 造梦 · 即时拥有</div>
+        <div class="dream-box">
+            <strong>点亮阴角</strong>
+            你家那个一直暗着的角落，种了一棵金色枫树。金黄色的叶子在阴暗处像一盏灯，整个角落被“点亮”了。你第一次觉得那个角落值得走过去看看——以前你是绕着走的，现在是专门走过去的。
+        </div>
+        <div class="dream-box">
+            <strong>金色光斑</strong>
+            秋天的下午，阳光穿过金色枫叶，在树下的地面上投下金色的光斑。你站在那里，光斑在你身上晃动——你整个人被金色包裹着。那种温暖，不是衣服给的，是颜色给的。
+        </div>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer-note">
+            庭院美学顾问 · 黄色系速查 · 审美共鸣 × 身份确认 × 即时拥有
+        </div>
+
+    </div>
+</body>
+</html>

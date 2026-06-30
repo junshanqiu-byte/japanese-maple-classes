@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7号 · 低分枝双杆斜飘 · 优化版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f1ec;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #2b2620;
+            line-height: 1.6;
+        }
+        .card {
+            max-width: 960px;
+            margin: 0 auto;
+            background: #fcfaf7;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            padding: 2.4rem 2.8rem;
+        }
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #ece5dc;
+            margin-bottom: 1.8rem;
+        }
+        .header .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            color: #b09b86;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+        }
+        .header .name {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2b2620;
+            letter-spacing: 0.3px;
+        }
+        .header .sub {
+            font-size: 0.85rem;
+            color: #7a6e5e;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+            margin-left: auto;
+        }
+        .hero {
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 450;
+            color: #1f1b17;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+        }
+        .hero .tagline {
+            display: inline-block;
+            background: #f2ede7;
+            padding: 0.35rem 1.8rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 450;
+            color: #3d352c;
+            margin-top: 0.6rem;
+            border: 1px solid #e5ddd2;
+            letter-spacing: 0.2px;
+        }
+        .block {
+            margin-bottom: 2.4rem;
+        }
+        .block-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #e5ddd2;
+            padding-bottom: 0.4rem;
+        }
+        .block-header .icon {
+            font-size: 1rem;
+            color: #b09b86;
+        }
+        .block-header h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6f6456;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+        .sell-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .sell-item {
+            background: #f8f5f0;
+            border-radius: 10px;
+            padding: 1rem 1.4rem;
+            border-left: 4px solid #c4b2a0;
+        }
+        .sell-item .label {
+            font-weight: 600;
+            color: #3d352c;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .sell-item .label .emoji {
+            font-size: 1.1rem;
+            opacity: 0.7;
+        }
+        .sell-item .desc {
+            color: #5f5549;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin: 0.2rem 0 0.4rem 0;
+        }
+        .sell-item ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sell-item ul li {
+            font-size: 0.85rem;
+            color: #3d352c;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.15rem;
+        }
+        .sell-item ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+            font-weight: 700;
+        }
+        .quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.2rem 1.6rem;
+            background: #f8f5f0;
+            padding: 1.2rem 1.8rem;
+            border-radius: 12px;
+            border: 1px solid #ece5dc;
+        }
+        .quick-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+            font-size: 0.88rem;
+            border-bottom: 1px dotted #e5ddd2;
+        }
+        .quick-item .q-label {
+            font-weight: 500;
+            color: #6f6456;
+            min-width: 4.2rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        .quick-item .q-value {
+            color: #2b2620;
+        }
+        .quick-item .q-tag {
+            background: #ede7df;
+            padding: 0.05rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #4d443a;
+            display: inline-block;
+            margin-right: 0.2rem;
+        }
+        .scene-list {
+            list-style: none;
+            padding: 0;
+        }
+        .scene-list li {
+            padding: 0.5rem 1.2rem;
+            margin-bottom: 0.4rem;
+            background: #f8f5f0;
+            border-radius: 6px;
+            border-left: 3px solid #d6ccbf;
+            font-size: 0.88rem;
+            color: #3d352c;
+        }
+        .scene-list li strong {
+            color: #2b2620;
+            font-weight: 550;
+        }
+        .pain-block {
+            background: #f8f5f0;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            border-left: 4px solid #b8a692;
+            margin-bottom: 0.7rem;
+        }
+        .pain-block .pain-q {
+            font-weight: 500;
+            color: #3d352c;
+            font-size: 0.88rem;
+        }
+        .pain-block .pain-a {
+            color: #4d443a;
+            font-size: 0.85rem;
+            margin-top: 0.15rem;
+        }
+        .pain-block .pain-a strong {
+            color: #2b2620;
+        }
+        .dream-block {
+            background: #f2ede7;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+            font-size: 0.88rem;
+            color: #3d352c;
+            font-style: italic;
+            border-left: 3px solid #c4b2a0;
+        }
+        .dream-block strong {
+            font-style: normal;
+            color: #2b2620;
+        }
+        .footnote {
+            background: #f8f5f0;
+            padding: 0.8rem 1.4rem;
+            border-radius: 8px;
+            border: 1px solid #e5ddd2;
+            font-size: 0.85rem;
+            color: #5f5549;
+        }
+        .footnote strong {
+            color: #a65a4a;
+        }
+        .footnote ul {
+            list-style: none;
+            padding-left: 0.2rem;
+            margin-top: 0.3rem;
+        }
+        .footnote ul li {
+            padding-left: 1rem;
+            position: relative;
+            font-size: 0.82rem;
+            margin-bottom: 0.1rem;
+        }
+        .footnote ul li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+        }
+        @media (max-width: 760px) {
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .sell-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem 1.2rem;
+                gap: 0.1rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .header .name {
+                font-size: 1.2rem;
+            }
+            .header .sub {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem 0.5rem;
+            }
+            .card {
+                padding: 1rem 0.8rem;
+                border-radius: 16px;
+            }
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+            .hero .tagline {
+                font-size: 0.85rem;
+                padding: 0.25rem 1.2rem;
+            }
+            .quick-item {
+                font-size: 0.8rem;
+                flex-wrap: wrap;
+            }
+            .quick-item .q-label {
+                min-width: 3.2rem;
+            }
+            .sell-item {
+                padding: 0.7rem 1rem;
+            }
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0.2in;
+            }
+            .card {
+                box-shadow: none;
+                padding: 0.2in;
+                border-radius: 0;
+                background: white;
+            }
+            .sell-item,
+            .quick-grid,
+            .pain-block,
+            .dream-block,
+            .footnote {
+                background: #f9f6f2;
+                border-color: #ccc;
+            }
+            .hero .tagline {
+                background: #f5f0ea;
+                border-color: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <span class="badge">7 号</span>
+            <span class="name">低分枝双杆斜飘</span>
+            <span class="sub">斜飘型 · 低 (≤0.8m) · 双杆 · 同向V形岔开</span>
+        </div>
+        <div class="hero">
+            <h1>双杆同向V形岔，方向统一层次多</h1>
+            <div class="tagline">“同向 · 分叉 · 双线并行 · V形指向 — 方向统一，姿态不一”</div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>核心卖点 · 四维话术</h2></div>
+            <div class="sell-grid">
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 同向分叉 · 方向一致，姿态不一</div>
+                    <div class="desc">“这两根杆，看方向是一伙的；看姿态各有各的劲儿”</div>
+                    <ul>
+                        <li>两杆从同一基部发出，朝同一方向倾斜，中间有V形夹角。</li>
+                        <li>不是完全平行，也不是背向——统一中有变化。</li>
+                        <li>夹角大小决定气质：小夹角≈并肩密语，大夹角≈各自舒展。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 低处出发 · 从脚边开始的同向双线</div>
+                    <div class="desc">“从地面起就是斜的双线——整棵树没有一段是‘直的’”</div>
+                    <ul>
+                        <li>分枝点≤0.8m，从膝盖高度开始两杆同向倾斜。</li>
+                        <li>斜势连续不间断——你的视线从地面就被‘带着走’。</li>
+                        <li>种在路径旁，两杆在身侧一左一右地陪伴、指引。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 双线同指 · 同一个目标，两根‘瞄准线’</div>
+                    <div class="desc">“两根线同时指向同一个目标——就像用两支笔同时画箭头”</div>
+                    <ul>
+                        <li>单杆是一条线，双杆同向V形是一个扇形——指向更宽。</li>
+                        <li>目标是水面、白墙、花境——需要两条线来‘框’住一个‘面’。</li>
+                        <li>视线从两杆之间穿过，看到的是‘完整的区域’。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 一粗一细、一高一低 · 同向中的主次节奏</div>
+                    <div class="desc">“粗的是‘老大’，细的是‘老二’——有对话，有故事”</div>
+                    <ul>
+                        <li>两杆一粗一细、一高一低——各有各的‘表情’。</li>
+                        <li>不是复制粘贴，是师徒、是兄弟、是搭档。</li>
+                        <li>视线在两杆之间来回切换，视线的‘行走’有了节奏。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>主播速查卡</h2></div>
+            <div class="quick-grid">
+                <div class="quick-item"><span class="q-label">编号</span><span class="q-value">7 号</span></div>
+                <div class="quick-item"><span class="q-label">树形</span><span class="q-value">低分枝双杆斜飘</span></div>
+                <div class="quick-item"><span class="q-label">定位</span><span class="q-value">斜飘型 · 低 (≤0.8m) · 双杆 · 同向V形</span></div>
+                <div class="quick-item"><span class="q-label">定调</span><span class="q-value">“双杆同向V形岔，方向统一层次多。”</span></div>
+                <div class="quick-item"><span class="q-label">卖点</span><span class="q-value">同向分叉 · 低处出发 · 双线同指 · 主次节奏</span></div>
+                <div class="quick-item"><span class="q-label">气质</span><span class="q-value">同向 · 分叉 · 统一中有变化 · V形指向</span></div>
+                <div class="quick-item"><span class="q-label">场景</span><span class="q-value"><span class="q-tag">水边</span> <span class="q-tag">白墙前</span> <span class="q-tag">茶室窗外</span> <span class="q-tag">花境边缘</span> <span class="q-tag">长椅旁</span></span></div>
+                <div class="quick-item"><span class="q-label">痛点</span><span class="q-value">单杆太单 · 背向太散 · 水边指向弱 · 白墙影子太规整 · 花境缺方向</span></div>
+                <div class="quick-item"><span class="q-label">造梦</span><span class="q-value">双杆同指水面 · V形双影 · 双线穿花 · 并行不同步</span></div>
+                <div class="quick-item"><span class="q-label">违禁词</span><span class="q-value">❌ 家人们 · 性价比 · 赶紧拍 · 3、2、1上链接</span></div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>高频场景匹配</h2></div>
+            <ul class="scene-list">
+                <li><strong>水边 ·</strong> 两杆同向探向水面，V形岔开框住更宽的水面。倒影也是V形，实树双杆+虚影双杆形成‘四线叠影’。</li>
+                <li><strong>白墙前 ·</strong> 两杆岔开的影子不是并行的‘II’，是‘V’形双影，一粗一细、一深一浅。</li>
+                <li><strong>茶室窗外 ·</strong> 两杆同向斜过窗框，V形岔开在窗框里‘划’出动态构图。</li>
+                <li><strong>花境边缘 ·</strong> 两杆一前一后在花丛中穿过，像两道并行的笔触。</li>
+                <li><strong>长椅旁 ·</strong> 两杆像两只手臂同时指向你想看的方向——力道不同，目标一致。</li>
+            </ul>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>场景痛点话术</h2></div>
+            <div class="pain-block"><div class="pain-q">单杆斜飘‘太单’，双杆完全背向又‘太散’</div><div class="pain-a">“你想要的不是‘单’，也不是‘散’，是‘有方向但丰富’。<strong>→</strong> 同向V形——两杆朝同一方向微微岔开，丰富度翻倍。”</div></div>
+            <div class="pain-block"><div class="pain-q">水边的树‘指向性不强’</div><div class="pain-a">“树是树、水是水，两者没有‘发生关系’。<strong>→</strong> 两杆同向探向水面，像两支手臂同时指向水面，视线精准落水。”</div></div>
+            <div class="pain-block"><div class="pain-q">白墙前的影子‘太规整’</div><div class="pain-a">“一道影子斜过去就完了。<strong>→</strong> 两道影子同向岔开，白墙上的画面从‘独白’变成‘对话’。”</div></div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>造梦深化</h2></div>
+            <div class="dream-block"><strong>双杆同指水面 ·</strong> “阳光从两杆之间的缝隙穿过，在水面上投下一道光带。叶子顺着两杆方向落在水面——一杆送左边的红、一杆送右边的红。”</div>
+            <div class="dream-block"><strong>V形双影 ·</strong> “冬日的白墙前，两杆的骨架投下岔开的‘V’，像两根手指并拢伸出、指尖微微分开。”</div>
+            <div class="dream-block"><strong>并行不同步 ·</strong> “五年后，‘老大’长高了，‘老二’追上来了一些。它们同向但不同步——一个快一点、一个慢一点。”</div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>主播临场要点</h2></div>
+            <div class="footnote">
+                <p><strong>❌ 违禁词：</strong> 禁用“家人们”“性价比”“赶紧拍”“3、2、1上链接”。</p>
+                <p><strong>✅ 要点：</strong></p>
+                <ul>
+                    <li><strong>手势比划：</strong> 双手并拢伸出、指尖微微分开——“两杆同向但岔开，像两只手同时指向一个方向。”</li>
+                    <li><strong>先讲单杆，再讲7号：</strong> “单杆是一条线，双杆是一个V。方向一样，丰富度翻倍。”</li>
+                    <li><strong>强调‘统一中有变化’：</strong> 反复说“岔开”“V形”“有夹角”——不是复制粘贴。</li>
+                    <li><strong>夹角大小给选择：</strong> “这棵夹角小，两杆像在商量着走；那棵夹角大，像各走各的但方向一致。”</li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top:2.2rem;padding-top:1rem;border-top:1px solid #ece5dc;font-size:0.75rem;color:#b09b86;text-align:center;">庭院美学顾问 · 速查便签 · 7号低分枝双杆斜飘 · 优化版</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5号 · 高分枝斜飘 · 优化版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f1ec;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #2b2620;
+            line-height: 1.6;
+        }
+
+        .card {
+            max-width: 960px;
+            margin: 0 auto;
+            background: #fcfaf7;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            padding: 2.4rem 2.8rem;
+        }
+
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #ece5dc;
+            margin-bottom: 1.8rem;
+        }
+
+        .header .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            color: #b09b86;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+        }
+
+        .header .name {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2b2620;
+            letter-spacing: 0.3px;
+        }
+
+        .header .sub {
+            font-size: 0.85rem;
+            color: #7a6e5e;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+            margin-left: auto;
+        }
+
+        .hero {
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 450;
+            color: #1f1b17;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: #f2ede7;
+            padding: 0.35rem 1.8rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 450;
+            color: #3d352c;
+            margin-top: 0.6rem;
+            border: 1px solid #e5ddd2;
+            letter-spacing: 0.2px;
+        }
+
+        .block {
+            margin-bottom: 2.4rem;
+        }
+
+        .block-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #e5ddd2;
+            padding-bottom: 0.4rem;
+        }
+
+        .block-header .icon {
+            font-size: 1rem;
+            color: #b09b86;
+        }
+
+        .block-header h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6f6456;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .sell-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .sell-item {
+            background: #f8f5f0;
+            border-radius: 10px;
+            padding: 1rem 1.4rem;
+            border-left: 4px solid #c4b2a0;
+        }
+
+        .sell-item .label {
+            font-weight: 600;
+            color: #3d352c;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .sell-item .label .emoji {
+            font-size: 1.1rem;
+            opacity: 0.7;
+        }
+
+        .sell-item .desc {
+            color: #5f5549;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin: 0.2rem 0 0.4rem 0;
+        }
+
+        .sell-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sell-item ul li {
+            font-size: 0.85rem;
+            color: #3d352c;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.15rem;
+        }
+
+        .sell-item ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+            font-weight: 700;
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.2rem 1.6rem;
+            background: #f8f5f0;
+            padding: 1.2rem 1.8rem;
+            border-radius: 12px;
+            border: 1px solid #ece5dc;
+        }
+
+        .quick-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+            font-size: 0.88rem;
+            border-bottom: 1px dotted #e5ddd2;
+        }
+
+        .quick-item .q-label {
+            font-weight: 500;
+            color: #6f6456;
+            min-width: 4.2rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .quick-item .q-value {
+            color: #2b2620;
+        }
+
+        .quick-item .q-tag {
+            background: #ede7df;
+            padding: 0.05rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #4d443a;
+            display: inline-block;
+            margin-right: 0.2rem;
+        }
+
+        .scene-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .scene-list li {
+            padding: 0.5rem 1.2rem;
+            margin-bottom: 0.4rem;
+            background: #f8f5f0;
+            border-radius: 6px;
+            border-left: 3px solid #d6ccbf;
+            font-size: 0.88rem;
+            color: #3d352c;
+        }
+
+        .scene-list li strong {
+            color: #2b2620;
+            font-weight: 550;
+        }
+
+        .pain-block {
+            background: #f8f5f0;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            border-left: 4px solid #b8a692;
+            margin-bottom: 0.7rem;
+        }
+
+        .pain-block .pain-q {
+            font-weight: 500;
+            color: #3d352c;
+            font-size: 0.88rem;
+        }
+
+        .pain-block .pain-a {
+            color: #4d443a;
+            font-size: 0.85rem;
+            margin-top: 0.15rem;
+        }
+
+        .pain-block .pain-a strong {
+            color: #2b2620;
+        }
+
+        .dream-block {
+            background: #f2ede7;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+            font-size: 0.88rem;
+            color: #3d352c;
+            font-style: italic;
+            border-left: 3px solid #c4b2a0;
+        }
+
+        .dream-block strong {
+            font-style: normal;
+            color: #2b2620;
+        }
+
+        .footnote {
+            background: #f8f5f0;
+            padding: 0.8rem 1.4rem;
+            border-radius: 8px;
+            border: 1px solid #e5ddd2;
+            font-size: 0.85rem;
+            color: #5f5549;
+        }
+
+        .footnote strong {
+            color: #a65a4a;
+        }
+
+        .footnote ul {
+            list-style: none;
+            padding-left: 0.2rem;
+            margin-top: 0.3rem;
+        }
+
+        .footnote ul li {
+            padding-left: 1rem;
+            position: relative;
+            font-size: 0.82rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .footnote ul li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+        }
+
+        @media (max-width: 760px) {
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .sell-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem 1.2rem;
+                gap: 0.1rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .header .name {
+                font-size: 1.2rem;
+            }
+            .header .sub {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem 0.5rem;
+            }
+            .card {
+                padding: 1rem 0.8rem;
+                border-radius: 16px;
+            }
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+            .hero .tagline {
+                font-size: 0.85rem;
+                padding: 0.25rem 1.2rem;
+            }
+            .quick-item {
+                font-size: 0.8rem;
+                flex-wrap: wrap;
+            }
+            .quick-item .q-label {
+                min-width: 3.2rem;
+            }
+            .sell-item {
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0.2in;
+            }
+            .card {
+                box-shadow: none;
+                padding: 0.2in;
+                border-radius: 0;
+                background: white;
+            }
+            .sell-item,
+            .quick-grid,
+            .pain-block,
+            .dream-block,
+            .footnote {
+                background: #f9f6f2;
+                border-color: #ccc;
+            }
+            .hero .tagline {
+                background: #f5f0ea;
+                border-color: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+
+        <!-- 头部 -->
+        <div class="header">
+            <span class="badge">5 号</span>
+            <span class="name">高分枝斜飘</span>
+            <span class="sub">斜飘型 · 高 (≥1.5m) · 单干 · 疏朗 · 倾斜≥15°</span>
+        </div>
+
+        <!-- 主标题 -->
+        <div class="hero">
+            <h1>斜枝一指定方向，白墙水边最出画</h1>
+            <div class="tagline">“动势 · 画意 · 方向感 · 探 — 你庭院里的‘视线导演’”</div>
+        </div>
+
+        <!-- ===== 核心卖点 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>核心卖点 · 四维话术</h2>
+            </div>
+            <div class="sell-grid">
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 方向感 · 它不是站着等你，是朝你走来</div>
+                    <div class="desc">“斜飘的树是‘动的’，直立树是‘等的’”</div>
+                    <ul>
+                        <li>倾斜的主干让空间有了明确的指向性——视线会不由自主跟着它走。</li>
+                        <li>它像庭院里的‘视线导演’，你想让人看向水景或白墙，它帮你决定。</li>
+                        <li>有叙事感——你会忍不住想：它为什么朝那边长？那边有什么？</li>
+                    </ul>
+                </div>
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> ‘探’ · 不占空间，但延伸空间</div>
+                    <div class="desc">“它用姿态去‘连接’空间，而不是用体积去‘填’空间”</div>
+                    <ul>
+                        <li>种在墙角，枝条探向院子中央——角落不再是角落，它‘伸出来’了。</li>
+                        <li>种在围墙边，视线跟着枝条‘出去了’——院子的边界被打破了。</li>
+                        <li>不是用体积去‘填’空间，是用姿态去‘连’空间。</li>
+                    </ul>
+                </div>
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 高脚杯斜置 · 通透 + 方向，两者兼得</div>
+                    <div class="desc">“它既有1号的通透，又有斜飘的方向感”</div>
+                    <ul>
+                        <li>分枝点≥1.5m，树干下面是空的——跟1号一样通透，树下可过人。</li>
+                        <li>但树干是斜的，不是直的——通透的基础上多了一个‘指向’。</li>
+                        <li>把直立类的通透、斜飘类的动势、疏朗冠幅的光影，三样东西集于一身。</li>
+                    </ul>
+                </div>
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 白墙的画笔 · 影子会画画</div>
+                    <div class="desc">“种在白墙前面，它每天在墙上画画”</div>
+                    <ul>
+                        <li>倾斜的树干投在白墙上——影子是斜着出去的，像书法的一笔长撇。</li>
+                        <li>疏朗的冠幅让影子有浓有淡，不是一团黑影，是有笔触的水墨。</li>
+                        <li>一天中影子从墙的一侧移到另一侧——白墙成了记录时间流逝的幕布。</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ===== 速查卡 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>主播速查卡</h2>
+            </div>
+            <div class="quick-grid">
+                <div class="quick-item"><span class="q-label">编号</span><span class="q-value">5 号</span></div>
+                <div class="quick-item"><span class="q-label">树形</span><span class="q-value">高分枝斜飘</span></div>
+                <div class="quick-item"><span class="q-label">定位</span><span class="q-value">斜飘型 · 高 (≥1.5m) · 单干 · 疏朗 · 倾斜≥15°</span></div>
+                <div class="quick-item"><span class="q-label">定调</span><span class="q-value">“斜枝一指定方向，白墙水边最出画。”</span></div>
+                <div class="quick-item"><span class="q-label">卖点</span><span class="q-value">方向感 · 探 · 高脚杯斜置 · 白墙画笔</span></div>
+                <div class="quick-item"><span class="q-label">气质</span><span class="q-value">动势 · 画意 · 方向感 · 探 · 视线引导</span></div>
+                <div class="quick-item"><span class="q-label">场景</span><span class="q-value"><span class="q-tag">白墙前</span> <span class="q-tag">水边</span> <span class="q-tag">转角</span> <span class="q-tag">月洞门/漏窗</span> <span class="q-tag">茶室窗外</span></span></div>
+                <div class="quick-item"><span class="q-label">痛点</span><span class="q-value">白墙太干净 · 院子太安静 · 转角太硬 · 水边没关联 · 窗前太正</span></div>
+                <div class="quick-item"><span class="q-label">造梦</span><span class="q-value">斜枝指水 · 白墙影斜 · 转角遇枫 · 窗前引目</span></div>
+                <div class="quick-item"><span class="q-label">违禁词</span><span class="q-value">❌ 家人们 · 性价比 · 赶紧拍 · 3、2、1上链接</span></div>
+            </div>
+        </div>
+
+        <!-- ===== 高频场景匹配 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>高频场景匹配 · 种在哪里，就长成什么画面</h2>
+            </div>
+            <ul class="scene-list">
+                <li><strong>白墙前 ·</strong> 白墙为纸，树影为墨——斜影像书法的一笔长撇，一天中影子从墙的一侧移到另一侧，墙上的画一直在变。</li>
+                <li><strong>水边/池塘 ·</strong> 斜枝探向水面，倒影与水中的虚影相互呼应。秋叶从斜枝落入水中，顺着枝条指向的方向漂走。</li>
+                <li><strong>转角/通道 ·</strong> 斜飘的枝条指向转角后的方向——人走到转角，视线被枝条‘接住’，然后顺着方向转过去。生硬的90°被柔化了。</li>
+                <li><strong>月洞门/漏窗 ·</strong> 枝条从门洞边缘探出来，‘藏一半露一半’。圆框里斜枝是最抢眼的‘动势’，四时画面不重复。</li>
+                <li><strong>茶室窗外 ·</strong> 斜枝斜斜地探入窗景，‘破’了窗框的规整。你端着茶杯，视线顺着斜枝走出去——那一杯茶，喝的不只是味道，还有窗外的方向。</li>
+            </ul>
+        </div>
+
+        <!-- ===== 场景痛点话术 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>场景痛点话术 · 先刺痛，再给解药</h2>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点一 · 白墙‘太干净了’，干净到‘没内容’</div>
+                <div class="pain-a">“白墙像一张没落过笔的宣纸，你觉得空，但不知道往墙上放什么——挂东西太俗，刷颜色太闹，种棵普通的树影子又没看头。”<br />
+                <strong>→</strong> 种一棵5号在白墙前面——斜斜的树干每天在墙上画画。影子是斜着出去的，像书法的一笔长撇；疏朗的冠幅让影子有浓有淡，像水墨的晕染。你砌了一面墙，得到了一整面‘活的画’。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点二 · 院子‘太安静’了，缺一点‘动势’</div>
+                <div class="pain-a">“所有的树都是直挺挺的、所有的线条都是横平竖直的——你走进院子里，感觉一切都‘停了’。太安静的院子，待久了会闷。”<br />
+                <strong>→</strong> 种一棵斜飘的树进去——它是院子里唯一‘有方向’的东西。斜斜的树干打破横平竖直的秩序，给空间注入一股‘动势’。院子从‘静止’变成了‘有叙事感’。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点三 · 转角太‘硬’了，走过去就是‘一刀切’</div>
+                <div class="pain-a">“你家那个转角——路的转弯处或者建筑的角上，是不是特别‘硬’？走过去了就是走过去了，没有任何过渡。”<br />
+                <strong>→</strong> 种一棵5号在转角——斜飘的枝条指向转角后的方向。人走到转角处，视线被枝条‘接住’，然后顺着指向‘送’到转角后面。那个生硬的90°不见了，转角从‘断点’变成了‘连接’。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点四 · 水边有‘空间’但‘没关系’</div>
+                <div class="pain-a">“水边种了一棵直挺挺的树，树是树、水是水，两者‘各过各的’。它只是‘种在水边’，不是‘长在水边’。”<br />
+                <strong>→</strong> 种一棵5号在水边——斜飘的枝条探向水面，树和水之间发生了‘对话’。实树在水上，倒影在水里，秋叶从斜枝上落入水中漂走。树不再只是‘种在水边’，而是跟水‘长在了一起’。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点五 · 窗前有景，但‘太正了’，没有味道</div>
+                <div class="pain-a">“一棵直挺挺的树站在窗框正中央——位置对了、高度对了，但总觉得太‘正’了。你每次看出去，看到的是一棵‘标准答案’，不是一件‘作品’。”<br />
+                <strong>→</strong> 种一棵5号在窗前——斜斜的枝条探入窗框，打破了窗框的规整感。窗框是方的、是正的，枝条是斜的、是自由的——这种‘破’的感觉，就是庭院美学里最讲究的‘生趣’。</div>
+            </div>
+        </div>
+
+        <!-- ===== 造梦深化 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>造梦深化 · 把‘看见’变成‘感受到’</h2>
+            </div>
+
+            <div class="dream-block">
+                <strong>斜枝指水 ·</strong> “秋天，斜飘的枝条探向水面，叶子红了。风一吹，叶子从斜枝上落下来，飘在水面上，顺着枝条指向的方向慢慢漂走。你站在岸边，看着叶子的轨迹——那不是落叶，是树写给水的信。”
+            </div>
+
+            <div class="dream-block">
+                <strong>白墙影斜 ·</strong> “冬日的下午，阳光斜斜地照过来，斜飘的枫树在白墙上投下一道长长的影子。树干是深色的线、枝条是细碎的笔触、光斑是留白。你从旁边走过的时候，影子从你身上划过去——那一瞬间，你走进了这幅画里。”
+            </div>
+
+            <div class="dream-block">
+                <strong>转角遇枫 ·</strong> “每天回家，走到那个转角，斜飘的枝条指向你来的方向。它在那个角落等你，每一个季节用不同的颜色跟你打招呼。春天红、夏天绿、秋天金、冬天枝干有颜色。它不是种在那儿，是‘长’在了你每天的必经之路上。”
+            </div>
+
+            <div class="dream-block">
+                <strong>窗前引目 ·</strong> “春天的早晨，你坐在茶室里，窗外的斜飘枫树新叶初展，胭脂红的颜色。枝条斜斜地探入窗框，像一个‘箭头’，把你的视线从室内引向窗外的庭院。你喝茶的时候，视线顺着那根枝条走出去——这一杯茶，喝的不只是味道，还有风景。”
+            </div>
+        </div>
+
+        <!-- ===== 违禁词 & 临场要点 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>主播临场要点</h2>
+            </div>
+            <div class="footnote">
+                <p><strong>❌ 违禁词提醒：</strong> 禁用“家人们”“性价比”“赶紧拍”“3、2、1上链接”——用“大家”“价值”“感受”“从容拥有”替代。</p>
+                <p style="margin-top:0.5rem;"><strong>✅ 临场要点：</strong></p>
+                <ul>
+                    <li><strong>定位要准：</strong> 这是‘视线导演’——用手势顺着树干倾斜的方向划出去，“你看，它指向那边”，客户看到你的手势就懂了这棵树在‘说话’。</li>
+                    <li><strong>先讲1号，再讲5号：</strong> “还记得1号吗？树下通透、不挡视线。5号就是1号的‘升级版’——在通透的基础上，多了一个‘指向’。”</li>
+                    <li><strong>白墙是最好的搭配：</strong> 当客户说“我家有面白墙”时，眼睛要亮起来——“5号就是为白墙准备的。”立刻进入“白墙为纸、树影为墨”的画面描述。</li>
+                    <li><strong>强调‘方向感’的价值：</strong> 不强调“贵”，要说“它的价值在于它的‘方向感’——它不是一棵普通的树，它是你庭院里的‘视线导演’。”</li>
+                    <li><strong>不催单：</strong> 说完“喜欢的朋友可以带走”之后安静下来。5号是为那些“想要空间有方向”的人准备的——你越从容，他越觉得“我的院子需要这个方向感”。</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 底部 -->
+        <div style="margin-top:2.2rem;padding-top:1rem;border-top:1px solid #ece5dc;font-size:0.75rem;color:#b09b86;text-align:center;letter-spacing:0.5px;">
+            庭院美学顾问 · 速查便签 · 5号高分枝斜飘 · 优化版
+        </div>
+
+    </div>
+</body>
+</html>

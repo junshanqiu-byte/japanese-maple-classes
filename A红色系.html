@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>红色系 · 枫叶色彩速查卡</title>
+    <style>
+        /* ===== 全局 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #F8F6F2;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #1E1C19;
+            padding: 1.8rem 1.2rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== 标题区 ===== */
+        .header {
+            text-align: center;
+            padding-bottom: 1.6rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #E8DCD0;
+            position: relative;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #A52A2A;
+            /* 红褐色 */
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            margin-bottom: 0.2rem;
+        }
+        .header .sub {
+            font-size: 0.95rem;
+            color: #6F5E4F;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+        }
+        .header .sub span {
+            background: #F0E8DE;
+            padding: 0.15rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #7A4A3A;
+        }
+
+        /* ===== 定调 & 对比 ===== */
+        .tone-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 1.4rem 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border-left: 6px solid #B22222;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1rem 2rem;
+        }
+        .tone-card .tone {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1E1C19;
+        }
+        .tone-card .tone em {
+            font-style: normal;
+            color: #A52A2A;
+            font-weight: 600;
+        }
+        .tone-card .contrast {
+            flex: 1;
+            font-size: 0.95rem;
+            color: #3D3832;
+            line-height: 1.6;
+        }
+        .tone-card .contrast strong {
+            color: #A52A2A;
+        }
+        .tone-card .contrast .highlight {
+            background: #FDF6F0;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* ===== 速查网格 ===== */
+        .section-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7A6A5A;
+            margin: 2rem 0 1rem 0;
+            font-weight: 500;
+            border-bottom: 1px dashed #E0D6C8;
+            padding-bottom: 0.3rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== 便签卡片 ===== */
+        .sticky-card {
+            background: #FFFFFF;
+            border-radius: 14px;
+            padding: 1.2rem 1.2rem 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            border: 1px solid #F0EAE2;
+            transition: all 0.15s;
+            position: relative;
+        }
+        .sticky-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        }
+        .sticky-card .color-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1E1C19;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .sticky-card .color-name .tag {
+            font-weight: 400;
+            font-size: 0.7rem;
+            background: #F0E8DE;
+            color: #6F5E4F;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            letter-spacing: 0.02em;
+        }
+        .sticky-card .color-tagline {
+            font-size: 0.85rem;
+            color: #A52A2A;
+            font-weight: 500;
+            margin-top: 0.1rem;
+        }
+        .sticky-card .color-desc {
+            font-size: 0.9rem;
+            color: #3D3832;
+            margin: 0.4rem 0 0.3rem;
+            line-height: 1.5;
+        }
+        .sticky-card .variety {
+            font-size: 0.75rem;
+            color: #7A6A5A;
+            border-top: 1px solid #F0EAE2;
+            padding-top: 0.4rem;
+            margin-top: 0.3rem;
+        }
+        .sticky-card .variety strong {
+            font-weight: 500;
+            color: #5A4A3A;
+        }
+
+        /* 红色系装饰线 */
+        .sticky-card.red-border {
+            border-left: 4px solid #B22222;
+        }
+
+        /* ===== 观赏期卡片 ===== */
+        .period-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .period-card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            border: 1px solid #F0EAE2;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+        .period-card .period-name {
+            font-weight: 600;
+            color: #1E1C19;
+            font-size: 1rem;
+        }
+        .period-card .period-desc {
+            font-size: 0.85rem;
+            color: #5A4A3A;
+            margin: 0.2rem 0;
+        }
+        .period-card .period-example {
+            font-size: 0.75rem;
+            color: #7A6A5A;
+        }
+
+        /* ===== 场景标签 ===== */
+        .scene-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.7rem;
+            margin: 0.5rem 0 1rem;
+        }
+        .scene-pill {
+            background: #F5EFE8;
+            border-radius: 40px;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.8rem;
+            color: #3D3832;
+            border: 1px solid #E8DCD0;
+        }
+        .scene-pill strong {
+            font-weight: 600;
+            color: #A52A2A;
+        }
+
+        /* ===== 痛点 & 造梦 ===== */
+        .pain-solution {
+            background: #FDF8F4;
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            margin-bottom: 0.8rem;
+            border-left: 4px solid #B22222;
+        }
+        .pain-solution .pain {
+            font-weight: 500;
+            color: #1E1C19;
+            font-size: 0.95rem;
+        }
+        .pain-solution .solution {
+            color: #3D3832;
+            font-size: 0.9rem;
+            margin-top: 0.1rem;
+        }
+        .pain-solution .solution .highlight {
+            color: #A52A2A;
+            font-weight: 500;
+        }
+
+        .dream-box {
+            background: #F5EFE8;
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid #B22222;
+            font-size: 0.95rem;
+            color: #2D2A26;
+        }
+        .dream-box strong {
+            color: #A52A2A;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        /* ===== 底部 ===== */
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #A69B8E;
+            border-top: 1px solid #E8DCD0;
+            padding-top: 1.5rem;
+            margin-top: 2.5rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .period-grid {
+                grid-template-columns: 1fr;
+            }
+            .tone-card {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        @media (max-width: 420px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 打印优化 */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0.2in;
+            }
+            .sticky-card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+            .header {
+                border-bottom-color: #ccc;
+            }
+        }
+    </style>
+    <!-- 字体：Playfair Display 用于标题 -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 标题 ===== -->
+        <div class="header">
+            <h1>🍁 红色系 · 枫叶色彩速查卡</h1>
+            <div class="sub">
+                <span>主角色</span>  &nbsp;·&nbsp; 一二十种红 &nbsp;·&nbsp; 庭院美学顾问
+            </div>
+        </div>
+
+        <!-- ===== 定调 & 对比 ===== -->
+        <div class="tone-card">
+            <div class="tone">
+                “你见过几种红色？<br /><em>枫树有一二十种。</em>”
+            </div>
+            <div class="contrast">
+                <strong>与普通植物的对比 · 审美共鸣</strong><br />
+                普通树是“背景绿”——出门满眼都是深浅不一的绿。枫树是<span class="highlight">“主角色”</span>——红得丰富、红得有层次。<br />
+                花会谢，樱花两周、牡丹十天，一场雨就没了。枫叶的红色是<span class="highlight">“长”在叶子上的</span>，春天红、夏天紫、秋天金红，一季接一季，持续好几个月。<br />
+                <span style="color:#6F5E4F;font-size:0.9rem;">花是转瞬即逝的惊艳，枫叶是细水长流的陪伴。</span>
+            </div>
+        </div>
+
+        <!-- ===== 色彩速查卡片 ===== -->
+        <div class="section-label">✦ 完整色彩 · 便签速查</div>
+        <div class="card-grid">
+
+            <div class="sticky-card red-border">
+                <div class="color-name">鲜红色 <span class="tag">最正</span></div>
+                <div class="color-tagline">不偏不倚</div>
+                <div class="color-desc">像国旗、像红领巾，就是红色本来的样子。</div>
+                <div class="variety"><strong>代表：</strong>三季红、红舞姬</div>
+            </div>
+
+            <div class="sticky-card red-border">
+                <div class="color-name">亮红色 <span class="tag">会发光</span></div>
+                <div class="color-tagline">叶子自己在发光</div>
+                <div class="color-desc">阳光下不是“涂”上去的，是叶子自带的亮度。</div>
+                <div class="variety"><strong>代表：</strong>三季红（秋）、血红</div>
+            </div>
+
+            <div class="sticky-card red-border">
+                <div class="color-name">暗红色 <span class="tag">有分量</span></div>
+                <div class="color-tagline">像红酒、像红木</div>
+                <div class="color-desc">越看越有味道，时间沉淀下来的颜色。</div>
+                <div class="variety"><strong>代表：</strong>血红（夏）、三季红（夏）</div>
+            </div>
+
+            <div class="sticky-card red-border">
+                <div class="color-name">紫红色 <span class="tag">贵族气</span></div>
+                <div class="color-tagline">红得克制、有分寸</div>
+                <div class="color-desc">紫红配白墙，设计师最爱的配色。</div>
+                <div class="variety"><strong>代表：</strong>紫叶鸡爪槭、血红</div>
+            </div>
+
+            <div class="sticky-card red-border">
+                <div class="color-name">猩红色 <span class="tag">最有精神</span></div>
+                <div class="color-tagline">像火苗最旺的那一截</div>
+                <div class="color-desc">活泼的、有劲儿的红，不沉闷。</div>
+                <div class="variety"><strong>代表：</strong>出猩猩</div>
+            </div>
+
+            <div class="sticky-card red-border">
+                <div class="color-name">火红色 <span class="tag">烧起来</span></div>
+                <div class="color-tagline">秋天最极致的红</div>
+                <div class="color-desc">整棵树像被点着了，但不是灾难，是盛宴。</div>
+                <div class="variety"><strong>代表：</strong>大孟（秋）</div>
+            </div>
+
+            <div class="sticky-card red-border">
+                <div class="color-name">粉红色 <span class="tag">少女</span></div>
+                <div class="color-tagline">淡淡的、嫩嫩的</div>
+                <div class="color-desc">春天新叶是粉红色，整棵树冒“粉红泡泡”。</div>
+                <div class="variety"><strong>代表：</strong>部分锦叶品种春叶</div>
+            </div>
+
+            <div class="sticky-card red-border">
+                <div class="color-name">橙红色 <span class="tag">最暖</span></div>
+                <div class="color-tagline">像壁炉里的火光</div>
+                <div class="color-desc">温暖、亲切，让人想靠近。</div>
+                <div class="variety"><strong>代表：</strong>橙之梦、约旦</div>
+            </div>
+
+            <div class="sticky-card red-border">
+                <div class="color-name">胭脂红 <span class="tag">中国红</span></div>
+                <div class="color-tagline">温润典雅</div>
+                <div class="color-desc">像宣纸上的一抹朱砂，不刺眼、不霸道。</div>
+                <div class="variety"><strong>代表：</strong>中华小叶红</div>
+            </div>
+
+            <div class="sticky-card red-border">
+                <div class="color-name">铜红色 <span class="tag">最低调</span></div>
+                <div class="color-tagline">不争不抢，但耐看</div>
+                <div class="color-desc">像老铜器上的锈色，那种“旧”的感觉最迷人。</div>
+                <div class="variety"><strong>代表：</strong>青龙</div>
+            </div>
+
+            <div class="sticky-card red-border">
+                <div class="color-name">荧光红 <span class="tag">不真实</span></div>
+                <div class="color-tagline">亮到发光</div>
+                <div class="color-desc">阳光穿过，整片叶子半透明、发光，像科幻片。</div>
+                <div class="variety"><strong>代表：</strong>部分品种特定光下</div>
+            </div>
+
+            <div class="sticky-card red-border">
+                <div class="color-name">酒红色 <span class="tag">有故事</span></div>
+                <div class="color-tagline">像陈年红酒</div>
+                <div class="color-desc">颜色里藏着年份，要盯着看才能读出层次。</div>
+                <div class="variety"><strong>代表：</strong>血红</div>
+            </div>
+        </div>
+
+        <!-- ===== 观赏期分类 ===== -->
+        <div class="section-label">✦ 观赏期 · 三类节奏</div>
+        <div class="period-grid">
+            <div class="period-card">
+                <div class="period-name">🌿 三季红</div>
+                <div class="period-desc">春、夏、秋三季保持红色，6-8个月</div>
+                <div class="period-example">“你不需要等到秋天才能看，一年三季都是红的。”<br /><strong>代表：</strong>三季红、血红、红舞姬</div>
+            </div>
+            <div class="period-card">
+                <div class="period-name">🍂 两季红</div>
+                <div class="period-desc">春、秋两季红色，夏季转绿，4-6个月</div>
+                <div class="period-example">“春天一抹惊喜，夏天一片清凉，秋天一次震撼。”<br /><strong>代表：</strong>出猩猩、中华小叶红</div>
+            </div>
+            <div class="period-card">
+                <div class="period-name">🍁 秋色红</div>
+                <div class="period-desc">仅秋季变红，1-2个月</div>
+                <div class="period-example">“春夏两季安安静静地绿着，到了秋天一夜烧起来。”<br /><strong>代表：</strong>大孟、鸡爪槭原种</div>
+            </div>
+        </div>
+
+        <!-- ===== 场景匹配 ===== -->
+        <div class="section-label">✦ 场景推荐 · 身份确认</div>
+        <div class="scene-pills">
+            <span class="scene-pill"><strong>窗前</strong> 两季红 / 秋色红 —— 四季四幅画，不挡光有景</span>
+            <span class="scene-pill"><strong>白墙前</strong> 紫红 / 深红 —— 白墙为纸，红枫为画</span>
+            <span class="scene-pill"><strong>草坪中央</strong> 三季红 / 秋色红 —— 绿草坪上红色的焦点</span>
+            <span class="scene-pill"><strong>水边</strong> 秋色红 —— 上下对称，虚实相生</span>
+            <span class="scene-pill"><strong>入口</strong> 三季红 —— 每天回家都有红树在等</span>
+            <span class="scene-pill"><strong>路径两侧</strong> 三季红 —— 红色隧道，四季有节奏</span>
+        </div>
+
+        <!-- ===== 痛点解药 ===== -->
+        <div class="section-label">✦ 痛点化解 · 解药话术</div>
+        <div class="pain-solution">
+            <div class="pain">“红色太常见了，不想跟别人一样”</div>
+            <div class="solution">→ 那就不要红色。粉色、紫色、锦叶——<span class="highlight">枫树不只有红色，你不需要跟别人一样。</span></div>
+        </div>
+        <div class="pain-solution">
+            <div class="pain">“怕只有秋天才好看”</div>
+            <div class="solution">→ 选三季红，春天红、夏天红、秋天还红。或者冬观枝，<span class="highlight">四季轮着来。</span></div>
+        </div>
+        <div class="pain-solution">
+            <div class="pain">“怕颜色太跳不搭”</div>
+            <div class="solution">→ 选铜红色，红得不跳，雅雅地融进去。或墨绿，<span class="highlight">有分寸不抢戏。</span></div>
+        </div>
+
+        <!-- ===== 造梦话术 ===== -->
+        <div class="section-label">✦ 造梦 · 即时拥有</div>
+        <div class="dream-box">
+            <strong>秋日火红</strong>
+            十月的傍晚，红枫像一团燃烧的火焰，夕阳穿过半透明的红叶。你站在树下，满眼都是红色。你会忍不住拍照发给朋友，他们回你：“你家院子也太夸张了吧。”
+        </div>
+        <div class="dream-box">
+            <strong>三季常红</strong>
+            春天嫩红，夏天深红，秋天火红。一年三季，每次推开院门，第一眼就是它。不是“秋天的惊喜”，是“每天的日常”。
+        </div>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer-note">
+            庭院美学顾问 · 红色系速查 · 审美共鸣 × 身份确认 × 即时拥有
+        </div>
+
+    </div>
+</body>
+</html>

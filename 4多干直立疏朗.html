@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4号 · 多干直立疏朗 · 优化版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f1ec;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #2b2620;
+            line-height: 1.6;
+        }
+
+        .card {
+            max-width: 960px;
+            margin: 0 auto;
+            background: #fcfaf7;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            padding: 2.4rem 2.8rem;
+        }
+
+        /* ===== 头部 ===== */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #ece5dc;
+            margin-bottom: 1.8rem;
+        }
+
+        .header .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            color: #b09b86;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+        }
+
+        .header .name {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2b2620;
+            letter-spacing: 0.3px;
+        }
+
+        .header .sub {
+            font-size: 0.85rem;
+            color: #7a6e5e;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+            margin-left: auto;
+        }
+
+        /* ===== 主标题 ===== */
+        .hero {
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 450;
+            color: #1f1b17;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: #f2ede7;
+            padding: 0.35rem 1.8rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 450;
+            color: #3d352c;
+            margin-top: 0.6rem;
+            border: 1px solid #e5ddd2;
+            letter-spacing: 0.2px;
+        }
+
+        /* ===== 区块通用 ===== */
+        .block {
+            margin-bottom: 2.4rem;
+        }
+
+        .block-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #e5ddd2;
+            padding-bottom: 0.4rem;
+        }
+
+        .block-header .icon {
+            font-size: 1rem;
+            color: #b09b86;
+        }
+
+        .block-header h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6f6456;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        /* ===== 卖点网格 ===== */
+        .sell-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .sell-item {
+            background: #f8f5f0;
+            border-radius: 10px;
+            padding: 1rem 1.4rem;
+            border-left: 4px solid #c4b2a0;
+            transition: background 0.15s;
+        }
+
+        .sell-item .label {
+            font-weight: 600;
+            color: #3d352c;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .sell-item .label .emoji {
+            font-size: 1.1rem;
+            opacity: 0.7;
+        }
+
+        .sell-item .desc {
+            color: #5f5549;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin: 0.2rem 0 0.4rem 0;
+        }
+
+        .sell-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sell-item ul li {
+            font-size: 0.85rem;
+            color: #3d352c;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.15rem;
+        }
+
+        .sell-item ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+            font-weight: 700;
+        }
+
+        /* ===== 速查卡 ===== */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.2rem 1.6rem;
+            background: #f8f5f0;
+            padding: 1.2rem 1.8rem;
+            border-radius: 12px;
+            border: 1px solid #ece5dc;
+        }
+
+        .quick-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+            font-size: 0.88rem;
+            border-bottom: 1px dotted #e5ddd2;
+        }
+
+        .quick-item .q-label {
+            font-weight: 500;
+            color: #6f6456;
+            min-width: 4.2rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .quick-item .q-value {
+            color: #2b2620;
+        }
+
+        .quick-item .q-tag {
+            background: #ede7df;
+            padding: 0.05rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #4d443a;
+            display: inline-block;
+            margin-right: 0.2rem;
+        }
+
+        /* ===== 场景列表 ===== */
+        .scene-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .scene-list li {
+            padding: 0.5rem 1.2rem;
+            margin-bottom: 0.4rem;
+            background: #f8f5f0;
+            border-radius: 6px;
+            border-left: 3px solid #d6ccbf;
+            font-size: 0.88rem;
+            color: #3d352c;
+        }
+
+        .scene-list li strong {
+            color: #2b2620;
+            font-weight: 550;
+        }
+
+        /* ===== 痛点 ===== */
+        .pain-block {
+            background: #f8f5f0;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            border-left: 4px solid #b8a692;
+            margin-bottom: 0.7rem;
+        }
+
+        .pain-block .pain-q {
+            font-weight: 500;
+            color: #3d352c;
+            font-size: 0.88rem;
+        }
+
+        .pain-block .pain-a {
+            color: #4d443a;
+            font-size: 0.85rem;
+            margin-top: 0.15rem;
+        }
+
+        .pain-block .pain-a strong {
+            color: #2b2620;
+        }
+
+        /* ===== 造梦 ===== */
+        .dream-block {
+            background: #f2ede7;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+            font-size: 0.88rem;
+            color: #3d352c;
+            font-style: italic;
+            border-left: 3px solid #c4b2a0;
+        }
+
+        .dream-block strong {
+            font-style: normal;
+            color: #2b2620;
+        }
+
+        /* ===== 附注 ===== */
+        .footnote {
+            background: #f8f5f0;
+            padding: 0.8rem 1.4rem;
+            border-radius: 8px;
+            border: 1px solid #e5ddd2;
+            font-size: 0.85rem;
+            color: #5f5549;
+        }
+
+        .footnote strong {
+            color: #a65a4a;
+        }
+
+        .footnote ul {
+            list-style: none;
+            padding-left: 0.2rem;
+            margin-top: 0.3rem;
+        }
+
+        .footnote ul li {
+            padding-left: 1rem;
+            position: relative;
+            font-size: 0.82rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .footnote ul li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 760px) {
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .sell-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem 1.2rem;
+                gap: 0.1rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .header .name {
+                font-size: 1.2rem;
+            }
+            .header .sub {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem 0.5rem;
+            }
+            .card {
+                padding: 1rem 0.8rem;
+                border-radius: 16px;
+            }
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+            .hero .tagline {
+                font-size: 0.85rem;
+                padding: 0.25rem 1.2rem;
+            }
+            .quick-item {
+                font-size: 0.8rem;
+                flex-wrap: wrap;
+            }
+            .quick-item .q-label {
+                min-width: 3.2rem;
+            }
+            .sell-item {
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0.2in;
+            }
+            .card {
+                box-shadow: none;
+                padding: 0.2in;
+                border-radius: 0;
+                background: white;
+            }
+            .sell-item,
+            .quick-grid,
+            .pain-block,
+            .dream-block,
+            .footnote {
+                background: #f9f6f2;
+                border-color: #ccc;
+            }
+            .hero .tagline {
+                background: #f5f0ea;
+                border-color: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+
+        <!-- 头部 -->
+        <div class="header">
+            <span class="badge">4 号</span>
+            <span class="name">多干直立疏朗</span>
+            <span class="sub">直立型 · 一本多干 · 疏朗 · 火炬状</span>
+        </div>
+
+        <!-- 主标题 -->
+        <div class="hero">
+            <h1>一本多干如火炬，向上散开不堵光</h1>
+            <div class="tagline">“同根不同命 · 清瘦的丰富 · 有秩序的群体感”</div>
+        </div>
+
+        <!-- ===== 核心卖点 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>核心卖点 · 四维话术</h2>
+            </div>
+            <div class="sell-grid">
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 一本多干 · 合而不同的叙事</div>
+                    <div class="desc">“同一个根，同一个家，各自长大——像极了我们自己的故事”</div>
+                    <ul>
+                        <li>从同一根主干低处分出多根次主干，下面‘合’，上面‘分’。</li>
+                        <li>比丛生更雅，因为‘分’是有秩序、有源头的。</li>
+                        <li>视觉体量翻倍——一根基座撑起多干，像一束火炬。</li>
+                    </ul>
+                </div>
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 低处分出 · 从膝盖开始的丰富</div>
+                    <div class="desc">“它的‘多’从你的膝盖高度就开始了”</div>
+                    <ul>
+                        <li>分枝点≤0.8m，从低处就展现出多干并立的结构。</li>
+                        <li>视觉连续性强——从下到上都是内容，没有‘空窗期’。</li>
+                        <li>近身观赏时，视线在粗细、高低不同的干之间游走，趣味盎然。</li>
+                    </ul>
+                </div>
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 各干各异 · 同根不同命</div>
+                    <div class="desc">“每一根都有自己的性格——老大、老二、老三，各有各的劲儿”</div>
+                    <ul>
+                        <li>粗细、高低、角度各有差异，不是复制粘贴，有对话感。</li>
+                        <li>像大家庭，同根同源但各自走向不同高度和方向。</li>
+                        <li>你每年都能发现新的变化——谁长高了，谁长粗了。</li>
+                    </ul>
+                </div>
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 向上不堵 · 清瘦的丰富</div>
+                    <div class="desc">“多干但不密，丰富但不堵——向上撑开，疏朗透光”</div>
+                    <ul>
+                        <li>各干之间的缝隙疏朗，光能穿透，视线能穿过。</li>
+                        <li>不是‘臃肿’的丰富，是‘有结构’的丰富，像工笔画。</li>
+                        <li>集体向上的力量感，让空间充满‘生长的动势’。</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ===== 速查卡 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>主播速查卡</h2>
+            </div>
+            <div class="quick-grid">
+                <div class="quick-item"><span class="q-label">编号</span><span class="q-value">4 号</span></div>
+                <div class="quick-item"><span class="q-label">树形</span><span class="q-value">多干直立疏朗</span></div>
+                <div class="quick-item"><span class="q-label">定位</span><span class="q-value">直立型 · 一本多干 · 疏朗 · 各干直立或略斜</span></div>
+                <div class="quick-item"><span class="q-label">定调</span><span class="q-value">“一本多干如火炬，向上散开不堵光。”</span></div>
+                <div class="quick-item"><span class="q-label">卖点</span><span class="q-value">一本多干 · 低处分出 · 各干各异 · 向上不堵</span></div>
+                <div class="quick-item"><span class="q-label">气质</span><span class="q-value">火炬 · 群立 · 丰富 · 有秩序 · 清瘦</span></div>
+                <div class="quick-item"><span class="q-label">场景</span><span class="q-value"><span class="q-tag">开阔草坪</span> <span class="q-tag">窗前/茶室</span> <span class="q-tag">硬质广场</span> <span class="q-tag">几何树池</span> <span class="q-tag">花境背景</span></span></div>
+                <div class="quick-item"><span class="q-label">痛点</span><span class="q-value">单干太规矩 · 丛生太野 · 压不住草坪 · 窗前太单调 · 想要一树成林但不要乱</span></div>
+                <div class="quick-item"><span class="q-label">造梦</span><span class="q-value">火炬之光 · 窗中群干 · 草坪上红色焰火 · 同根不同命 · 群干齐立</span></div>
+                <div class="quick-item"><span class="q-label">违禁词</span><span class="q-value">❌ 家人们 · 性价比 · 赶紧拍 · 3、2、1上链接</span></div>
+            </div>
+        </div>
+
+        <!-- ===== 高频场景匹配 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>高频场景匹配 · 种在哪里，就长成什么画面</h2>
+            </div>
+            <ul class="scene-list">
+                <li><strong>开阔草坪中央 ·</strong> 一束火炬从草坪中央拔地而起，集体向上的力量感，是草坪上最震撼的视觉锚点。</li>
+                <li><strong>窗前/茶室窗外 ·</strong> 多干同时出现在窗框中，高高低低、粗粗细细，像一组竖线在窗框里展开，画面丰富而有层次。</li>
+                <li><strong>硬质铺装广场 ·</strong> 灰色硬地面上，多干如雕塑般直立，越硬的地面越能衬出多干的‘生命感’。</li>
+                <li><strong>几何树池 ·</strong> 树池的规整与多干的自由向上形成对比，方与圆、人工与自然多重对话。</li>
+                <li><strong>花境背景 ·</strong> 多干从花境边缘拔地而起，成为花境的‘垂直骨架’，视线从低到高被完整接住。</li>
+            </ul>
+        </div>
+
+        <!-- ===== 场景痛点话术 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>场景痛点话术 · 先刺痛，再给解药</h2>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点一 · 单干树‘太规矩’，院子里缺一棵‘会分叉’的</div>
+                <div class="pain-a">“院子里都是直挺挺的单干树，好看是好看，但总觉得太‘规矩’了，缺一点丰富感。你想要的是一棵‘会分叉’的树——下面合在一起、上面分开成一束。”<br />
+                <strong>→</strong> 4号就是那个‘会分叉’的树——同一根上分出了多根干，像一束火炬。它有单干树的挺拔，但比单干树丰富，因为‘多’本身就有看头。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点二 · 丛生树太‘野’，单干树又太‘正’，想要‘中间状态’</div>
+                <div class="pain-a">“丛生树有‘一树成林’的效果，但有点野；单干树挺拔但太正。你想要的是一种有秩序的多干——不野，但也不板。”<br />
+                <strong>→</strong> 4号就是那个‘中间状态’——它有明确的主干基座（所以不野），但从这个基座上分出了多根次主干（所以不板）。雅而不板，丰而不野。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点三 · 开阔草坪上种一棵单干树‘压不住’</div>
+                <div class="pain-a">“开阔草坪上种一棵单干树，总觉得太‘轻’了，压不住那片空。一棵树在那片开阔地上显得太细、太单薄。”<br />
+                <strong>→</strong> 种一棵4号在草坪中央——多干从低处散开，视觉体量翻了好几倍。一棵单干是‘一根线’，多干是一‘束’——那片开阔草地，被这一束树‘镇’住了。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点四 · 窗前需要‘垂直层次’，但单干太单调</div>
+                <div class="pain-a">“窗前想种一棵树，希望给窗框增加一些‘竖线’的感觉。但单干树种下去，窗框里就一根竖线，太单调了。”<br />
+                <strong>→</strong> 种一棵4号在窗前——多干同时出现在窗框中，高高低低、粗粗细细，像一组垂直线条在窗框里展开。不是单干独奏，是群干齐立。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点五 · 想要‘一树成林’的效果，但不喜欢丛生的‘乱’</div>
+                <div class="pain-a">“你听过‘一树成林’——觉得特别好，但丛生树的‘乱’让你犹豫。你想要的是‘有秩序的林’，不是‘乱长的林子’。”<br />
+                <strong>→</strong> 4号就是‘有秩序的一树成林’——所有的干都从同一根主干上分出来，下面是一个明确的核心，上面才散开。你一眼就能看懂它的结构，既有‘林’的效果，又有‘秩序’的美感。</div>
+            </div>
+        </div>
+
+        <!-- ===== 造梦深化 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>造梦深化 · 把‘看见’变成‘感受到’</h2>
+            </div>
+
+            <div class="dream-block">
+                <strong>火炬之光 ·</strong> “春天，多干同时冒新芽。每一根干上都爆出嫩红的新叶，整棵树像一束被点燃的火炬。阳光从背后照过来，新叶是半透明的——那一束多干，像一团正在燃烧的火焰。”
+            </div>
+
+            <div class="dream-block">
+                <strong>窗中群干 ·</strong> “冬日的茶室里，叶子落尽了，窗外只剩下多干的骨架。窗框里，多根竖线并立，高高低低、粗粗细细，像一排站立的文人。你端着茶杯，数一数有几根干——数完一遍，再看一遍，每根的角度都不一样，百看不厌。”
+            </div>
+
+            <div class="dream-block">
+                <strong>草坪上的红色焰火 ·</strong> “秋天，开阔草坪中央，多干的叶子全部变红。从远处看，那不是一棵树，是一束红色的焰火从草坪中央喷向天空。草坪的绿是底，多干的红是焰——整个院子的视觉重心，就是这一束。”
+            </div>
+
+            <div class="dream-block">
+                <strong>同根不同命 ·</strong> “这棵树种下去五年后，你再回来看。当年最粗的那根‘老大’可能长得更高了，当年细的那根‘老二’可能追上来了一些。每一根干都有自己的成长节奏，你每年看它们，都会发现新的变化——那不是一棵树，是一个还在生长的‘家族’。”
+            </div>
+        </div>
+
+        <!-- ===== 违禁词 & 临场要点 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>主播临场要点</h2>
+            </div>
+            <div class="footnote">
+                <p><strong>❌ 违禁词提醒：</strong> 禁用“家人们”“性价比”“赶紧拍”“3、2、1上链接”——用“大家”“价值”“感受”“从容拥有”替代。</p>
+                <p style="margin-top:0.5rem;"><strong>✅ 临场要点：</strong></p>
+                <ul>
+                    <li><strong>定位要准：</strong> 这是‘有秩序的一束’。反复强调“一本多干”“同一个基座”“合而不同”，让客户明白它和丛生树的本质区别。</li>
+                    <li><strong>讲‘故事’不讲‘结构’：</strong> 多用“老大老二”“兄弟姐妹”“各自成长”这类比喻，让客户在情感上被触动。</li>
+                    <li><strong>强调‘清瘦的丰富’：</strong> 主动化解“会不会太密太堵”的顾虑——“各干之间是疏朗的、透光的，它是‘清瘦的丰富’，不是‘臃肿的杂乱’。”</li>
+                    <li><strong>出镜配合手势：</strong> 先指基座（“这里是合”），再分开手指向上（“这里是分”）——那个“合→分”的手势比任何语言都直观。</li>
+                    <li><strong>价格匹配价值：</strong> 不强调“贵”，要说“它的价值在于它的结构和故事——一棵树，就是一个家族。这种叙事感是无法复制的。”</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 底部 -->
+        <div style="margin-top:2.2rem;padding-top:1rem;border-top:1px solid #ece5dc;font-size:0.75rem;color:#b09b86;text-align:center;letter-spacing:0.5px;">
+            庭院美学顾问 · 速查便签 · 4号多干直立疏朗 · 优化版
+        </div>
+
+    </div>
+</body>
+</html>

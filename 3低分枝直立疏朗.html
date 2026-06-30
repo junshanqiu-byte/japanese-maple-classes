@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3号 · 低分枝直立疏朗 · 优化版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f1ec;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #2b2620;
+            line-height: 1.6;
+        }
+
+        .card {
+            max-width: 960px;
+            margin: 0 auto;
+            background: #fcfaf7;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            padding: 2.4rem 2.8rem;
+        }
+
+        /* ===== 头部 ===== */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #ece5dc;
+            margin-bottom: 1.8rem;
+        }
+
+        .header .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            color: #b09b86;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+        }
+
+        .header .name {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2b2620;
+            letter-spacing: 0.3px;
+        }
+
+        .header .sub {
+            font-size: 0.85rem;
+            color: #7a6e5e;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+            margin-left: auto;
+        }
+
+        /* ===== 主标题 ===== */
+        .hero {
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 450;
+            color: #1f1b17;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: #f2ede7;
+            padding: 0.35rem 1.8rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 450;
+            color: #3d352c;
+            margin-top: 0.6rem;
+            border: 1px solid #e5ddd2;
+            letter-spacing: 0.2px;
+        }
+
+        /* ===== 区块通用 ===== */
+        .block {
+            margin-bottom: 2.4rem;
+        }
+
+        .block-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #e5ddd2;
+            padding-bottom: 0.4rem;
+        }
+
+        .block-header .icon {
+            font-size: 1rem;
+            color: #b09b86;
+        }
+
+        .block-header h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6f6456;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        /* ===== 卖点网格 ===== */
+        .sell-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .sell-item {
+            background: #f8f5f0;
+            border-radius: 10px;
+            padding: 1rem 1.4rem;
+            border-left: 4px solid #c4b2a0;
+            transition: background 0.15s;
+        }
+
+        .sell-item .label {
+            font-weight: 600;
+            color: #3d352c;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .sell-item .label .emoji {
+            font-size: 1.1rem;
+            opacity: 0.7;
+        }
+
+        .sell-item .desc {
+            color: #5f5549;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin: 0.2rem 0 0.4rem 0;
+        }
+
+        .sell-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sell-item ul li {
+            font-size: 0.85rem;
+            color: #3d352c;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.15rem;
+        }
+
+        .sell-item ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+            font-weight: 700;
+        }
+
+        /* ===== 速查卡 ===== */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.2rem 1.6rem;
+            background: #f8f5f0;
+            padding: 1.2rem 1.8rem;
+            border-radius: 12px;
+            border: 1px solid #ece5dc;
+        }
+
+        .quick-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+            font-size: 0.88rem;
+            border-bottom: 1px dotted #e5ddd2;
+        }
+
+        .quick-item .q-label {
+            font-weight: 500;
+            color: #6f6456;
+            min-width: 4.2rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .quick-item .q-value {
+            color: #2b2620;
+        }
+
+        .quick-item .q-tag {
+            background: #ede7df;
+            padding: 0.05rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #4d443a;
+            display: inline-block;
+            margin-right: 0.2rem;
+        }
+
+        /* ===== 场景列表 ===== */
+        .scene-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .scene-list li {
+            padding: 0.5rem 1.2rem;
+            margin-bottom: 0.4rem;
+            background: #f8f5f0;
+            border-radius: 6px;
+            border-left: 3px solid #d6ccbf;
+            font-size: 0.88rem;
+            color: #3d352c;
+        }
+
+        .scene-list li strong {
+            color: #2b2620;
+            font-weight: 550;
+        }
+
+        /* ===== 痛点 ===== */
+        .pain-block {
+            background: #f8f5f0;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            border-left: 4px solid #b8a692;
+            margin-bottom: 0.7rem;
+        }
+
+        .pain-block .pain-q {
+            font-weight: 500;
+            color: #3d352c;
+            font-size: 0.88rem;
+        }
+
+        .pain-block .pain-a {
+            color: #4d443a;
+            font-size: 0.85rem;
+            margin-top: 0.15rem;
+        }
+
+        .pain-block .pain-a strong {
+            color: #2b2620;
+        }
+
+        /* ===== 造梦 ===== */
+        .dream-block {
+            background: #f2ede7;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+            font-size: 0.88rem;
+            color: #3d352c;
+            font-style: italic;
+            border-left: 3px solid #c4b2a0;
+        }
+
+        .dream-block strong {
+            font-style: normal;
+            color: #2b2620;
+        }
+
+        /* ===== 附注 ===== */
+        .footnote {
+            background: #f8f5f0;
+            padding: 0.8rem 1.4rem;
+            border-radius: 8px;
+            border: 1px solid #e5ddd2;
+            font-size: 0.85rem;
+            color: #5f5549;
+        }
+
+        .footnote strong {
+            color: #a65a4a;
+        }
+
+        .footnote ul {
+            list-style: none;
+            padding-left: 0.2rem;
+            margin-top: 0.3rem;
+        }
+
+        .footnote ul li {
+            padding-left: 1rem;
+            position: relative;
+            font-size: 0.82rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .footnote ul li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 760px) {
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .sell-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem 1.2rem;
+                gap: 0.1rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .header .name {
+                font-size: 1.2rem;
+            }
+            .header .sub {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem 0.5rem;
+            }
+            .card {
+                padding: 1rem 0.8rem;
+                border-radius: 16px;
+            }
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+            .hero .tagline {
+                font-size: 0.85rem;
+                padding: 0.25rem 1.2rem;
+            }
+            .quick-item {
+                font-size: 0.8rem;
+                flex-wrap: wrap;
+            }
+            .quick-item .q-label {
+                min-width: 3.2rem;
+            }
+            .sell-item {
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0.2in;
+            }
+            .card {
+                box-shadow: none;
+                padding: 0.2in;
+                border-radius: 0;
+                background: white;
+            }
+            .sell-item,
+            .quick-grid,
+            .pain-block,
+            .dream-block,
+            .footnote {
+                background: #f9f6f2;
+                border-color: #ccc;
+            }
+            .hero .tagline {
+                background: #f5f0ea;
+                border-color: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+
+        <!-- 头部 -->
+        <div class="header">
+            <span class="badge">3 号</span>
+            <span class="name">低分枝直立疏朗</span>
+            <span class="sub">直立型 · 低分枝 · 单干 · 疏朗</span>
+        </div>
+
+        <!-- 主标题 -->
+        <div class="hero">
+            <h1>从膝盖开始就是树，小院边界全靠它</h1>
+            <div class="tagline">“包裹 · 遮挡 · 近景 · 小空间主角 — 蹲下来陪你的树”</div>
+        </div>
+
+        <!-- ===== 核心卖点 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>核心卖点 · 四维话术</h2>
+            </div>
+            <div class="sell-grid">
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 包裹 · 从地面开始的拥抱</div>
+                    <div class="desc">“你不是‘走近’它，是‘走进’它”</div>
+                    <ul>
+                        <li>分枝点不到膝盖，枝叶从地面就开始了，近身就被包裹。</li>
+                        <li>孩子伸手就能摸到叶子，你坐在旁边不用抬头就是满眼绿色。</li>
+                        <li>种在墙角，从地面到树冠是连续的、不间断的绿意。</li>
+                    </ul>
+                </div>
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 遮挡 · 天然的隐私屏障</div>
+                    <div class="desc">“它不说话，但替你挡住了不想被看见的视线”</div>
+                    <ul>
+                        <li>低分枝让视线从地面开始就被挡住，在你最需要的高度温柔守护。</li>
+                        <li>给冰冷的围墙穿一件‘绿衣’，边界从此有了生命。</li>
+                        <li>透而不堵——挡住视线，但阳光和空气能自由穿过。</li>
+                    </ul>
+                </div>
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 近景 · 为近身观赏而生</div>
+                    <div class="desc">“它不是用来远看的，是为‘走近了看’准备的”</div>
+                    <ul>
+                        <li>你走近它，不是在看一棵树，是在‘进入’一棵树。</li>
+                        <li>站着、坐着、蹲下，视线都在枝叶范围内，沉浸感十足。</li>
+                        <li>春天新芽、夏天叶脉、秋天红叶——细节就在你眼前。</li>
+                    </ul>
+                </div>
+
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 小空间主角 · 面积不大，气场不小</div>
+                    <div class="desc">“它不高大，但气场不小；它不占天，但占地有分量”</div>
+                    <ul>
+                        <li>为十几二十平的小院子量身设计，种一棵就有了‘魂’。</li>
+                        <li>空角落、不知道怎么用的地方，种下去立刻‘活了’。</li>
+                        <li>茶室旁、石组旁——不抢、不压、不空，刚刚好。</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ===== 速查卡 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>主播速查卡</h2>
+            </div>
+            <div class="quick-grid">
+                <div class="quick-item"><span class="q-label">编号</span><span class="q-value">3 号</span></div>
+                <div class="quick-item"><span class="q-label">树形</span><span class="q-value">低分枝直立疏朗</span></div>
+                <div class="quick-item"><span class="q-label">定位</span><span class="q-value">直立型 · 低 (≤0.8m) · 单干 · 疏朗</span></div>
+                <div class="quick-item"><span class="q-label">定调</span><span class="q-value">“从膝盖开始就是树，小院边界全靠它。”</span></div>
+                <div class="quick-item"><span class="q-label">卖点</span><span class="q-value">包裹 · 遮挡 · 近景 · 小空间主角</span></div>
+                <div class="quick-item"><span class="q-label">气质</span><span class="q-value">亲和 · 包裹 · 遮挡 · 触手可及 · 蹲下来陪你</span></div>
+                <div class="quick-item"><span class="q-label">场景</span><span class="q-value"><span class="q-tag">围墙边界</span> <span class="q-tag">墙角</span> <span class="q-tag">茶室旁</span> <span class="q-tag">飞石路径</span> <span class="q-tag">窗前</span></span></div>
+                <div class="quick-item"><span class="q-label">痛点</span><span class="q-value">墙角空 · 边界没私密 · 树够不着 · 小院子不敢种 · 窗前挡光</span></div>
+                <div class="quick-item"><span class="q-label">造梦</span><span class="q-value">春日触手可及 · 夏日包裹感 · 秋日近身红叶 · 冬日骨感 · 日常陪伴</span></div>
+                <div class="quick-item"><span class="q-label">违禁词</span><span class="q-value">❌ 家人们 · 性价比 · 赶紧拍 · 3、2、1上链接</span></div>
+            </div>
+        </div>
+
+        <!-- ===== 高频场景匹配 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>高频场景匹配 · 种在哪里，就长成什么画面</h2>
+            </div>
+            <ul class="scene-list">
+                <li><strong>围墙边界 ·</strong> 枝叶从围墙底部就开始覆盖，墙不再是冷冰冰的砖，而是从地面到半空都披上了‘绿衣’。</li>
+                <li><strong>庭院角落 ·</strong> 空角落、不知道怎么用的角落，种一棵低分枝，枝叶从地面就开始丰满，那个角落立刻‘活了’。</li>
+                <li><strong>茶室/窗下 ·</strong> 茶人坐于室内，视线平视出去就是低垂的枫枝。春红夏绿秋金冬枝，四季就在眼前流转。</li>
+                <li><strong>飞石/汀步路径旁 ·</strong> 人在石上走，树在身侧，高度正好在膝盖到腰部。一步一石，一石一枫，行走有了陪伴。</li>
+                <li><strong>入户门旁 ·</strong> 出门时弯腰就能摸到叶子，进门时低头就看到新芽。门厅不再是‘通道’，是‘有陪伴的过渡’。</li>
+            </ul>
+        </div>
+
+        <!-- ===== 场景痛点话术 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>场景痛点话术 · 先刺痛，再给解药</h2>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点一 · 墙角‘空’了十几年，一直不知道怎么填</div>
+                <div class="pain-a">“种过高一点的树吧，太压；种过矮的灌木吧，又不够看；种花吧冬天又没了。那个角落空了十几年，每次看到都觉得‘应该种点什么’，但每次都不知道种什么。”<br />
+                <strong>→</strong> 种一棵3号，枝叶从地面就开始了，不需要长高就能把角落‘填满’。不高不压、不矮不空，一棵树让十几年的空角落变成风景角。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点二 · 边界没私密感，邻居一眼看到底</div>
+                <div class="pain-a">“种绿篱吧太死板，种高树吧下面还是空的——视线还是能穿过去。你坐在院子里总觉得不踏实，就是因为没有遮挡。”<br />
+                <strong>→</strong> 种一棵3号在边界，低分枝让视线从地面就开始被挡住。它在视线最关键的腰部位置给你挡得严严实实，私密感有了，但透气感还在。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点三 · 院子里的树‘够不着’，没有互动感</div>
+                <div class="pain-a">“分枝点比你人还高，叶子都在头顶上，你除了抬头看一眼，跟它没有任何‘接触’。树是树，你是你——你们是‘陌生人’。”<br />
+                <strong>→</strong> 种一棵3号，伸手就能摸到叶子，孩子踮脚就能够到最低的枝条。它不是‘高高在上’的树，是‘蹲下来陪你’的树。你跟它之间，是有‘关系’的。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点四 · 小院子不敢种树，怕‘种不下’</div>
+                <div class="pain-a">“十几平的小院子，种大树怕把空间占满了，不种又空荡荡的。小院子的业主最怕‘种错了树’。”<br />
+                <strong>→</strong> 3号就是为小院子准备的——它不往高处长、不占天际线，但它丰满、有体量、有存在感。小院子里种一棵，整个院子就有了‘重心’。</div>
+            </div>
+
+            <div class="pain-block">
+                <div class="pain-q">痛点五 · 窗前种树‘挡光’，不种又‘空’</div>
+                <div class="pain-a">“想种又怕挡光，不种又觉得空。那种‘想要又不敢要’的感觉，已经陪你好几个春天了。”<br />
+                <strong>→</strong> 3号种在窗前，分枝点不到膝盖，树冠在窗台高度展开。窗户的上半部分留给了天空和光线，下半部分有了枫叶的陪伴。不挡光，但有景。窗前终于不用再‘二选一’了。</div>
+            </div>
+        </div>
+
+        <!-- ===== 造梦深化 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>造梦深化 · 把‘看见’变成‘感受到’</h2>
+            </div>
+
+            <div class="dream-block">
+                <strong>春日触手可及 ·</strong> “春天，新叶从最低的枝条上冒出来，嫩红的、半透明的。你每天早上出门前，顺手摸一下那片叶子，凉凉的、软软的。它不是一棵‘看’的树，是一棵‘摸’的树。”
+            </div>
+
+            <div class="dream-block">
+                <strong>夏日包裹感 ·</strong> “夏天的傍晚，你搬一把矮椅子坐在树旁边。低垂的枝叶在你肩膀周围形成一个‘绿色的半包围圈’，风从枝叶间穿过，你在圈里面，安静、凉快、被包裹着。那种‘被一棵树抱住’的感觉，高飘树给不了你。”
+            </div>
+
+            <div class="dream-block">
+                <strong>秋日近身红叶 ·</strong> “到了秋天，叶子在触手可及的高度变红。你不用抬头、不用弯腰，眼睛平视过去就是满眼的红色。你伸手摘一片叶子，放在手心里——秋天的颜色，就在你掌心里。”
+            </div>
+
+            <div class="dream-block">
+                <strong>日常陪伴 ·</strong> “这棵树最特别的地方是——它跟你生活在同一个高度。你不是‘仰望’它，不是‘俯视’它，是‘平视’它。你坐在它旁边的时候，你们是‘平等的’。它不是一棵树，是你院子里的‘邻居’。”
+            </div>
+        </div>
+
+        <!-- ===== 违禁词 & 临场要点 ===== -->
+        <div class="block">
+            <div class="block-header">
+                <span class="icon">✦</span>
+                <h2>主播临场要点</h2>
+            </div>
+            <div class="footnote">
+                <p><strong>❌ 违禁词提醒：</strong> 禁用“家人们”“性价比”“赶紧拍”“3、2、1上链接”——用“大家”“价值”“感受”“从容拥有”替代。</p>
+                <p style="margin-top:0.5rem;"><strong>✅ 临场要点：</strong></p>
+                <ul>
+                    <li><strong>定位要准：</strong> 这是‘蹲下来陪你’的树。介绍时用手势从地面往上比划——“枝叶从这么低的地方就开始了，你走近它，是‘走进’它，不是‘看到’它。”</li>
+                    <li><strong>强调‘触感’和‘互动’：</strong> 多用“伸手就能摸到”“孩子能够到”“你坐在旁边的时候”这类描述，让客户感觉到这棵树和他之间是有‘肢体关系’的。</li>
+                    <li><strong>针对‘隐私’需求要精准：</strong> 当客户提到“邻居能看到我家院子”的时候，3号是最好的答案。要讲“它在腰际到视线的高度给你最温柔的守护”——让客户感觉到被保护，而不是被围堵。</li>
+                    <li><strong>针对‘小空间’要笃定：</strong> 当客户说“我家院子不大”时，干脆利落地说“3号就是为小空间准备的”。小院子的客户最需要‘确定感’。</li>
+                    <li><strong>价格轻描淡写：</strong> 不要强调“便宜”“划算”，要说“它的价值在于它和你的亲近感——那种每天都能摸到叶子的体验，是价格无法衡量的。”</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 底部 -->
+        <div style="margin-top:2.2rem;padding-top:1rem;border-top:1px solid #ece5dc;font-size:0.75rem;color:#b09b86;text-align:center;letter-spacing:0.5px;">
+            庭院美学顾问 · 速查便签 · 3号低分枝直立疏朗 · 优化版
+        </div>
+
+    </div>
+</body>
+</html>

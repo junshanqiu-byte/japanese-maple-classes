@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12号 · 临水形 · 优化版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f1ec;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #2b2620;
+            line-height: 1.6;
+        }
+        .card {
+            max-width: 960px;
+            margin: 0 auto;
+            background: #fcfaf7;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            padding: 2.4rem 2.8rem;
+        }
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #ece5dc;
+            margin-bottom: 1.8rem;
+        }
+        .header .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            color: #b09b86;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+        }
+        .header .name {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2b2620;
+            letter-spacing: 0.3px;
+        }
+        .header .sub {
+            font-size: 0.85rem;
+            color: #7a6e5e;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+            margin-left: auto;
+        }
+        .hero {
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 450;
+            color: #1f1b17;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+        }
+        .hero .tagline {
+            display: inline-block;
+            background: #f2ede7;
+            padding: 0.35rem 1.8rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 450;
+            color: #3d352c;
+            margin-top: 0.6rem;
+            border: 1px solid #e5ddd2;
+            letter-spacing: 0.2px;
+        }
+        .water-note {
+            background: #eef3f0;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            border-left: 4px solid #5f8b7a;
+            font-size: 0.88rem;
+            color: #2d4a3e;
+            margin-bottom: 1.8rem;
+        }
+        .water-note strong {
+            color: #1a3a2e;
+        }
+        .block {
+            margin-bottom: 2.4rem;
+        }
+        .block-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #e5ddd2;
+            padding-bottom: 0.4rem;
+        }
+        .block-header .icon {
+            font-size: 1rem;
+            color: #b09b86;
+        }
+        .block-header h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6f6456;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+        .sell-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .sell-item {
+            background: #f8f5f0;
+            border-radius: 10px;
+            padding: 1rem 1.4rem;
+            border-left: 4px solid #c4b2a0;
+        }
+        .sell-item .label {
+            font-weight: 600;
+            color: #3d352c;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .sell-item .label .emoji {
+            font-size: 1.1rem;
+            opacity: 0.7;
+        }
+        .sell-item .desc {
+            color: #5f5549;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin: 0.2rem 0 0.4rem 0;
+        }
+        .sell-item ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sell-item ul li {
+            font-size: 0.85rem;
+            color: #3d352c;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.15rem;
+        }
+        .sell-item ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+            font-weight: 700;
+        }
+        .quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.2rem 1.6rem;
+            background: #f8f5f0;
+            padding: 1.2rem 1.8rem;
+            border-radius: 12px;
+            border: 1px solid #ece5dc;
+        }
+        .quick-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+            font-size: 0.88rem;
+            border-bottom: 1px dotted #e5ddd2;
+        }
+        .quick-item .q-label {
+            font-weight: 500;
+            color: #6f6456;
+            min-width: 4.2rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        .quick-item .q-value {
+            color: #2b2620;
+        }
+        .quick-item .q-tag {
+            background: #ede7df;
+            padding: 0.05rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #4d443a;
+            display: inline-block;
+            margin-right: 0.2rem;
+        }
+        .scene-list {
+            list-style: none;
+            padding: 0;
+        }
+        .scene-list li {
+            padding: 0.5rem 1.2rem;
+            margin-bottom: 0.4rem;
+            background: #f8f5f0;
+            border-radius: 6px;
+            border-left: 3px solid #d6ccbf;
+            font-size: 0.88rem;
+            color: #3d352c;
+        }
+        .scene-list li strong {
+            color: #2b2620;
+            font-weight: 550;
+        }
+        .pain-block {
+            background: #f8f5f0;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            border-left: 4px solid #b8a692;
+            margin-bottom: 0.7rem;
+        }
+        .pain-block .pain-q {
+            font-weight: 500;
+            color: #3d352c;
+            font-size: 0.88rem;
+        }
+        .pain-block .pain-a {
+            color: #4d443a;
+            font-size: 0.85rem;
+            margin-top: 0.15rem;
+        }
+        .pain-block .pain-a strong {
+            color: #2b2620;
+        }
+        .dream-block {
+            background: #f2ede7;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+            font-size: 0.88rem;
+            color: #3d352c;
+            font-style: italic;
+            border-left: 3px solid #c4b2a0;
+        }
+        .dream-block strong {
+            font-style: normal;
+            color: #2b2620;
+        }
+        .footnote {
+            background: #f8f5f0;
+            padding: 0.8rem 1.4rem;
+            border-radius: 8px;
+            border: 1px solid #e5ddd2;
+            font-size: 0.85rem;
+            color: #5f5549;
+        }
+        .footnote strong {
+            color: #a65a4a;
+        }
+        .footnote ul {
+            list-style: none;
+            padding-left: 0.2rem;
+            margin-top: 0.3rem;
+        }
+        .footnote ul li {
+            padding-left: 1rem;
+            position: relative;
+            font-size: 0.82rem;
+            margin-bottom: 0.1rem;
+        }
+        .footnote ul li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+        }
+        @media (max-width: 760px) {
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .sell-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem 1.2rem;
+                gap: 0.1rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .header .name {
+                font-size: 1.2rem;
+            }
+            .header .sub {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem 0.5rem;
+            }
+            .card {
+                padding: 1rem 0.8rem;
+                border-radius: 16px;
+            }
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+            .hero .tagline {
+                font-size: 0.85rem;
+                padding: 0.25rem 1.2rem;
+            }
+            .quick-item {
+                font-size: 0.8rem;
+                flex-wrap: wrap;
+            }
+            .quick-item .q-label {
+                min-width: 3.2rem;
+            }
+            .sell-item {
+                padding: 0.7rem 1rem;
+            }
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0.2in;
+            }
+            .card {
+                box-shadow: none;
+                padding: 0.2in;
+                border-radius: 0;
+                background: white;
+            }
+            .sell-item,
+            .quick-grid,
+            .pain-block,
+            .dream-block,
+            .footnote {
+                background: #f9f6f2;
+                border-color: #ccc;
+            }
+            .hero .tagline {
+                background: #f5f0ea;
+                border-color: #ccc;
+            }
+            .water-note {
+                background: #eef3f0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <span class="badge">12 号</span>
+            <span class="name">临水形</span>
+            <span class="sub">斜飘特型 · 主干倾斜≥45° · 极致探水 · 倒影成画</span>
+        </div>
+        <div class="hero">
+            <h1>扑向水面成倒影，一树一影一轮月</h1>
+            <div class="tagline">“极限 · 倾斜 · 倒影 · 探水 — 水中月，为水而生的诗”</div>
+        </div>
+        <div class="water-note">
+            <strong>⚠️ 特别提醒：</strong> 临水形必须有“水”才能发挥全部价值。无水庭院请优先选择其他树形。它的倒影是整个观赏价值的核心——没有水，就没有“水中月”。
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>核心卖点 · 四维话术</h2></div>
+            <div class="sell-grid">
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 极致倾斜 · 不是‘斜’，是‘扑’</div>
+                    <div class="desc">“倾斜不是‘微微的’，是‘几乎要倒进水里’的”</div>
+                    <ul>
+                        <li>主干倾斜至少45度，有的甚至六七十度——‘扑向水面’。</li>
+                        <li>倾斜角度越大，空间张力越大——人走到水边，脚步会停下来。</li>
+                        <li>斜飘是‘指’，临水是‘扑’——把整棵树的重心都送向水面。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 倒影成画 · 实树与虚影构成完整的圆</div>
+                    <div class="desc">“最美的时刻，是看它和水里的倒影合在一起”</div>
+                    <ul>
+                        <li>倾斜的枝条与倒影在水面上对接，形成一道完整的弧——像一轮满月卧在水面。</li>
+                        <li>风平浪静时，分不清哪是实、哪是影——连成了一体。</li>
+                        <li>风来影碎，风停影合——碎了又合的过程，是水面上的呼吸。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 水岸主角 · 它定义了这片水</div>
+                    <div class="desc">“水边种一棵普通的树，是‘水边的一棵树’。临水形——是‘这棵树定义了这片水’”</div>
+                    <ul>
+                        <li>石头是‘蹲’在水边，亭子是‘站’在水边，只有临水形是‘扑’向水面的。</li>
+                        <li>水是‘虚’的、平的，需要一棵‘实’的、斜的、有姿态的树来‘破’它。</li>
+                        <li>有了它，水面不再是一滩死水——有了倒影、有了落点、有了诗。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 极限之雅 · 险中求稳，危中见美</div>
+                    <div class="desc">“给你一个‘虚假的危险’，换来的是一份真实的震撼”</div>
+                    <ul>
+                        <li>看到一棵几乎要倒的树，你会紧张。但发现它稳稳地站着——‘紧张’的释放就是审美快感。</li>
+                        <li>‘上面极险、下面极稳’的对比，是这棵树最有力量的地方。</li>
+                        <li>那道弧线，是十年以上的时间刻在树上的痕迹——不是‘做’出来的险，是‘长’出来的险。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>主播速查卡</h2></div>
+            <div class="quick-grid">
+                <div class="quick-item"><span class="q-label">编号</span><span class="q-value">12 号</span></div>
+                <div class="quick-item"><span class="q-label">树形</span><span class="q-value">临水形</span></div>
+                <div class="quick-item"><span class="q-label">定位</span><span class="q-value">斜飘特型 · ≥45° · 极致探水 · 倒影成画</span></div>
+                <div class="quick-item"><span class="q-label">定调</span><span class="q-value">“扑向水面成倒影，一树一影一轮月。”</span></div>
+                <div class="quick-item"><span class="q-label">卖点</span><span class="q-value">极致倾斜 · 倒影成画 · 水岸主角 · 极限之雅</span></div>
+                <div class="quick-item"><span class="q-label">气质</span><span class="q-value">极限 · 倾斜 · 倒影 · 探水 · 水中月</span></div>
+                <div class="quick-item"><span class="q-label">场景</span><span class="q-value"><span class="q-tag">池塘/自然水面</span> <span class="q-tag">镜面水池</span> <span class="q-tag">溪流边</span> <span class="q-tag">水边平台</span> <span class="q-tag">水边石组</span></span></div>
+                <div class="quick-item"><span class="q-label">痛点</span><span class="q-value">水边树跟水没关系 · 水面太干净 · 种过直立树角度不对 · 普通斜飘不够味</span></div>
+                <div class="quick-item"><span class="q-label">造梦</span><span class="q-value">水中月 · 叶落水面 · 风碎倒影 · 春探新水</span></div>
+                <div class="quick-item"><span class="q-label">违禁词</span><span class="q-value">❌ 家人们 · 性价比 · 赶紧拍 · 3、2、1上链接</span></div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>高频场景匹配</h2></div>
+            <ul class="scene-list">
+                <li><strong>池塘/自然水面 ·</strong> 临水形最核心的场景。倒影在水上对接成一道完整的弧线——像一弯新月卧在水面。秋叶落入水中，几乎能听到‘啪’的一声。</li>
+                <li><strong>镜面水池 ·</strong> 倾斜的枝条与倒影完美对称，实树与虚影在水平面上完全对接——你看到的是一个完整的‘圈’。</li>
+                <li><strong>溪流边 ·</strong> 枝条探向流水，秋叶几乎是‘递’给流水的——近到能看清叶片入水时的涟漪。</li>
+                <li><strong>水边平台 ·</strong> 人坐于平台上，倾斜的枝条就在前方探向水面。你坐着的时候，视线顺着枝条的方向看向水面。</li>
+                <li><strong>水边石组 ·</strong> 石是沉的、拙的探，树是轻的、雅的探。石影沉在水底，树影浮在水面。</li>
+            </ul>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>场景痛点话术</h2></div>
+            <div class="pain-block"><div class="pain-q">水边有空间，但‘树跟水没关系’</div><div class="pain-a">“树只是‘站在水边’，没有‘探向水面’。<strong>→</strong> 枝条贴着水面探出去，倒影在水面、落叶在水面。它跟水‘发生了关系’——不是挨着，是‘探’、是‘扑’、是‘拥抱’。”</div></div>
+            <div class="pain-block"><div class="pain-q">水面‘太干净’，缺‘打破它’的东西</div><div class="pain-a">“水面是空的，你觉得‘应该有东西在上面’。<strong>→</strong> 临水形的枝条探向水面，倒影铺开——水从‘空的’变成‘有内容的’。那片水面，因为一棵树的倒影，从此有了诗。”</div></div>
+            <div class="pain-block"><div class="pain-q">想要‘最极致’的斜飘</div><div class="pain-a">“普通斜飘不够味——斜得不够彻底。<strong>→</strong> 临水形是‘极限的斜飘’——45度起，有的60度、70度。它不是‘优雅地歪着’，是‘扑向水面’。”</div></div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>造梦深化</h2></div>
+            <div class="dream-block"><strong>水中月 ·</strong> “秋天的傍晚，水面平静如镜。倾斜的枝条与倒影在水面上对接，形成一个完整的弧——夕阳下，那道弧像一轮卧在水面上的月亮。你分不清哪是实的、哪是虚的。”</div>
+            <div class="dream-block"><strong>叶落水面 ·</strong> “深秋，一片红叶松开枝头向下飘落。它只落了一小段——枝条贴着水面——‘啪’地一声落在水面上。你听到了落叶的声音——那是在其他树上听不到的。”</div>
+            <div class="dream-block"><strong>风碎倒影 ·</strong> “夏天的午后，风来了。水面皱起，倒影碎了。风一停，倒影重新聚合——合拢的过程比完整的时候更好看。你站在那里看它拼完。”</div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>主播临场要点</h2></div>
+            <div class="footnote">
+                <p><strong>❌ 违禁词：</strong> 禁用“家人们”“性价比”“赶紧拍”“3、2、1上链接”。</p>
+                <p><strong>✅ 要点：</strong></p>
+                <ul>
+                    <li><strong>先确认有水：</strong> “你家有水景吗？”——如果有，这棵树就是为你准备的；如果没有，果断推荐其他树形。这种‘挑剔’让有水的客户觉得‘这棵树是专门为我准备的’。</li>
+                    <li><strong>强调‘极限’：</strong> “这棵树几乎要倒进水里了”——让客户觉得‘这棵跟所有斜飘都不一样’。</li>
+                    <li><strong>倒影讲透：</strong> 至少花一半时间讲倒影——“实树与虚影对接”“像一轮满月”“碎了又合”——让客户‘看见’那幅画面。</li>
+                    <li><strong>‘险’与‘稳’的张力：</strong> “你先被吓一跳，然后发现它稳稳地站在那里——那种‘紧张’的释放，就是审美快感。”</li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top:2.2rem;padding-top:1rem;border-top:1px solid #ece5dc;font-size:0.75rem;color:#b09b86;text-align:center;">庭院美学顾问 · 速查便签 · 12号临水形 · 优化版</div>
+    </div>
+</body>
+</html>

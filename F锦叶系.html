@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>锦叶系 · 枫叶色彩速查卡</title>
+    <style>
+        /* ===== 全局 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #F9F6F0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #1E1C19;
+            padding: 1.8rem 1.2rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== 标题区 ===== */
+        .header {
+            text-align: center;
+            padding-bottom: 1.6rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #D5CFC8;
+            position: relative;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #6A5A4A;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            margin-bottom: 0.2rem;
+            background: linear-gradient(135deg, #B8A090, #C8B0A0, #D0B8A0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header .sub {
+            font-size: 0.95rem;
+            color: #7A6A5A;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+        }
+        .header .sub span {
+            background: #F0EAE0;
+            padding: 0.15rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #6A5A4A;
+        }
+
+        /* ===== 定调 & 对比 ===== */
+        .tone-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 1.4rem 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border-left: 6px solid #B8A090;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1rem 2rem;
+        }
+        .tone-card .tone {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1E1C19;
+        }
+        .tone-card .tone em {
+            font-style: normal;
+            color: #6A5A4A;
+            font-weight: 600;
+        }
+        .tone-card .contrast {
+            flex: 1;
+            font-size: 0.95rem;
+            color: #3D3832;
+            line-height: 1.6;
+        }
+        .tone-card .contrast strong {
+            color: #6A5A4A;
+        }
+        .tone-card .contrast .highlight {
+            background: #F4EEE8;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 500;
+            color: #6A5A4A;
+        }
+
+        /* ===== 速查网格 ===== */
+        .section-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7A6A5A;
+            margin: 2rem 0 1rem 0;
+            font-weight: 500;
+            border-bottom: 1px dashed #D5CFC8;
+            padding-bottom: 0.3rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== 便签卡片 ===== */
+        .sticky-card {
+            background: #FFFFFF;
+            border-radius: 14px;
+            padding: 1.2rem 1.2rem 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            border: 1px solid #F0EAE0;
+            transition: all 0.15s;
+            position: relative;
+        }
+        .sticky-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        }
+        .sticky-card .color-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1E1C19;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .sticky-card .color-name .tag {
+            font-weight: 400;
+            font-size: 0.7rem;
+            background: #F0EAE0;
+            color: #6A5A4A;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            letter-spacing: 0.02em;
+        }
+        .sticky-card .color-tagline {
+            font-size: 0.85rem;
+            color: #6A5A4A;
+            font-weight: 500;
+            margin-top: 0.1rem;
+        }
+        .sticky-card .color-desc {
+            font-size: 0.9rem;
+            color: #3D3832;
+            margin: 0.4rem 0 0.3rem;
+            line-height: 1.5;
+        }
+        .sticky-card .variety {
+            font-size: 0.75rem;
+            color: #6A5A4A;
+            border-top: 1px solid #F0EAE0;
+            padding-top: 0.4rem;
+            margin-top: 0.3rem;
+        }
+        .sticky-card .variety strong {
+            font-weight: 500;
+            color: #4A3A2A;
+        }
+
+        /* 锦叶系装饰线：多色渐变斑纹 */
+        .sticky-card.variegated-border {
+            border-left: 4px solid;
+            border-image: linear-gradient(180deg, #D4C0B0, #C8B0A0, #B8A090, #D0B8A0) 1;
+            border-image-slice: 1;
+            border-left-color: transparent;
+        }
+        .sticky-card.variegated-border {
+            border-left: 4px solid #C8B0A0; /* fallback */
+        }
+        /* 为每个卡片单独设置斑纹色，用伪类或额外类 */
+        .sticky-card.v1 { border-left-color: #E8D8C0; }
+        .sticky-card.v2 { border-left-color: #D8C8B8; }
+        .sticky-card.v3 { border-left-color: #C8B8A8; }
+        .sticky-card.v4 { border-left-color: #D0C0B0; }
+        .sticky-card.v5 { border-left-color: #E0D0C0; }
+
+        /* ===== 场景标签 ===== */
+        .scene-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.7rem;
+            margin: 0.5rem 0 1rem;
+        }
+        .scene-pill {
+            background: #F4EEE8;
+            border-radius: 40px;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.8rem;
+            color: #3D3832;
+            border: 1px solid #D5CFC8;
+        }
+        .scene-pill strong {
+            font-weight: 600;
+            color: #6A5A4A;
+        }
+
+        /* ===== 痛点 & 造梦 ===== */
+        .pain-solution {
+            background: #F4EEE8;
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            margin-bottom: 0.8rem;
+            border-left: 4px solid #C8B0A0;
+        }
+        .pain-solution .pain {
+            font-weight: 500;
+            color: #1E1C19;
+            font-size: 0.95rem;
+        }
+        .pain-solution .solution {
+            color: #3D3832;
+            font-size: 0.9rem;
+            margin-top: 0.1rem;
+        }
+        .pain-solution .solution .highlight {
+            color: #6A5A4A;
+            font-weight: 500;
+        }
+
+        .dream-box {
+            background: #F4EEE8;
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid #C8B0A0;
+            font-size: 0.95rem;
+            color: #2D2A26;
+        }
+        .dream-box strong {
+            color: #6A5A4A;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        /* ===== 底部 ===== */
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #A69B8E;
+            border-top: 1px solid #D5CFC8;
+            padding-top: 1.5rem;
+            margin-top: 2.5rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .tone-card {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        @media (max-width: 420px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 打印优化 */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0.2in;
+            }
+            .sticky-card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+            .header {
+                border-bottom-color: #ccc;
+            }
+        }
+    </style>
+    <!-- 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 标题 ===== -->
+        <div class="header">
+            <h1>🎨 锦叶系 · 枫叶色彩速查卡</h1>
+            <div class="sub">
+                <span>每一片叶子都不一样</span>  &nbsp;·&nbsp; 树也是画 &nbsp;·&nbsp; 庭院美学顾问
+            </div>
+        </div>
+
+        <!-- ===== 定调 & 对比 ===== -->
+        <div class="tone-card">
+            <div class="tone">
+                “每一片叶子都不一样——<br /><em>它是树，也是画。</em>”
+            </div>
+            <div class="contrast">
+                <strong>与普通植物的对比 · 审美共鸣</strong><br />
+                你见过一片叶子上有白色、粉色、绿色三种颜色的树吗？没有吧。<br />
+                普通树的叶子是“纯色”的，锦叶枫不一样——一片叶子上同时有好几个颜色，白一块、粉一块、绿一块，像画家随手泼上去的。<br />
+                而且每一片都不一样——<span class="highlight">那不是一棵树，是一千幅不同的画。</span>
+            </div>
+        </div>
+
+        <!-- ===== 色彩速查卡片 ===== -->
+        <div class="section-label">✦ 完整色彩 · 便签速查</div>
+        <div class="card-grid">
+
+            <div class="sticky-card variegated-border v1">
+                <div class="color-name">白色锦 <span class="tag">最清爽</span></div>
+                <div class="color-tagline">白的地方像雪，绿的地方像翡翠</div>
+                <div class="color-desc">像一幅水墨画，留白的地方比画的地方还有味道。</div>
+                <div class="variety"><strong>代表：</strong>浮云、云井锦</div>
+            </div>
+
+            <div class="sticky-card variegated-border v2">
+                <div class="color-name">粉色锦 <span class="tag">最浪漫</span></div>
+                <div class="color-tagline">像草莓抹茶拿铁</div>
+                <div class="color-desc">粉的地方像樱花、绿的地方像新叶，柔柔地揉在一起。又甜又清新。</div>
+                <div class="variety"><strong>代表：</strong>蝴蝶、羽前锦</div>
+            </div>
+
+            <div class="sticky-card variegated-border v3">
+                <div class="color-name">彩色锦 <span class="tag">最华丽</span></div>
+                <div class="color-tagline">白、粉、黄、绿，一块调色盘</div>
+                <div class="color-desc">一片叶子四种颜色，每一片都是一幅抽象画。</div>
+                <div class="variety"><strong>代表：</strong>旭鹤</div>
+            </div>
+
+            <div class="sticky-card variegated-border v4">
+                <div class="color-name">锦边 <span class="tag">最精致</span></div>
+                <div class="color-tagline">边缘镶白边或粉边</div>
+                <div class="color-desc">像给叶子描了一道轮廓线，那种精细感是整片斑锦给不了的。</div>
+                <div class="variety"><strong>代表：</strong>部分锦叶品种</div>
+            </div>
+
+            <div class="sticky-card variegated-border v5">
+                <div class="color-name">斑入锦 <span class="tag">最自然</span></div>
+                <div class="color-tagline">斑纹是“渗”进去的</div>
+                <div class="color-desc">白的地方慢慢过渡到绿，粉的地方慢慢融进白。自然的过渡感最耐看。</div>
+                <div class="variety"><strong>代表：</strong>部分斑叶品种</div>
+            </div>
+
+        </div>
+
+        <!-- ===== 场景匹配 ===== -->
+        <div class="section-label">✦ 场景推荐 · 身份确认</div>
+        <div class="scene-pills">
+            <span class="scene-pill"><strong>白墙前</strong> 锦叶枫 —— 白墙是画廊的墙面，锦叶枫是挂在墙上的展品</span>
+            <span class="scene-pill"><strong>茶室静观</strong> 锦叶枫 —— 你喝完一杯茶，视线已经在几十片不同的叶子上走了一遍。那是你喝茶时的“读物”</span>
+            <span class="scene-pill"><strong>阴角</strong> 白色锦 —— 白色斑纹在暗处最清楚，越暗越明显。点亮阴角</span>
+            <span class="scene-pill"><strong>配植</strong> 粉色锦 —— 与绿色背景形成浪漫对比</span>
+        </div>
+
+        <!-- ===== 痛点解药 ===== -->
+        <div class="section-label">✦ 痛点化解 · 解药话术</div>
+        <div class="pain-solution">
+            <div class="pain">“锦叶太个性了，怕过两年不喜欢了”</div>
+            <div class="solution">→ 锦叶的魅力在于<span class="highlight">每一片都不一样，每天都有新发现</span>。它不是“个性”，是“生动”。而且白色锦在阴角特别出彩，<span class="highlight">越暗越亮，不会腻。</span></div>
+        </div>
+
+        <!-- ===== 造梦话术 ===== -->
+        <div class="section-label">✦ 造梦 · 即时拥有</div>
+        <div class="dream-box">
+            <strong>叶子博物馆</strong>
+            你种了一棵锦叶枫，每天下班回来，你都会走到它面前，看一看今天哪片叶子最好看。今天你注意到一片白的多的，明天你注意到一片粉的多的。你每天都能发现“新叶子”。那不是一棵树，是你回家路上的“每日美术馆”。
+        </div>
+        <div class="dream-box">
+            <strong>四季不退的斑纹</strong>
+            别的树春天红、夏天绿、秋天变色，锦叶枫不一样——它从春天到冬天，一直有斑纹、一直有颜色。你不需要等季节，它每天都在展出。冬天叶子落尽了，斑纹没有了，但红色的枝条出来了——一年四季，它永远有东西给你看。
+        </div>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer-note">
+            庭院美学顾问 · 锦叶系速查 · 审美共鸣 × 身份确认 × 即时拥有
+        </div>
+
+    </div>
+</body>
+</html>

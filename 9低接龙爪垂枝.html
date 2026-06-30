@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9号 · 低接龙爪垂枝 · 优化版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f1ec;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #2b2620;
+            line-height: 1.6;
+        }
+        .card {
+            max-width: 960px;
+            margin: 0 auto;
+            background: #fcfaf7;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            padding: 2.4rem 2.8rem;
+        }
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #ece5dc;
+            margin-bottom: 1.8rem;
+        }
+        .header .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            color: #b09b86;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+        }
+        .header .name {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2b2620;
+            letter-spacing: 0.3px;
+        }
+        .header .sub {
+            font-size: 0.85rem;
+            color: #7a6e5e;
+            background: #f0ebe4;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+            margin-left: auto;
+        }
+        .hero {
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 450;
+            color: #1f1b17;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+        }
+        .hero .tagline {
+            display: inline-block;
+            background: #f2ede7;
+            padding: 0.35rem 1.8rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 450;
+            color: #3d352c;
+            margin-top: 0.6rem;
+            border: 1px solid #e5ddd2;
+            letter-spacing: 0.2px;
+        }
+        .block {
+            margin-bottom: 2.4rem;
+        }
+        .block-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #e5ddd2;
+            padding-bottom: 0.4rem;
+        }
+        .block-header .icon {
+            font-size: 1rem;
+            color: #b09b86;
+        }
+        .block-header h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6f6456;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+        .sell-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .sell-item {
+            background: #f8f5f0;
+            border-radius: 10px;
+            padding: 1rem 1.4rem;
+            border-left: 4px solid #c4b2a0;
+        }
+        .sell-item .label {
+            font-weight: 600;
+            color: #3d352c;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .sell-item .label .emoji {
+            font-size: 1.1rem;
+            opacity: 0.7;
+        }
+        .sell-item .desc {
+            color: #5f5549;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin: 0.2rem 0 0.4rem 0;
+        }
+        .sell-item ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sell-item ul li {
+            font-size: 0.85rem;
+            color: #3d352c;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.15rem;
+        }
+        .sell-item ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+            font-weight: 700;
+        }
+        .quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.2rem 1.6rem;
+            background: #f8f5f0;
+            padding: 1.2rem 1.8rem;
+            border-radius: 12px;
+            border: 1px solid #ece5dc;
+        }
+        .quick-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+            font-size: 0.88rem;
+            border-bottom: 1px dotted #e5ddd2;
+        }
+        .quick-item .q-label {
+            font-weight: 500;
+            color: #6f6456;
+            min-width: 4.2rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        .quick-item .q-value {
+            color: #2b2620;
+        }
+        .quick-item .q-tag {
+            background: #ede7df;
+            padding: 0.05rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #4d443a;
+            display: inline-block;
+            margin-right: 0.2rem;
+        }
+        .scene-list {
+            list-style: none;
+            padding: 0;
+        }
+        .scene-list li {
+            padding: 0.5rem 1.2rem;
+            margin-bottom: 0.4rem;
+            background: #f8f5f0;
+            border-radius: 6px;
+            border-left: 3px solid #d6ccbf;
+            font-size: 0.88rem;
+            color: #3d352c;
+        }
+        .scene-list li strong {
+            color: #2b2620;
+            font-weight: 550;
+        }
+        .pain-block {
+            background: #f8f5f0;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            border-left: 4px solid #b8a692;
+            margin-bottom: 0.7rem;
+        }
+        .pain-block .pain-q {
+            font-weight: 500;
+            color: #3d352c;
+            font-size: 0.88rem;
+        }
+        .pain-block .pain-a {
+            color: #4d443a;
+            font-size: 0.85rem;
+            margin-top: 0.15rem;
+        }
+        .pain-block .pain-a strong {
+            color: #2b2620;
+        }
+        .dream-block {
+            background: #f2ede7;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+            font-size: 0.88rem;
+            color: #3d352c;
+            font-style: italic;
+            border-left: 3px solid #c4b2a0;
+        }
+        .dream-block strong {
+            font-style: normal;
+            color: #2b2620;
+        }
+        .footnote {
+            background: #f8f5f0;
+            padding: 0.8rem 1.4rem;
+            border-radius: 8px;
+            border: 1px solid #e5ddd2;
+            font-size: 0.85rem;
+            color: #5f5549;
+        }
+        .footnote strong {
+            color: #a65a4a;
+        }
+        .footnote ul {
+            list-style: none;
+            padding-left: 0.2rem;
+            margin-top: 0.3rem;
+        }
+        .footnote ul li {
+            padding-left: 1rem;
+            position: relative;
+            font-size: 0.82rem;
+            margin-bottom: 0.1rem;
+        }
+        .footnote ul li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: #b09b86;
+        }
+        @media (max-width: 760px) {
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .sell-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem 1.2rem;
+                gap: 0.1rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .header .name {
+                font-size: 1.2rem;
+            }
+            .header .sub {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem 0.5rem;
+            }
+            .card {
+                padding: 1rem 0.8rem;
+                border-radius: 16px;
+            }
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+            .hero .tagline {
+                font-size: 0.85rem;
+                padding: 0.25rem 1.2rem;
+            }
+            .quick-item {
+                font-size: 0.8rem;
+                flex-wrap: wrap;
+            }
+            .quick-item .q-label {
+                min-width: 3.2rem;
+            }
+            .sell-item {
+                padding: 0.7rem 1rem;
+            }
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0.2in;
+            }
+            .card {
+                box-shadow: none;
+                padding: 0.2in;
+                border-radius: 0;
+                background: white;
+            }
+            .sell-item,
+            .quick-grid,
+            .pain-block,
+            .dream-block,
+            .footnote {
+                background: #f9f6f2;
+                border-color: #ccc;
+            }
+            .hero .tagline {
+                background: #f5f0ea;
+                border-color: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <span class="badge">9 号</span>
+            <span class="name">低接龙爪垂枝</span>
+            <span class="sub">垂枝型 · 低接 · 龙爪状 · 层叠垂落</span>
+        </div>
+        <div class="hero">
+            <h1>卷曲如爪层层叠，近身静观最出彩</h1>
+            <div class="tagline">“精致 · 卷曲 · 层叠 · 雕塑感 — 近在咫尺的活雕塑”</div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>核心卖点 · 四维话术</h2></div>
+            <div class="sell-grid">
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 低接价值 · 整棵树都是品种本身</div>
+                    <div class="desc">“嫁接口极低——从头到脚都是龙爪枫，没有拼接感”</div>
+                    <ul>
+                        <li>嫁接口≤15cm，从地面起就是龙爪卷曲的枝条，无砧木段干扰。</li>
+                        <li>主干自然弯曲，每一棵的弯曲都不一样，有造型美。</li>
+                        <li>品种纯度高，不会从下面长出笔直的绿枝破坏形态。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 龙爪枝条 · 自然的雕刻，卷曲如爪</div>
+                    <div class="desc">“枝条不是‘垂’下来的，是‘卷’下来的”</div>
+                    <ul>
+                        <li>枝条皱缩、卷曲、扭曲，如龙爪、如枯笔，每一根都不一样。</li>
+                        <li>普通垂枝是‘流’，龙爪是‘叠’——雕刻的姿态。</li>
+                        <li>冬天叶子落尽，卷曲的骨架更清楚，是‘另一种丰满’。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 层叠垂落 · 从上到下的精致叠压</div>
+                    <div class="desc">“枝条是一层一层叠下来的，像龙鳞、像叠瓦”</div>
+                    <ul>
+                        <li>枝条从树冠内部层层叠压着垂落，是一面‘叠出来的墙’。</li>
+                        <li>阳光从层叠的缝隙穿过，投下斑驳的、有层次的光影。</li>
+                        <li>低接让层叠从地面就开始——蹲下、站起，全是‘叠’。</li>
+                    </ul>
+                </div>
+                <div class="sell-item">
+                    <div class="label"><span class="emoji">⊞</span> 近身精致 · 需要走近看的树</div>
+                    <div class="desc">“它的美在细节里，在伸手可及的距离内”</div>
+                    <ul>
+                        <li>站在三米以内看，才是它最好看的时候——每一道卷曲都清晰可见。</li>
+                        <li>枝条在你肩膀高度垂落，伸手就能摸到卷曲的质感。</li>
+                        <li>茶室窗外、长椅旁、苔庭边缘最安静的陪伴者。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>主播速查卡</h2></div>
+            <div class="quick-grid">
+                <div class="quick-item"><span class="q-label">编号</span><span class="q-value">9 号</span></div>
+                <div class="quick-item"><span class="q-label">树形</span><span class="q-value">低接龙爪垂枝</span></div>
+                <div class="quick-item"><span class="q-label">定位</span><span class="q-value">垂枝型 · 低接 (≤0.15m) · 龙爪状 · 层叠</span></div>
+                <div class="quick-item"><span class="q-label">定调</span><span class="q-value">“卷曲如爪层层叠，近身静观最出彩。”</span></div>
+                <div class="quick-item"><span class="q-label">卖点</span><span class="q-value">低接价值 · 龙爪枝条 · 层叠垂落 · 近身精致</span></div>
+                <div class="quick-item"><span class="q-label">气质</span><span class="q-value">精致 · 卷曲 · 层叠 · 雕塑感 · 侘寂 · 冬观</span></div>
+                <div class="quick-item"><span class="q-label">场景</span><span class="q-value"><span class="q-tag">茶室窗外</span> <span class="q-tag">苔庭边缘</span> <span class="q-tag">白墙前</span> <span class="q-tag">石组旁</span> <span class="q-tag">长椅旁</span></span></div>
+                <div class="quick-item"><span class="q-label">痛点</span><span class="q-value">茶室缺活雕塑 · 白墙影子太直 · 苔庭太静 · 近身缺可看之物 · 冬天断档</span></div>
+                <div class="quick-item"><span class="q-label">造梦</span><span class="q-value">窗外尺景 · 白墙草书 · 苔上垂枝 · 伸手可及的卷曲</span></div>
+                <div class="quick-item"><span class="q-label">违禁词</span><span class="q-value">❌ 家人们 · 性价比 · 赶紧拍 · 3、2、1上链接</span></div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>高频场景匹配</h2></div>
+            <ul class="scene-list">
+                <li><strong>茶室窗外 ·</strong> 卷曲的枝条在窗框里层层叠叠，像一幅立体的小品画——够你看完半盏茶。</li>
+                <li><strong>苔庭边缘 ·</strong> 苔的细腻是水平的，龙爪的细腻是垂直的——两种精致在同一个空间里。</li>
+                <li><strong>白墙前 ·</strong> 卷曲的影子像书法里的草书、像干枯的藤蔓在纸上作画。</li>
+                <li><strong>石组/石灯笼旁 ·</strong> 石的拙与枝的‘巧’——日式美学里最经典的对比。</li>
+                <li><strong>长椅旁 ·</strong> 卷曲的枝条在头顶侧方垂落，伸手可及，让每个人都忍不住想摸一下。</li>
+            </ul>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>场景痛点话术</h2></div>
+            <div class="pain-block"><div class="pain-q">茶室窗前‘太干净’，缺近身‘活雕塑’</div><div class="pain-a">“你的视线穿过去、穿过去——没有东西‘挂’住目光。<strong>→</strong> 卷曲的枝条在窗外尺把远，顺着它的卷曲慢慢走，是‘视线停留的地方’。”</div></div>
+            <div class="pain-block"><div class="pain-q">白墙影子‘太直’，缺‘卷曲的线条’</div><div class="pain-a">“想要‘卷’的影子、‘曲’的影子——像草书、像枯笔。<strong>→</strong> 卷曲的枝条投在墙上，是卷的、皱的、缠绕的——不是影子，是白墙上的一幅草书。”</div></div>
+            <div class="pain-block"><div class="pain-q">冬天‘什么都没了’</div><div class="pain-a">“叶子落尽之后，卷曲的枝条还在。落雪时每一根卷曲的枝条上都托着一小撮雪——冬天的龙爪枫，是另一种‘开花’。”</div></div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>造梦深化</h2></div>
+            <div class="dream-block"><strong>窗外尺景 ·</strong> “你端着茶杯，目光落在一根卷曲的枝条上——它的卷曲从左边扭到右边，再绕回左边，上面托着一片红叶。你看了一盏茶，视线还没走完那道弯。”</div>
+            <div class="dream-block"><strong>白墙草书 ·</strong> “冬日的白墙前，卷曲的影子像一篇狂草。风来的时候，‘笔触’在墙上微微晃动——你不是在看树，是在读一首写在墙上的诗。”</div>
+            <div class="dream-block"><strong>伸手可及的卷曲 ·</strong> “你伸出手，摸到一根卷曲的枝条，手指顺着它的卷曲走了一遍——从一道弧到另一道弧，像读盲文。那不是一棵树，是可以触摸的雕塑。”</div>
+        </div>
+        <div class="block">
+            <div class="block-header"><span class="icon">✦</span><h2>主播临场要点</h2></div>
+            <div class="footnote">
+                <p><strong>❌ 违禁词：</strong> 禁用“家人们”“性价比”“赶紧拍”“3、2、1上链接”。</p>
+                <p><strong>✅ 要点：</strong></p>
+                <ul>
+                    <li><strong>定位：</strong> ‘近身细品’的树。手掌在眼前缓缓移动——“它的美在细节里，在伸手可及的距离内。”</li>
+                    <li><strong>强调‘低接’完整性：</strong> “嫁接口不到十五公分”“整棵树都是品种本身”“没有拼接感”。</li>
+                    <li><strong>先讲‘卷’，再讲‘垂’：</strong> “普通垂枝是‘流’，龙爪是‘叠’——一个是水的姿态，一个是雕刻的姿态。”</li>
+                    <li><strong>强调冬天更好看：</strong> “龙爪枫叶子落尽之后反而更好看——冬天是它最好看的季节。”</li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top:2.2rem;padding-top:1rem;border-top:1px solid #ece5dc;font-size:0.75rem;color:#b09b86;text-align:center;">庭院美学顾问 · 速查便签 · 9号低接龙爪垂枝 · 优化版</div>
+    </div>
+</body>
+</html>

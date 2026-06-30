@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>观枝系 · 枫叶色彩速查卡</title>
+    <style>
+        /* ===== 全局 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #F4F0EA;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #1E1C19;
+            padding: 1.8rem 1.2rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== 标题区 ===== */
+        .header {
+            text-align: center;
+            padding-bottom: 1.6rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #B8A898;
+            position: relative;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #4A3A2A;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            margin-bottom: 0.2rem;
+        }
+        .header .sub {
+            font-size: 0.95rem;
+            color: #6A5A4A;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+        }
+        .header .sub span {
+            background: #E8E0D8;
+            padding: 0.15rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #4A3A2A;
+        }
+
+        /* ===== 定调 & 对比 ===== */
+        .tone-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 1.4rem 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border-left: 6px solid #8A7A6A;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1rem 2rem;
+        }
+        .tone-card .tone {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1E1C19;
+        }
+        .tone-card .tone em {
+            font-style: normal;
+            color: #4A3A2A;
+            font-weight: 600;
+        }
+        .tone-card .contrast {
+            flex: 1;
+            font-size: 0.95rem;
+            color: #3D3832;
+            line-height: 1.6;
+        }
+        .tone-card .contrast strong {
+            color: #4A3A2A;
+        }
+        .tone-card .contrast .highlight {
+            background: #F0EAE0;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 500;
+            color: #4A3A2A;
+        }
+
+        /* ===== 速查网格 ===== */
+        .section-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #6A5A4A;
+            margin: 2rem 0 1rem 0;
+            font-weight: 500;
+            border-bottom: 1px dashed #D5C8BC;
+            padding-bottom: 0.3rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== 便签卡片 ===== */
+        .sticky-card {
+            background: #FFFFFF;
+            border-radius: 14px;
+            padding: 1.2rem 1.2rem 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            border: 1px solid #F0EAE0;
+            transition: all 0.15s;
+            position: relative;
+        }
+        .sticky-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        }
+        .sticky-card .color-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1E1C19;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .sticky-card .color-name .tag {
+            font-weight: 400;
+            font-size: 0.7rem;
+            background: #E8E0D8;
+            color: #6A5A4A;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            letter-spacing: 0.02em;
+        }
+        .sticky-card .color-tagline {
+            font-size: 0.85rem;
+            color: #4A3A2A;
+            font-weight: 500;
+            margin-top: 0.1rem;
+        }
+        .sticky-card .color-desc {
+            font-size: 0.9rem;
+            color: #3D3832;
+            margin: 0.4rem 0 0.3rem;
+            line-height: 1.5;
+        }
+        .sticky-card .variety {
+            font-size: 0.75rem;
+            color: #6A5A4A;
+            border-top: 1px solid #F0EAE0;
+            padding-top: 0.4rem;
+            margin-top: 0.3rem;
+        }
+        .sticky-card .variety strong {
+            font-weight: 500;
+            color: #4A3A2A;
+        }
+
+        /* 观枝系装饰线：深色木质 */
+        .sticky-card.winter-border {
+            border-left: 4px solid #8A7A6A;
+        }
+        /* 荒皮枝专用：更粗粝的边框 */
+        .sticky-card.bark-border {
+            border-left: 6px solid #6A5A4A;
+            background: #FCF8F0;
+        }
+        .sticky-card.bark-border .color-name .tag {
+            background: #D5C8BC;
+            color: #3A2A1A;
+        }
+
+        /* ===== 场景标签 ===== */
+        .scene-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.7rem;
+            margin: 0.5rem 0 1rem;
+        }
+        .scene-pill {
+            background: #F0EAE0;
+            border-radius: 40px;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.8rem;
+            color: #3D3832;
+            border: 1px solid #D5C8BC;
+        }
+        .scene-pill strong {
+            font-weight: 600;
+            color: #4A3A2A;
+        }
+
+        /* ===== 痛点 & 造梦 ===== */
+        .pain-solution {
+            background: #F0EAE0;
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            margin-bottom: 0.8rem;
+            border-left: 4px solid #8A7A6A;
+        }
+        .pain-solution .pain {
+            font-weight: 500;
+            color: #1E1C19;
+            font-size: 0.95rem;
+        }
+        .pain-solution .solution {
+            color: #3D3832;
+            font-size: 0.9rem;
+            margin-top: 0.1rem;
+        }
+        .pain-solution .solution .highlight {
+            color: #4A3A2A;
+            font-weight: 500;
+        }
+
+        .dream-box {
+            background: #F0EAE0;
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid #8A7A6A;
+            font-size: 0.95rem;
+            color: #2D2A26;
+        }
+        .dream-box strong {
+            color: #4A3A2A;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        /* ===== 底部 ===== */
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #A69B8E;
+            border-top: 1px solid #D5C8BC;
+            padding-top: 1.5rem;
+            margin-top: 2.5rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .tone-card {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        @media (max-width: 420px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 打印优化 */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0.2in;
+            }
+            .sticky-card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+            .header {
+                border-bottom-color: #ccc;
+            }
+        }
+    </style>
+    <!-- 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 标题 ===== -->
+        <div class="header">
+            <h1>🌲 观枝系 · 枫叶色彩速查卡</h1>
+            <div class="sub">
+                <span>冬天是彩色的</span>  &nbsp;·&nbsp; 脱了衣服展示骨架 &nbsp;·&nbsp; 庭院美学顾问
+            </div>
+        </div>
+
+        <!-- ===== 定调 & 对比 ===== -->
+        <div class="tone-card">
+            <div class="tone">
+                “别人的树冬天是光秃秃的，<br /><em>你的树冬天是彩色的。</em>”
+            </div>
+            <div class="contrast">
+                <strong>与普通植物的对比 · 审美共鸣</strong><br />
+                冬天你站在院子里看——普通树全是灰的、黑的、光秃秃的。你的珊瑚阁不一样——枝条是珊瑚红的，在灰白的冬天里像一团火。<br />
+                普通树冬天“没东西看”，观枝系的枫树冬天<span class="highlight">“换了一种好看”</span>。那不是光秃秃，是“脱了衣服展示骨架”。
+            </div>
+        </div>
+
+        <!-- ===== 色彩速查卡片 ===== -->
+        <div class="section-label">✦ 完整色彩 · 便签速查</div>
+        <div class="card-grid">
+
+            <div class="sticky-card winter-border">
+                <div class="color-name">红色枝 <span class="tag">冬天里的一团火</span></div>
+                <div class="color-tagline">珊瑚红，最醒目</div>
+                <div class="color-desc">灰白的冬天里，一抹红色枝条像一团火。落雪的时候，红枝配白雪——那是另一种春天。</div>
+                <div class="variety"><strong>代表：</strong>珊瑚阁</div>
+            </div>
+
+            <div class="sticky-card winter-border">
+                <div class="color-name">黄色枝 <span class="tag">冬天里的一束光</span></div>
+                <div class="color-tagline">像把阳光存进了树枝里</div>
+                <div class="color-desc">冬天的阳光本来就少，黄色枝条让你看到它的时候，心里是暖的。</div>
+                <div class="variety"><strong>代表：</strong>美</div>
+            </div>
+
+            <div class="sticky-card winter-border">
+                <div class="color-name">绿色枝 <span class="tag">最清新</span></div>
+                <div class="color-tagline">像春天提前来了</div>
+                <div class="color-desc">冬天一切都是灰的、暗的，突然看到一根绿色的枝条，像春天提前来了。</div>
+                <div class="variety"><strong>代表：</strong>部分鸡爪槭品种</div>
+            </div>
+
+            <div class="sticky-card winter-border">
+                <div class="color-name">多色枝 <span class="tag">最特别</span></div>
+                <div class="color-tagline">一根枝条，一侧红一侧黄</div>
+                <div class="color-desc">像一道天然的渐变色，冬天站在树下看枝条，比夏天看叶子还有看头。</div>
+                <div class="variety"><strong>代表：</strong>Japanese Sunrise</div>
+            </div>
+
+            <div class="sticky-card winter-border">
+                <div class="color-name">锦纹枝 <span class="tag">最精致</span></div>
+                <div class="color-tagline">枝条上有彩色条纹</div>
+                <div class="color-desc">像给树枝画了花纹，每一根枝条的花纹都不一样。</div>
+                <div class="variety"><strong>代表：</strong>部分锦叶品种</div>
+            </div>
+
+            <!-- 新增：荒皮枝 -->
+            <div class="sticky-card bark-border">
+                <div class="color-name">荒皮枝 <span class="tag">最古意</span></div>
+                <div class="color-tagline">皲裂如松，岁月苍劲</div>
+                <div class="color-desc">树皮呈现像松树皮那样的皲裂纹理，具有岁月沉淀的古朴意境。适合追求禅意、古韵的庭院，苍劲中见风骨。</div>
+                <div class="variety"><strong>代表：</strong>荒皮红叶、荒皮郁金</div>
+            </div>
+
+        </div>
+
+        <!-- ===== 场景匹配 ===== -->
+        <div class="section-label">✦ 场景推荐 · 身份确认</div>
+        <div class="scene-pills">
+            <span class="scene-pill"><strong>窗前</strong> 珊瑚阁（红色枝）—— 四季轮着看：春天红芽、夏天绿叶、秋天金叶、冬天红枝</span>
+            <span class="scene-pill"><strong>白墙前</strong> 红色枝 —— 冬天枝条的影子投在白墙上，像书法——一笔一笔的“字”</span>
+            <span class="scene-pill"><strong>路径两侧</strong> 红色枝 —— 一条路四季有景，冬天也不空窗</span>
+            <span class="scene-pill"><strong>茶室静观</strong> 珊瑚阁 / 荒皮枝 —— 端着热茶，看着红枝或苍劲树皮，那是冬天最安静的画面</span>
+            <span class="scene-pill"><strong>入口</strong> 珊瑚阁 / 荒皮枝 —— 冬天灰蒙蒙的，你家门口是红的（或苍劲古朴的），那是冬季的“门面”</span>
+            <span class="scene-pill"><strong>禅意庭院</strong> 荒皮枝 —— 皲裂树皮自带岁月感，与枯山水、石灯相得益彰，意境深远</span>
+        </div>
+
+        <!-- ===== 痛点解药 ===== -->
+        <div class="section-label">✦ 痛点化解 · 解药话术</div>
+        <div class="pain-solution">
+            <div class="pain">“冬天院子光秃秃的，不想出门看”</div>
+            <div class="solution">→ 种一棵观枝系的珊瑚阁或荒皮枝。冬天叶子落尽了，但枝条是珊瑚红色的（或树皮皲裂古朴）。你站在窗前看出去，红枝在灰白的冬天里像一团火；荒皮枝则像一尊古木，静默而有力。<span class="highlight">冬天不再是“断档”，是“换了一种好看”。</span></div>
+        </div>
+
+        <!-- ===== 造梦话术 ===== -->
+        <div class="section-label">✦ 造梦 · 即时拥有</div>
+        <div class="dream-box">
+            <strong>冬日火焰（红色枝）</strong>
+            冬天的早晨，窗外灰蒙蒙的，但那棵珊瑚阁不一样——它的枝条是珊瑚红色的，在灰白的天空里像一团不会熄灭的火。雪落在红色枝条上，红白相间——那不是冬天，是另一种春天。
+        </div>
+        <div class="dream-box">
+            <strong>四季轮盘</strong>
+            春天冒红芽，夏天长绿叶，秋天变金色，冬天露红枝。一棵树，走完了一整年。你看看它的时候，看到的不是一棵树，是时间本身。
+        </div>
+        <div class="dream-box">
+            <strong>古意苍劲（荒皮枝）</strong>
+            你坐在茶室里，透过窗看着那棵荒皮枝。它的树皮皲裂如松，每一道纹路都像在诉说岁月。你什么都不用做，只是看着它，心里就静下来了。那种禅意，不是造出来的，是长出来的。
+        </div>
+
+        <!-- ===== 底部 ===== -->
+        <div class="footer-note">
+            庭院美学顾问 · 观枝系速查 · 审美共鸣 × 身份确认 × 即时拥有
+        </div>
+
+    </div>
+</body>
+</html>
